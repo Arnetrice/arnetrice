@@ -1,0 +1,262 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }} - Arnetrice Smith{% endblock %}
+
+{% block extra_css %}
+<style>
+.thank-you-hero {
+    background: linear-gradient(135deg, var(--accent-green) 0%, var(--accent-green-light) 100%);
+    color: white;
+    border-radius: var(--radius-lg);
+    padding: 4rem 2rem;
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.success-icon {
+    font-size: 4rem;
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.next-steps {
+    background: var(--light-gray);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    margin: 2rem 0;
+}
+
+.step-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: white;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-light);
+}
+
+.step-item:last-child {
+    margin-bottom: 0;
+}
+
+.step-number {
+    background: var(--primary-blue);
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-right: 1rem;
+    flex-shrink: 0;
+}
+
+.calendly-container {
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.cta-section {
+    background: var(--primary-blue);
+    color: white;
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    text-align: center;
+    margin: 2rem 0;
+}
+
+@media (max-width: 768px) {
+    .thank-you-hero {
+        padding: 2rem 1rem;
+    }
+    
+    .success-icon {
+        font-size: 3rem;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <!-- Thank You Hero -->
+                <div class="thank-you-hero">
+                    <div class="success-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    {% if plan_type == "paid" %}
+                    <h1 class="mb-4">Payment Successful!</h1>
+                    <p class="lead mb-0">Thank you for choosing our data solutions. Your subscription is now active and we're excited to help transform your business with data-driven insights.</p>
+                    {% else %}
+                    <h1 class="mb-4">Quote Request Received!</h1>
+                    <p class="lead mb-0">Thank you for your interest in our enterprise solutions. We've received your request and will be in touch within 24 hours with a custom proposal.</p>
+                    {% endif %}
+                </div>
+
+                {% if plan_type == "paid" %}
+                <!-- Next Steps for Paid Plans -->
+                <div class="next-steps">
+                    <h3 class="fw-bold mb-4 text-center">What Happens Next</h3>
+                    
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <div>
+                            <h5 class="fw-bold mb-2">Confirmation Email Sent</h5>
+                            <p class="mb-0">You'll receive a confirmation email with your subscription details and receipt within the next few minutes.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <div>
+                            <h5 class="fw-bold mb-2">Schedule Your Onboarding Call</h5>
+                            <p class="mb-0">Book a 30-minute onboarding session to discuss your data needs and get started with your new plan.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <div>
+                            <h5 class="fw-bold mb-2">Access Your Dashboard</h5>
+                            <p class="mb-0">We'll set up your personalized dashboard and provide login credentials within 48 hours.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step-item">
+                        <div class="step-number">4</div>
+                        <div>
+                            <h5 class="fw-bold mb-2">Start Getting Insights</h5>
+                            <p class="mb-0">Begin analyzing your data and generating actionable insights to drive business growth.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Calendly Integration -->
+                <div class="cta-section">
+                    <h3 class="mb-3">Ready to Get Started?</h3>
+                    <p class="mb-4">Schedule your onboarding call now to fast-track your data transformation journey.</p>
+                    <a href="#" class="btn btn-light btn-lg px-5" onclick="openCalendly()">
+                        <i class="fas fa-calendar-alt me-2"></i>Schedule Onboarding Call
+                    </a>
+                </div>
+                
+                {% else %}
+                <!-- Next Steps for Enterprise -->
+                <div class="next-steps">
+                    <h3 class="fw-bold mb-4 text-center">What Happens Next</h3>
+                    
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <div>
+                            <h5 class="fw-bold mb-2">Requirements Review</h5>
+                            <p class="mb-0">Our team will review your requirements and prepare a custom solution tailored to your needs.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <div>
+                            <h5 class="fw-bold mb-2">Proposal Delivery</h5>
+                            <p class="mb-0">Within 24 hours, you'll receive a detailed proposal with pricing, timeline, and implementation plan.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <div>
+                            <h5 class="fw-bold mb-2">Discovery Call</h5>
+                            <p class="mb-0">We'll schedule a call to discuss the proposal and answer any questions you may have.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step-item">
+                        <div class="step-number">4</div>
+                        <div>
+                            <h5 class="fw-bold mb-2">Project Kickoff</h5>
+                            <p class="mb-0">Once approved, we'll kick off your project with a dedicated team and clear milestones.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Enterprise CTA -->
+                <div class="cta-section">
+                    <h3 class="mb-3">Want to Discuss Your Project Now?</h3>
+                    <p class="mb-4">Schedule an intro call to discuss your requirements and get answers to your questions.</p>
+                    <a href="#" class="btn btn-light btn-lg px-5" onclick="openCalendly()">
+                        <i class="fas fa-phone me-2"></i>Schedule Intro Call
+                    </a>
+                </div>
+                {% endif %}
+
+                <!-- Contact Information -->
+                <div class="text-center mt-5">
+                    <h4 class="fw-bold mb-3">Questions or Need Help?</h4>
+                    <p class="mb-3">Don't hesitate to reach out if you have any questions or need immediate assistance.</p>
+                    <div class="row text-center">
+                        <div class="col-md-4">
+                            <i class="fas fa-envelope fa-2x text-primary mb-2"></i>
+                            <p><strong>Email</strong><br>hello@arnetrice.com</p>
+                        </div>
+                        <div class="col-md-4">
+                            <i class="fas fa-phone fa-2x text-primary mb-2"></i>
+                            <p><strong>Phone</strong><br>(555) 123-4567</p>
+                        </div>
+                        <div class="col-md-4">
+                            <i class="fas fa-clock fa-2x text-primary mb-2"></i>
+                            <p><strong>Response Time</strong><br>Within 4 hours</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Actions -->
+                <div class="text-center mt-5">
+                    <a href="/" class="btn btn-outline-primary me-3">
+                        <i class="fas fa-home me-2"></i>Back to Home
+                    </a>
+                    <a href="/services" class="btn btn-outline-primary">
+                        <i class="fas fa-layer-group me-2"></i>View All Services
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function openCalendly() {
+    // This is a placeholder for Calendly integration
+    // Replace with your actual Calendly URL
+    const calendlyUrl = "https://calendly.com/arnetrice/onboarding";
+    
+    // Open Calendly in a new window
+    window.open(calendlyUrl, '_blank', 'width=800,height=600');
+    
+    // Alternative: You can embed Calendly directly on the page
+    // Or redirect to the Calendly page
+    // window.location.href = calendlyUrl;
+}
+
+// If session_id is provided, you could fetch additional payment details
+{% if session_id %}
+document.addEventListener('DOMContentLoaded', function() {
+    // Optional: Fetch additional payment details from your API
+    console.log('Payment session ID:', '{{ session_id }}');
+});
+{% endif %}
+
+{% if submission_id %}
+document.addEventListener('DOMContentLoaded', function() {
+    // Optional: Track enterprise submission
+    console.log('Enterprise submission ID:', '{{ submission_id }}');
+});
+{% endif %}
+</script>
+{% endblock %}

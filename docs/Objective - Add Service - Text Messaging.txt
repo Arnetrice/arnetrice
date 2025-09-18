@@ -1,0 +1,41 @@
+Objective:
+Add a new “Text Alerts” add-on option to the Services page and all relevant checkout pages, priced at $49/month (includes 1,000 messages) with $0.05 per additional message.
+
+Requirements
+
+Services Page
+
+Add “Text Alerts” to the list of Add-On Services.
+
+Use the following description:
+“Stay ahead with real-time SMS alerts when key events or thresholds occur. $49/month includes 1,000 messages, $0.05 per additional message. Perfect for instant updates without logging into dashboards.”
+
+Style and format should match existing add-ons (same card layout, fonts, and colors).
+
+Checkout Pages (Starter, Growth, Enterprise)
+
+Add a selectable checkbox for “Text Alerts – $49/month” in the add-ons list.
+
+Ensure that selecting the add-on updates the Order Summary dynamically.
+
+Order Summary should display:
+
+“Text Alerts — $49/month” under recurring charges.
+
+Include footnote/microcopy: “Includes 1,000 messages. Additional messages billed at $0.05 each.”
+
+Coding & Integration Notes
+
+Reuse existing add-on component structure for consistency.
+
+Match styling to existing checkboxes and order summary items.
+
+Ensure pricing updates work seamlessly with the order total calculations.
+
+Keep the language and color palette consistent with the current theme.
+
+Deliverables:
+
+Updated Services page with Text Alerts listed as an Add-On.
+
+Updated Starter, Growth, and Enterprise checkout pages with Text Alerts checkbox integrated into the add-on section and order summary.

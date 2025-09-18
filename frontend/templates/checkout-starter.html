@@ -1,0 +1,1048 @@
+{% extends "base.html" %}
+
+{% block title %}Starter Plan Checkout - Arnetrice Smith{% endblock %}
+
+{% block extra_css %}
+<style>
+.plan-summary {
+    background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-light) 100%);
+    color: white;
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.plan-features {
+    list-style: none;
+    padding: 0;
+}
+
+.plan-features li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.plan-features li:last-child {
+    border-bottom: none;
+}
+
+.plan-features li i {
+    color: var(--accent-green);
+    margin-right: 0.5rem;
+}
+
+.add-on-item {
+    border: 2px solid var(--medium-gray);
+    border-radius: var(--radius-md);
+    padding: 1rem;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.add-on-item:hover {
+    border-color: var(--primary-blue-light);
+}
+
+.add-on-item.selected {
+    border-color: var(--primary-blue);
+    background-color: var(--accent-green-pastel);
+}
+
+.price-summary {
+    background-color: var(--light-gray);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    position: sticky;
+    top: 100px;
+}
+
+.price-line {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--medium-gray);
+}
+
+.price-line:last-child {
+    border-bottom: none;
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: var(--primary-blue-dark);
+}
+
+.price-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.3rem 0;
+    font-size: 0.9rem;
+    padding-left: 1rem;
+}
+
+.price-item-name {
+    color: #666;
+}
+
+.price-item-amount {
+    color: #000;
+    font-weight: 500;
+}
+
+.price-total {
+    font-weight: bold;
+    color: var(--accent-green) !important;
+}
+
+.first-month-total {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border: 2px solid var(--accent-green);
+    border-radius: var(--radius-md);
+    padding: 1rem;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.starter-highlight {
+    background: linear-gradient(135deg, #4CAF50 0%, #8BC34A 100%);
+    color: white;
+    border-radius: var(--radius-md);
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.text-alerts-callout {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow-medium);
+    position: relative;
+    overflow: hidden;
+}
+
+.text-alerts-callout::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 200%;
+    background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+    transform: rotate(45deg);
+    pointer-events: none;
+}
+
+.callout-icon {
+    font-size: 2.5rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 0.5rem;
+}
+
+.callout-title {
+    color: white;
+    font-weight: 600;
+}
+
+.callout-text {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.95rem;
+}
+
+.callout-price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ffd700;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+.callout-cta small {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.payment-frequency-toggle .btn {
+    border-radius: var(--radius-md);
+    padding: 0.75rem 1.5rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.payment-frequency-toggle .btn-check:checked + .btn {
+    background-color: var(--primary-blue);
+    border-color: var(--primary-blue);
+    color: white;
+}
+
+.payment-frequency-toggle .btn-outline-primary:hover {
+    background-color: var(--primary-blue-light);
+    border-color: var(--primary-blue-light);
+}
+
+.payment-method-selection {
+    margin-bottom: 1rem;
+}
+
+.payment-method-card {
+    height: 140px;
+}
+
+.payment-method-card .btn {
+    min-height: 140px;
+    border: 2px solid var(--medium-gray);
+    transition: all 0.3s ease;
+}
+
+.payment-method-card .btn:hover {
+    border-color: var(--primary-blue-light);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.payment-method-card .btn-check:checked + .btn {
+    background-color: var(--accent-green-pastel);
+    border-color: var(--primary-blue);
+    box-shadow: 0 4px 12px rgba(var(--primary-blue-rgb), 0.2);
+}
+
+.payment-method-card .btn i {
+    color: var(--primary-blue);
+}
+
+.payment-method-card .btn-check:checked + .btn i {
+    color: var(--primary-blue);
+}
+
+#billingSection.paypal-selected {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .price-summary {
+        position: static;
+        margin-top: 2rem;
+    }
+    
+    .text-alerts-callout {
+        text-align: center;
+    }
+    
+    .callout-icon {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Starter Plan Header -->
+<section class="hero-section">
+    <div class="container text-center">
+        <h1 class="mb-4">Checkout – Starter Hosting Plan</h1>
+        <p class="lead">Perfect for small businesses starting their data journey</p>
+    </div>
+</section>
+
+<!-- Starter Checkout Form Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <!-- Starter Plan Summary -->
+                <div class="starter-highlight">
+                    <h3 class="mb-2"><i class="fas fa-rocket me-2"></i>Great Choice for Getting Started!</h3>
+                    <p class="mb-0">The Starter Hosting Plan includes everything you need to begin your data-driven transformation</p>
+                </div>
+
+                <div class="plan-summary">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <h3 class="mb-3">Starter Hosting Plan Features</h3>
+                            <ul class="plan-features">
+                                <li><i class="fas fa-check"></i>Up to 3 users</li>
+                                <li><i class="fas fa-check"></i>1 GB secure, scalable storage</li>
+                                <li><i class="fas fa-check"></i>Core dashboards</li>
+                                <li><i class="fas fa-check"></i>Email support (24–48 hr response)</li>
+                                <li><i class="fas fa-check"></i><strong>Standard AI Analytics</strong></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4 text-end">
+                            <div class="h2 mb-0">$199+/mo</div>
+                            <small class="opacity-75">Save 15% with annual billing</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Text Alerts Feature Callout -->
+                <div class="text-alerts-callout">
+                    <div class="row align-items-center">
+                        <div class="col-md-2 text-center">
+                            <div class="callout-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <h5 class="callout-title mb-1">Stay ahead with real-time text alerts</h5>
+                            <p class="callout-text mb-0">Get notified when critical thresholds are met — no need to log in to dashboards.</p>
+                        </div>
+                        <div class="col-md-2 text-center">
+                            <div class="callout-cta">
+                                <span class="callout-price">+$49/mo</span>
+                                <br><small class="text-muted">Available below</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Checkout Form -->
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-5">
+                        <form id="checkoutForm">
+                            <input type="hidden" id="plan" name="plan" value="starter">
+                            
+                            <!-- Starter Add-ons Section -->
+                            <div class="mb-5">
+                                <h3 class="fw-bold mb-3">Upgrade Your Starter Hosting Plan (Optional)</h3>
+                                <p class="text-muted mb-4">Add these powerful features to supercharge your data capabilities</p>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="add-on-item" data-addon="advanced_ai_analytics" data-price="99">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="addon_advanced_ai_analytics" name="add_ons" value="advanced_ai_analytics">
+                                                <label class="form-check-label w-100" for="addon_advanced_ai_analytics">
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <div>
+                                                            <strong>Advanced AI Analytics</strong>
+                                                            <br><small class="text-muted">$99–$199/month range</small>
+                                                        </div>
+                                                        <div class="text-primary fw-bold">+$99/mo</div>
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="add-on-item" data-addon="ai_powered_websites" data-price="49">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="addon_ai_powered_websites" name="add_ons" value="ai_powered_websites">
+                                                <label class="form-check-label w-100" for="addon_ai_powered_websites">
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <div>
+                                                            <strong>AI Powered Websites</strong>
+                                                            <br><small class="text-muted">starting at $1,500 setup</small>
+                                                        </div>
+                                                        <div class="text-primary fw-bold">+$49/mo</div>
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="add-on-item" data-addon="custom_applications" data-price="99">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="addon_custom_applications" name="add_ons" value="custom_applications">
+                                                <label class="form-check-label w-100" for="addon_custom_applications">
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <div>
+                                                            <strong>Custom Applications</strong>
+                                                            <br><small class="text-muted">starting at $2,000 setup</small>
+                                                        </div>
+                                                        <div class="text-primary fw-bold">+$99/mo</div>
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="add-on-item" data-addon="text_alerts" data-price="49">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="addon_text_alerts" name="add_ons" value="text_alerts">
+                                                <label class="form-check-label w-100" for="addon_text_alerts">
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <div>
+                                                            <strong>Text Alerts</strong>
+                                                            <br><small class="text-muted">1,000 messages included</small>
+                                                        </div>
+                                                        <div class="text-primary fw-bold">+$49/mo</div>
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h3 class="fw-bold mb-4">Your Information</h3>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="name" class="form-label">Full Name *</label>
+                                    <input type="text" class="form-control" id="name" name="name" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="email" class="form-label">Email Address *</label>
+                                    <input type="email" class="form-control" id="email" name="email" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="phone" class="form-label">Phone Number *</label>
+                                    <input type="tel" class="form-control" id="phone" name="phone" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="company" class="form-label">Company Name</label>
+                                    <input type="text" class="form-control" id="company" name="company">
+                                </div>
+                            </div>
+
+                            <!-- Payment Frequency Section -->
+                            <div class="mt-4">
+                                <h4 class="fw-bold mb-3">Payment Frequency</h4>
+                                <div class="payment-frequency-toggle">
+                                    <div class="btn-group w-100" role="group">
+                                        <input type="radio" class="btn-check" name="payment_frequency" id="monthly" value="monthly" checked>
+                                        <label class="btn btn-outline-primary" for="monthly">
+                                            <i class="fas fa-calendar-alt me-2"></i>Monthly
+                                        </label>
+                                        
+                                        <input type="radio" class="btn-check" name="payment_frequency" id="annually" value="annual">
+                                        <label class="btn btn-outline-primary" for="annually">
+                                            <i class="fas fa-calendar-check me-2"></i>Annually 
+                                            <span class="badge bg-success ms-2">Save 15%</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Payment Method Selection -->
+                            <div class="mt-5">
+                                <h4 class="fw-bold mb-3">Payment Method</h4>
+                                <div class="payment-method-selection">
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <div class="payment-method-card">
+                                                <input type="radio" class="btn-check" name="payment_provider" id="stripe" value="stripe" checked>
+                                                <label class="btn btn-outline-primary h-100 w-100 d-flex flex-column align-items-center justify-content-center p-4" for="stripe">
+                                                    <i class="fas fa-credit-card fa-2x mb-2"></i>
+                                                    <strong>Credit/Debit Card</strong>
+                                                    <small class="text-muted">Powered by Stripe</small>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="payment-method-card">
+                                                <input type="radio" class="btn-check" name="payment_provider" id="paypal" value="paypal">
+                                                <label class="btn btn-outline-primary h-100 w-100 d-flex flex-column align-items-center justify-content-center p-4" for="paypal">
+                                                    <i class="fab fa-paypal fa-2x mb-2"></i>
+                                                    <strong>PayPal</strong>
+                                                    <small class="text-muted">Pay with PayPal or card</small>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!-- Billing Information Section -->
+                            <div class="mt-5" id="billingSection">
+                                <h4 class="fw-bold mb-3">Billing Information</h4>
+                                <div class="row g-3">
+                                    <div class="col-12">
+                                        <label for="card_number" class="form-label">Card Number *</label>
+                                        <input type="text" class="form-control" id="card_number" name="card_number" placeholder="1234 5678 9012 3456" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="expiry_date" class="form-label">Expiration Date *</label>
+                                        <input type="text" class="form-control" id="expiry_date" name="expiry_date" placeholder="MM/YYYY" maxlength="7" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="cvv" class="form-label">CVV *</label>
+                                        <input type="text" class="form-control" id="cvv" name="cvv" placeholder="123" maxlength="4" autocomplete="cc-csc" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="mt-4">
+                                    <h5 class="fw-bold mb-3">Billing Address</h5>
+                                    <div class="row g-3">
+                                        <div class="col-12">
+                                            <label for="billing_address" class="form-label">Address Line 1 *</label>
+                                            <input type="text" class="form-control" id="billing_address" name="billing_address" required>
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="billing_address2" class="form-label">Address Line 2</label>
+                                            <input type="text" class="form-control" id="billing_address2" name="billing_address2">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="billing_city" class="form-label">City *</label>
+                                            <input type="text" class="form-control" id="billing_city" name="billing_city" required>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="billing_state" class="form-label">State *</label>
+                                            <input type="text" class="form-control" id="billing_state" name="billing_state" required>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="billing_zip" class="form-label">ZIP Code *</label>
+                                            <input type="text" class="form-control" id="billing_zip" name="billing_zip" required>
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="billing_country" class="form-label">Country *</label>
+                                            <select class="form-select" id="billing_country" name="billing_country" required>
+                                                <option value="">Select Country</option>
+                                                <option value="US" selected>United States</option>
+                                                <option value="CA">Canada</option>
+                                                <option value="GB">United Kingdom</option>
+                                                <option value="AU">Australia</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Security Message and Save Card -->
+                                <div class="mt-4 p-3 bg-light rounded">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-8">
+                                            <div class="d-flex align-items-center">
+                                                <i class="fas fa-shield-alt text-success me-2"></i>
+                                                <div>
+                                                    <small class="text-muted">
+                                                        <strong>Secure Payment:</strong> Payments are processed securely through Stripe. 
+                                                        We never store your card details.
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="save_card" name="save_card">
+                                                <label class="form-check-label" for="save_card">
+                                                    <small>Save card for future payments</small>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Legal & Policies Section -->
+                            <div class="mt-5">
+                                <h4 class="fw-bold mb-3">Legal & Policies</h4>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="accept_policies" name="accept_policies" required>
+                                    <label class="form-check-label" for="accept_policies">
+                                        I agree to the <a href="/terms-of-service">Terms of Service</a>, 
+                                        <a href="/privacy-policy">Privacy Policy</a>, and 
+                                        <a href="/billing-policy">Billing Policy</a> *
+                                    </label>
+                                </div>
+                                <div class="mt-3 p-3 bg-light rounded">
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-info-circle text-primary me-2"></i>
+                                        <small class="text-muted">
+                                            <strong>Your subscription will renew automatically. Cancel anytime.</strong>
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-4">
+                                <button type="submit" class="btn btn-primary btn-lg px-5" id="checkoutBtn">
+                                    <i class="fas fa-credit-card me-2"></i>Complete Purchase
+                                </button>
+                                <p class="mt-2 mb-0 text-muted">
+                                    <small><i class="fas fa-lock me-1"></i>Your information is secure and encrypted</small>
+                                </p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Price Summary Sidebar -->
+            <div class="col-lg-4">
+                <div class="price-summary">
+                    <h4 class="fw-bold mb-3">Order Summary</h4>
+                    
+                    <!-- Base Plan -->
+                    <div class="price-section mb-3">
+                        <h6 class="text-muted mb-2">Base Plan</h6>
+                        <div class="price-line">
+                            <span>Starter Hosting</span>
+                            <span>$199+/mo</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Upfront Costs Section -->
+                    <div class="price-section mb-3" id="upfrontSection" style="display: none;">
+                        <h6 class="text-muted mb-2"><strong>Upfront (One-time)</strong></h6>
+                        <div id="upfrontList">
+                            <!-- Upfront costs will be added here dynamically -->
+                        </div>
+                        <div class="price-line border-top pt-2">
+                            <span class="price-total">Upfront Total</span>
+                            <span class="price-total" id="upfrontTotal">$0</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Recurring Costs Section -->
+                    <div class="price-section mb-3">
+                        <h6 class="text-muted mb-2"><strong id="recurringTitle">Recurring (Monthly)</strong></h6>
+                        <div id="recurringList">
+                            <!-- Recurring add-ons will be added here dynamically -->
+                        </div>
+                        
+                        <!-- Annual Discount Display -->
+                        <div id="annualDiscountSection" style="display: none;" class="mt-2 mb-2">
+                            <div class="price-item text-muted">
+                                <span>Annual Subtotal (12 months)</span>
+                                <span id="annualSubtotal">$0</span>
+                            </div>
+                            <div class="price-item text-success">
+                                <span>Annual Discount (15%)</span>
+                                <span id="annualDiscount">-$0</span>
+                            </div>
+                        </div>
+                        
+                        <div class="price-line border-top pt-2">
+                            <span class="price-total" id="recurringTotalLabel">Monthly Total</span>
+                            <span class="price-total" id="recurringTotal">$199</span>
+                        </div>
+                        
+                        <!-- Savings Display -->
+                        <div id="savingsDisplay" style="display: none;" class="mt-2">
+                            <div class="badge bg-success">
+                                <i class="fas fa-piggy-bank me-1"></i>
+                                <span id="savingsText">Save $0 (15%) with annual billing</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Payment Summary -->
+                    <div class="payment-summary-section">
+                        <div class="h5 mb-2 text-success">
+                            <i class="fas fa-calculator me-2"></i>
+                            <span><strong id="paymentLabel">First Payment Due Today: </strong></span>
+                            <span id="checkoutTotal"><strong>$199</strong></span>
+                        </div>
+                        <small class="text-muted mt-1 d-block" id="paymentDescription">
+                            Includes all upfront setup costs + first month
+                        </small>
+                        
+                        <!-- Renewal Information -->
+                        <div id="renewalInfo" class="mt-2" style="display: none;">
+                            <small class="text-muted">
+                                <i class="fas fa-sync-alt me-1"></i>
+                                <span id="renewalText">Renews at $199/month unless canceled</span>
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const basePlanPrice = 199;
+    const annualDiscountRate = 0.15;
+    const addOnItems = document.querySelectorAll('.add-on-item');
+    const paymentFrequencyInputs = document.querySelectorAll('input[name="payment_frequency"]');
+    const paymentProviderInputs = document.querySelectorAll('input[name="payment_provider"]');
+    const billingSection = document.getElementById('billingSection');
+    const bankTransferSection = document.getElementById('bankTransferSection');
+    
+    // DOM elements
+    const upfrontSection = document.getElementById('upfrontSection');
+    const upfrontList = document.getElementById('upfrontList');
+    const recurringList = document.getElementById('recurringList');
+    const upfrontTotal = document.getElementById('upfrontTotal');
+    const checkoutTotal = document.getElementById('checkoutTotal');
+    const checkoutForm = document.getElementById('checkoutForm');
+    
+    // New elements for annual billing
+    const recurringTitle = document.getElementById('recurringTitle');
+    const recurringTotal = document.getElementById('recurringTotal');
+    const recurringTotalLabel = document.getElementById('recurringTotalLabel');
+    const annualDiscountSection = document.getElementById('annualDiscountSection');
+    const annualSubtotal = document.getElementById('annualSubtotal');
+    const annualDiscount = document.getElementById('annualDiscount');
+    const savingsDisplay = document.getElementById('savingsDisplay');
+    const savingsText = document.getElementById('savingsText');
+    const paymentLabel = document.getElementById('paymentLabel');
+    const paymentDescription = document.getElementById('paymentDescription');
+    const renewalInfo = document.getElementById('renewalInfo');
+    const renewalText = document.getElementById('renewalText');
+
+    // Card form elements
+    const cardNumberInput = document.getElementById('card_number');
+    const expiryDateInput = document.getElementById('expiry_date');
+    const cvvInput = document.getElementById('cvv');
+    
+    // Base plan pricing data
+    const basePlanPricing = {
+        setupFee: 299,
+        monthly: basePlanPrice,
+        name: 'Starter Hosting Plan'
+    };
+
+    // Add-on pricing data with upfront and recurring costs
+    const addOnPricing = {
+        'advanced_ai_analytics': { 
+            upfront: 0, 
+            monthly: 99,
+            name: 'Advanced AI Analytics'
+        },
+        'ai_powered_websites': { 
+            upfront: 1500, 
+            monthly: 49,
+            name: 'AI Powered Websites'
+        },
+        'custom_applications': { 
+            upfront: 2000, 
+            monthly: 99,
+            name: 'Custom Applications'
+        },
+        'text_alerts': { 
+            upfront: 0, 
+            monthly: 49,
+            name: 'Text Alerts'
+        }
+    };
+
+    // Card input formatting functions
+    function formatCardNumber(value) {
+        // Remove all non-digits
+        const digits = value.replace(/\D/g, '');
+        // Add spaces every 4 digits
+        return digits.replace(/(\d{4})(?=\d)/g, '$1 ');
+    }
+
+    function formatExpiryDate(value) {
+        // Remove all non-digits
+        const digits = value.replace(/\D/g, '');
+        // Add slash after 2 digits
+        if (digits.length >= 2) {
+            return digits.substring(0, 2) + '/' + digits.substring(2, 6);
+        }
+        return digits;
+    }
+
+    function formatCVV(value) {
+        // Only allow digits, max 4 characters
+        return value.replace(/\D/g, '').substring(0, 4);
+    }
+
+    // Add input event listeners for card formatting
+    if (cardNumberInput) {
+        cardNumberInput.addEventListener('input', function(e) {
+            const formatted = formatCardNumber(e.target.value);
+            e.target.value = formatted;
+        });
+    }
+
+    if (expiryDateInput) {
+        expiryDateInput.addEventListener('input', function(e) {
+            const formatted = formatExpiryDate(e.target.value);
+            e.target.value = formatted;
+        });
+    }
+
+    if (cvvInput) {
+        cvvInput.addEventListener('input', function(e) {
+            const formatted = formatCVV(e.target.value);
+            e.target.value = formatted;
+        });
+
+        // Ensure CVV field is not disabled or readonly
+        cvvInput.removeAttribute('disabled');
+        cvvInput.removeAttribute('readonly');
+    }
+
+    // Handle add-on selection
+    addOnItems.forEach(item => {
+        const checkbox = item.querySelector('input[type="checkbox"]');
+        const addOnId = item.dataset.addon;
+        
+        checkbox.addEventListener('change', function() {
+            if (this.checked) {
+                item.classList.add('selected');
+                addAddOnToSummary(addOnId);
+            } else {
+                item.classList.remove('selected');
+                removeAddOnFromSummary(addOnId);
+            }
+            updateTotals();
+        });
+    });
+    
+    // Handle payment frequency changes
+    paymentFrequencyInputs.forEach(input => {
+        input.addEventListener('change', function() {
+            updateTotals();
+        });
+    });
+
+    // Handle payment provider changes
+    paymentProviderInputs.forEach(input => {
+        input.addEventListener('change', function() {
+            const selectedProvider = document.querySelector('input[name="payment_provider"]:checked').value;
+            const checkoutBtn = document.getElementById('checkoutBtn');
+
+            if (selectedProvider === 'paypal') {
+                // Hide billing section for PayPal
+                billingSection.classList.add('paypal-selected');
+                checkoutBtn.innerHTML = '<i class="fab fa-paypal me-2"></i>Continue with PayPal';
+
+                // Remove required attributes from billing fields
+                const billingInputs = billingSection.querySelectorAll('input[required], select[required]');
+                billingInputs.forEach(input => {
+                    input.removeAttribute('required');
+                    input.setAttribute('data-was-required', 'true');
+                });
+            } else {
+                // Show billing section for Stripe
+                billingSection.classList.remove('paypal-selected');
+                checkoutBtn.innerHTML = '<i class="fas fa-credit-card me-2"></i>Complete Purchase';
+
+                // Restore required attributes for billing fields
+                const billingInputs = billingSection.querySelectorAll('input[data-was-required], select[data-was-required]');
+                billingInputs.forEach(input => {
+                    input.setAttribute('required', 'required');
+                    input.removeAttribute('data-was-required');
+                });
+            }
+        });
+    });
+    
+    // Initialize base plan setup fee display
+    function initializeBasePlanSetup() {
+        const basePlanUpfrontEl = document.createElement('div');
+        basePlanUpfrontEl.className = 'price-item';
+        basePlanUpfrontEl.id = 'upfront-base-plan';
+        basePlanUpfrontEl.innerHTML = `
+            <span class="price-item-name">${basePlanPricing.name} Setup</span>
+            <span class="price-item-amount">$${basePlanPricing.setupFee.toLocaleString()}</span>
+        `;
+        upfrontList.appendChild(basePlanUpfrontEl);
+    }
+
+    // Initialize base plan setup fee and totals on page load
+    initializeBasePlanSetup();
+    updateTotals();
+    
+    function addAddOnToSummary(id) {
+        const pricing = addOnPricing[id];
+        if (!pricing) return;
+        
+        // Add upfront cost if applicable
+        if (pricing.upfront > 0) {
+            const upfrontEl = document.createElement('div');
+            upfrontEl.className = 'price-item';
+            upfrontEl.id = `upfront-${id}`;
+            upfrontEl.innerHTML = `
+                <span class="price-item-name">${pricing.name}</span>
+                <span class="price-item-amount">$${pricing.upfront.toLocaleString()}</span>
+            `;
+            upfrontList.appendChild(upfrontEl);
+        }
+        
+        // Add recurring cost with appropriate label
+        const recurringEl = document.createElement('div');
+        recurringEl.className = 'price-item';
+        recurringEl.id = `recurring-${id}`;
+        
+        // Use specific labels for different services
+        let recurringLabel = pricing.name;
+        if (id === 'ai_powered_websites') {
+            recurringLabel = pricing.name + ' Hosting';
+        } else if (id === 'custom_applications') {
+            recurringLabel = pricing.name + ' Support';
+        }
+        
+        recurringEl.innerHTML = `
+            <span class="price-item-name">${recurringLabel}</span>
+            <span class="price-item-amount">$${pricing.monthly}/mo</span>
+        `;
+        recurringList.appendChild(recurringEl);
+        
+        // Add footnote for Text Alerts
+        if (id === 'text_alerts') {
+            const footnoteEl = document.createElement('div');
+            footnoteEl.className = 'text-muted small';
+            footnoteEl.id = `footnote-${id}`;
+            footnoteEl.style.paddingLeft = '1rem';
+            footnoteEl.style.fontSize = '0.75rem';
+            footnoteEl.innerHTML = 'Includes 1,000 messages. Additional messages billed at $0.05 each.';
+            recurringList.appendChild(footnoteEl);
+        }
+    }
+    
+    function removeAddOnFromSummary(id) {
+        const upfrontEl = document.getElementById(`upfront-${id}`);
+        const recurringEl = document.getElementById(`recurring-${id}`);
+        const footnoteEl = document.getElementById(`footnote-${id}`);
+        
+        if (upfrontEl) upfrontEl.remove();
+        if (recurringEl) recurringEl.remove();
+        if (footnoteEl) footnoteEl.remove();
+    }
+    
+    function updateTotals() {
+        const checkedAddOns = document.querySelectorAll('input[name="add_ons"]:checked');
+        const isAnnual = document.querySelector('input[name="payment_frequency"]:checked').value === 'annual';
+
+        // Start with base plan costs (including setup fee)
+        let totalUpfront = basePlanPricing.setupFee;
+        let totalMonthly = basePlanPrice;
+
+        // Calculate add-on costs
+        checkedAddOns.forEach(checkbox => {
+            const addOnId = checkbox.value;
+            const pricing = addOnPricing[addOnId];
+            if (pricing) {
+                totalUpfront += pricing.upfront;
+                totalMonthly += pricing.monthly;
+            }
+        });
+        
+        // Update upfront total
+        upfrontTotal.textContent = '$' + totalUpfront.toLocaleString();
+
+        // Always show upfront section since hosting plans have setup fees
+        upfrontSection.style.display = 'block';
+        
+        if (isAnnual) {
+            // Annual billing calculations
+            const annualSubtotalAmount = totalMonthly * 12;
+            const discountAmount = Math.round(annualSubtotalAmount * annualDiscountRate);
+            const discountedAnnual = annualSubtotalAmount - discountAmount;
+            
+            // Update UI for annual
+            recurringTitle.textContent = 'Recurring (Annually)';
+            recurringTotalLabel.textContent = 'Annual Total';
+            recurringTotal.textContent = '$' + discountedAnnual.toLocaleString() + '/year';
+            
+            // Show annual discount breakdown
+            annualDiscountSection.style.display = 'block';
+            annualSubtotal.textContent = '$' + annualSubtotalAmount.toLocaleString();
+            annualDiscount.textContent = '-$' + discountAmount.toLocaleString();
+            
+            // Show savings badge
+            savingsDisplay.style.display = 'block';
+            savingsText.textContent = `Save $${discountAmount.toLocaleString()} (15%) with annual billing`;
+            
+            // Update payment labels
+            paymentLabel.textContent = 'First Payment Due Today: ';
+            paymentDescription.textContent = 'Includes all upfront setup costs + annual subscription (covers 12 months upfront)';
+            
+            // Show renewal info
+            renewalInfo.style.display = 'block';
+            renewalText.textContent = `Renews at $${discountedAnnual.toLocaleString()}/year unless canceled`;
+            
+            // Calculate total (upfront + discounted annual)
+            const totalPayment = totalUpfront + discountedAnnual;
+            checkoutTotal.innerHTML = '<strong>$' + totalPayment.toLocaleString() + '</strong>';
+            
+        } else {
+            // Monthly billing
+            recurringTitle.textContent = 'Recurring (Monthly)';
+            recurringTotalLabel.textContent = 'Monthly Total';
+            recurringTotal.textContent = '$' + totalMonthly.toLocaleString() + '/month';
+            
+            // Hide annual-specific elements
+            annualDiscountSection.style.display = 'none';
+            savingsDisplay.style.display = 'none';
+            renewalInfo.style.display = 'none';
+            
+            // Update payment labels
+            paymentLabel.textContent = 'First Payment Due Today: ';
+            paymentDescription.textContent = 'Includes all upfront setup costs + first month';
+            
+            // Calculate first payment (upfront + first month)
+            const firstPayment = totalUpfront + totalMonthly;
+            checkoutTotal.innerHTML = '<strong>$' + firstPayment.toLocaleString() + '</strong>';
+        }
+    }
+    
+    // Handle form submission
+    checkoutForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const checkoutBtn = document.getElementById('checkoutBtn');
+        const originalText = checkoutBtn.innerHTML;
+        
+        // Show loading state
+        checkoutBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Processing...';
+        checkoutBtn.disabled = true;
+        
+        // Collect form data
+        const formData = new FormData(checkoutForm);
+        const selectedAddOns = Array.from(document.querySelectorAll('input[name="add_ons"]:checked'))
+            .map(checkbox => checkbox.value);
+        
+        const selectedProvider = formData.get('payment_provider');
+
+        const submissionData = {
+            name: formData.get('name'),
+            email: formData.get('email'),
+            phone: formData.get('phone'),
+            company: formData.get('company') || null,
+            plan: formData.get('plan'),
+            billing_cycle: formData.get('payment_frequency'),
+            payment_provider: selectedProvider,
+            add_ons: selectedAddOns,
+            save_card: formData.get('save_card') === 'on',
+            accept_policies: formData.get('accept_policies') === 'on'
+        };
+
+        // Add billing info for card payments
+        if (selectedProvider === 'stripe') {
+            submissionData.billing_info = {
+                card_number: formData.get('card_number'),
+                expiry_date: formData.get('expiry_date'),
+                cvv: formData.get('cvv'),
+                address: formData.get('billing_address'),
+                address2: formData.get('billing_address2') || null,
+                city: formData.get('billing_city'),
+                state: formData.get('billing_state'),
+                zip: formData.get('billing_zip'),
+                country: formData.get('billing_country')
+            };
+        }
+        
+        try {
+            const response = await fetch('/api/checkout/create-session', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(submissionData)
+            });
+            
+            if (response.ok) {
+                const data = await response.json();
+                if (data.success && data.checkout_url) {
+                    // Redirect to Stripe Checkout
+                    window.location.href = data.checkout_url;
+                } else {
+                    alert('Error: ' + (data.error || 'Failed to create checkout session'));
+                    checkoutBtn.innerHTML = originalText;
+                    checkoutBtn.disabled = false;
+                }
+            } else {
+                const errorData = await response.json();
+                alert('Error: ' + errorData.detail);
+                checkoutBtn.innerHTML = originalText;
+                checkoutBtn.disabled = false;
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('An error occurred. Please try again.');
+            checkoutBtn.innerHTML = originalText;
+            checkoutBtn.disabled = false;
+        }
+    });
+});
+</script>
+{% endblock %}

@@ -1,0 +1,406 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }} - Arnetrice Smith{% endblock %}
+
+{% block extra_css %}
+<style>
+.enterprise-header {
+    background: linear-gradient(135deg, var(--primary-blue-dark) 0%, var(--primary-blue) 100%);
+    color: white;
+    border-radius: var(--radius-lg);
+    padding: 3rem 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.enterprise-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.feature-card {
+    background: var(--light-gray);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+}
+
+.feature-icon {
+    font-size: 2.5rem;
+    color: var(--primary-blue);
+    margin-bottom: 1rem;
+}
+
+.service-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.service-option {
+    border: 2px solid var(--medium-gray);
+    border-radius: var(--radius-md);
+    padding: 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.service-option:hover {
+    border-color: var(--primary-blue-light);
+}
+
+.service-option.selected {
+    border-color: var(--primary-blue);
+    background-color: var(--accent-green-pastel);
+}
+
+.service-option input[type="checkbox"] {
+    margin-bottom: 0.5rem;
+}
+
+.text-alerts-callout {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow-medium);
+    position: relative;
+    overflow: hidden;
+}
+
+.text-alerts-callout::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 200%;
+    background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+    transform: rotate(45deg);
+    pointer-events: none;
+}
+
+.callout-icon {
+    font-size: 2.5rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 0.5rem;
+}
+
+.callout-title {
+    color: white;
+    font-weight: 600;
+}
+
+.callout-text {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.95rem;
+}
+
+.callout-price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ffd700;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+.callout-cta small {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+@media (max-width: 768px) {
+    .text-alerts-callout {
+        text-align: center;
+    }
+    
+    .callout-icon {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Enterprise Header -->
+<section class="hero-section">
+    <div class="container text-center">
+        <h1 class="mb-4">Enterprise Solutions</h1>
+        <p class="lead">Custom data solutions tailored to your organization's unique needs</p>
+    </div>
+</section>
+
+<!-- Enterprise Quote Form Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <!-- Enterprise Overview -->
+                <div class="enterprise-header">
+                    <h2 class="mb-3">Enterprise-Grade Data Solutions</h2>
+                    <p class="lead mb-0">Get a custom quote for enterprise data solutions, advanced analytics, and dedicated support</p>
+                </div>
+
+                <!-- Enterprise Features -->
+                <div class="enterprise-features">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h4>Advanced Analytics</h4>
+                        <p>Custom dashboards, predictive modeling, and real-time insights</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <h4>Data Integration</h4>
+                        <p>Connect multiple data sources and create unified data pipelines</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h4>Dedicated Support</h4>
+                        <p>24/7 support, personalized onboarding, dedicated point of contact, and strategic check-in calls</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <h4>Custom Development</h4>
+                        <p>Bespoke applications and tools built for your specific requirements</p>
+                    </div>
+                </div>
+
+                <!-- Text Alerts Feature Callout -->
+                <div class="text-alerts-callout">
+                    <div class="row align-items-center">
+                        <div class="col-md-2 text-center">
+                            <div class="callout-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <h5 class="callout-title mb-1">Stay ahead with real-time text alerts</h5>
+                            <p class="callout-text mb-0">Get notified when critical thresholds are met — no need to log in to dashboards.</p>
+                            <p class="callout-text small mb-0 mt-1"><strong>Enterprise clients benefit from volume discounts — as low as $0.04 per message for higher usage.</strong></p>
+                        </div>
+                        <div class="col-md-2 text-center">
+                            <div class="callout-cta">
+                                <span class="callout-price">$49/mo</span>
+                                <br><small class="text-muted">Include in quote</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quote Request Form -->
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-5">
+                        <h3 class="fw-bold mb-4">Request Your Custom Quote</h3>
+                        
+                        <form id="enterpriseForm">
+                            <input type="hidden" id="plan" name="plan" value="enterprise">
+                            
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="name" class="form-label">Full Name *</label>
+                                    <input type="text" class="form-control" id="name" name="name" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="email" class="form-label">Business Email *</label>
+                                    <input type="email" class="form-control" id="email" name="email" required>
+                                </div>
+                                <div class="col-12">
+                                    <label for="company" class="form-label">Company Name</label>
+                                    <input type="text" class="form-control" id="company" name="company">
+                                </div>
+                            </div>
+
+                            <!-- Services Needed -->
+                            <div class="mt-5">
+                                <h4 class="fw-bold mb-3">Services Needed (Select all that apply)</h4>
+                                <div class="service-options">
+                                    <div class="service-option" data-service="ai_driven_data_analytics">
+                                        <input type="checkbox" id="service_ai_analytics" name="services" value="ai_driven_data_analytics">
+                                        <label for="service_ai_analytics" class="d-block">
+                                            <i class="fas fa-chart-bar d-block mb-2"></i>
+                                            <strong>AI Driven Data Analytics</strong>
+                                        </label>
+                                    </div>
+                                    <div class="service-option" data-service="specialized_bi_dashboards">
+                                        <input type="checkbox" id="service_bi_dashboards" name="services" value="specialized_bi_dashboards">
+                                        <label for="service_bi_dashboards" class="d-block">
+                                            <i class="fas fa-brain d-block mb-2"></i>
+                                            <strong>Specialized BI Dashboards</strong>
+                                        </label>
+                                    </div>
+                                    <div class="service-option" data-service="ai_powered_websites">
+                                        <input type="checkbox" id="service_websites" name="services" value="ai_powered_websites">
+                                        <label for="service_websites" class="d-block">
+                                            <i class="fas fa-lightbulb d-block mb-2"></i>
+                                            <strong>AI Powered Websites</strong>
+                                        </label>
+                                    </div>
+                                    <div class="service-option" data-service="custom_applications">
+                                        <input type="checkbox" id="service_custom_apps" name="services" value="custom_applications">
+                                        <label for="service_custom_apps" class="d-block">
+                                            <i class="fas fa-cubes d-block mb-2"></i>
+                                            <strong>Custom Applications</strong>
+                                        </label>
+                                    </div>
+                                    <div class="service-option" data-service="text_alerts">
+                                        <input type="checkbox" id="service_text_alerts" name="services" value="text_alerts">
+                                        <label for="service_text_alerts" class="d-block">
+                                            <i class="fas fa-mobile-alt d-block mb-2"></i>
+                                            <strong>Text Alerts</strong>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Project Details -->
+                            <div class="mt-5">
+                                <label for="needs_requirements" class="form-label">
+                                    <h4 class="fw-bold mb-2">Project Details & Requirements</h4>
+                                    <small class="text-muted">Tell us more about your project, timeline, budget range, and specific requirements</small>
+                                </label>
+                                <textarea class="form-control" id="needs_requirements" name="needs_requirements" rows="6" 
+                                    placeholder="Please describe:
+• Your current data challenges
+• Project timeline and budget range
+• Specific requirements or goals
+• Team size and technical expertise
+• Any existing tools or systems"></textarea>
+                            </div>
+
+                            <!-- Legal & Policies Section -->
+                            <div class="mt-5">
+                                <h4 class="fw-bold mb-3">Legal & Policies</h4>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="accept_policies" name="accept_policies" required>
+                                    <label class="form-check-label" for="accept_policies">
+                                        I agree to the <a href="/terms-of-service">Terms of Service</a>, 
+                                        <a href="/privacy-policy">Privacy Policy</a>, and 
+                                        <a href="/billing-policy">Billing Policy</a> *
+                                    </label>
+                                </div>
+                                <div class="mt-3 p-3 bg-light rounded">
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-info-circle text-primary me-2"></i>
+                                        <small class="text-muted">
+                                            <strong>Your subscription will renew automatically. Cancel anytime.</strong>
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-4">
+                                <button type="submit" class="btn btn-primary btn-lg px-5" id="submitBtn">
+                                    <i class="fas fa-paper-plane me-2"></i>Submit Quote Request
+                                </button>
+                                <p class="mt-2 mb-0 text-muted">
+                                    <small><i class="fas fa-clock me-1"></i>We'll respond within 24 hours with a custom proposal</small>
+                                </p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const serviceOptions = document.querySelectorAll('.service-option');
+    const enterpriseForm = document.getElementById('enterpriseForm');
+    
+    // Handle service option selection
+    serviceOptions.forEach(option => {
+        const checkbox = option.querySelector('input[type="checkbox"]');
+        
+        checkbox.addEventListener('change', function() {
+            if (this.checked) {
+                option.classList.add('selected');
+            } else {
+                option.classList.remove('selected');
+            }
+        });
+        
+        // Allow clicking the entire option to toggle checkbox
+        option.addEventListener('click', function(e) {
+            if (e.target.type !== 'checkbox' && e.target.tagName !== 'LABEL') {
+                checkbox.checked = !checkbox.checked;
+                checkbox.dispatchEvent(new Event('change'));
+            }
+        });
+    });
+    
+    // Handle form submission
+    enterpriseForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const submitBtn = document.getElementById('submitBtn');
+        const originalText = submitBtn.innerHTML;
+        
+        // Show loading state
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Submitting...';
+        submitBtn.disabled = true;
+        
+        // Collect form data
+        const formData = new FormData(enterpriseForm);
+        const selectedServices = Array.from(document.querySelectorAll('input[name="services"]:checked'))
+            .map(checkbox => checkbox.value);
+        
+        const submissionData = {
+            name: formData.get('name'),
+            email: formData.get('email'),
+            company: formData.get('company') || null,
+            plan: formData.get('plan'),
+            needs_requirements: formData.get('needs_requirements'),
+            add_ons: selectedServices.length > 0 ? JSON.stringify(selectedServices) : null,
+            accept_policies: formData.get('accept_policies') === 'on'
+        };
+        
+        try {
+            const response = await fetch('/api/checkout/enterprise-submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(submissionData)
+            });
+            
+            if (response.ok) {
+                const data = await response.json();
+                // Redirect to thank you page
+                window.location.href = `/thank-you-enterprise?submission_id=${data.submission_id}`;
+            } else {
+                const errorData = await response.json();
+                alert('Error: ' + errorData.detail);
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('An error occurred. Please try again.');
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+        }
+    });
+});
+</script>
+{% endblock %}

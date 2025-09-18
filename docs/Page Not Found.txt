@@ -1,0 +1,26 @@
+Looking at the code, I can see the potential issue with why the checkout page can't be found when returning from Stripe.
+The Problem: URL Mismatch
+The issue is in how the Stripe cancel URL is constructed versus how the actual routes are defined:
+Stripe Cancel URL Configuration
+In the payment service (backend/app/services/payment_service.py), the cancel URL is set as:
+For the Growth plan, this creates: {BASE_URL}/checkout-growth
+Actual Route Definition
+But looking at the routes in backend/app/routes/checkout.py, the route is defined as:
+The Mismatch
+The route is defined as /checkout-growth (with a hyphen), and the Stripe cancel URL is also set to /checkout-growth (with a hyphen), so that should work.
+However, let me check if there might be other issues:
+Base URL Configuration: If settings.BASE_URL isn't properly configured or doesn't match your actual domain, the redirect URL could be malformed.
+Route Registration: The checkout routes might not be properly registered with the main FastAPI app, so the /checkout-growth endpoint might not actually be available.
+Server Configuration: If you're running behind a reverse proxy (like nginx) or in a different environment, the URL structure might be different.
+Case Sensitivity: Depending on your server configuration, there might be case sensitivity issues.
+Trailing Slashes: Some servers are picky about trailing slashes in URLs.
+The most likely culprits are:
+Base URL misconfiguration: The BASE_URL setting might not match your actual domain
+Route not registered: The checkout router might not be properly included in the main app
+Environment differences: The URL structure might work in development but fail in production due to different base URLs
+To diagnose this, you'd want to check:
+What settings.BASE_URL is actually set to
+Whether the checkout routes are properly registered with the main FastAPI application
+Whether the server is actually serving the /checkout-growth endpoint
+What the actual error message is when the redirect fails
+The route definition looks correct, so the issue is likely in the configuration or routing setup rather than the route itself.

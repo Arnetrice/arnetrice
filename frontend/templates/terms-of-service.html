@@ -1,0 +1,218 @@
+{% extends "base.html" %}
+
+{% block title %}Terms of Service - Arnetrice Smith{% endblock %}
+
+{% block extra_css %}
+<style>
+.policy-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+.policy-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
+    color: white;
+    border-radius: var(--radius-lg);
+}
+
+.pending-notice {
+    background: linear-gradient(135deg, #FFF3CD 0%, #FFF7DC 100%);
+    border: 2px solid #FFCC02;
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.pending-notice h4 {
+    color: #856404;
+    margin-bottom: 0.5rem;
+}
+
+.pending-notice p {
+    color: #856404;
+    margin-bottom: 0;
+    font-size: 0.95rem;
+}
+
+.policy-content {
+    background: white;
+    padding: 2rem;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-light);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.policy-content h1 {
+    color: var(--primary-blue-dark);
+    border-bottom: 3px solid var(--accent-green);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.policy-content h2 {
+    color: var(--primary-blue);
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.policy-content ul {
+    margin-left: 1rem;
+}
+
+.policy-content li {
+    margin-bottom: 0.5rem;
+}
+
+.back-to-checkout {
+    text-align: center;
+    padding: 2rem;
+    background: var(--light-gray);
+    border-radius: var(--radius-md);
+    margin-top: 2rem;
+}
+
+.back-to-checkout .btn {
+    margin: 0 0.5rem;
+}
+
+@media (max-width: 768px) {
+    .policy-container {
+        padding: 1rem 0.5rem;
+    }
+    
+    .policy-content {
+        padding: 1.5rem;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="policy-container">
+    <!-- Policy Header -->
+    <div class="policy-header">
+        <h1 class="mb-2">Terms of Service</h1>
+        <p class="mb-0">Pending Status - Effective Immediately</p>
+    </div>
+
+    <!-- Pending Notice -->
+    <div class="pending-notice">
+        <h4><i class="fas fa-info-circle me-2"></i>Pending Status Notice</h4>
+        <p>These Terms of Service are currently in a "pending" state as we finalize our trademark and migrate services under Qoat. The policies are effective immediately for Arnetrice.com and will be updated upon transition.</p>
+    </div>
+
+    <!-- Policy Content -->
+    <div class="policy-content">
+        <p><strong>Effective Date:</strong> [Insert Date]<br>
+        <strong>Last Updated:</strong> [Insert Date]</p>
+
+        <p>Welcome to Arnetrice.com (operating as Qoat, pending trademark approval) ("Company," "we," "our," or "us"). These Terms of Service ("Terms") govern your access to and use of our websites, applications, platforms, and services (collectively, the "Services"). By accessing or using our Services, you agree to these Terms.</p>
+
+        <p>If you do not agree, do not use our Services.</p>
+
+        <h2>1. Eligibility</h2>
+        <ul>
+            <li>You must be at least 18 years old (or the age of majority in your jurisdiction) to use our Services.</li>
+            <li>By using the Services, you represent and warrant that you meet these requirements.</li>
+        </ul>
+
+        <h2>2. Services Provided</h2>
+        <p>Arnetrice.com (operating as Qoat, pending trademark approval) offers:</p>
+        <ul>
+            <li>Web Development & Hosting</li>
+            <li>Data Storage & Share</li>
+            <li>Data Management</li>
+            <li>Exploratory Data Analysis</li>
+            <li>AI/ML Recommendations</li>
+            <li>Text Alerts (add-on service)</li>
+        </ul>
+        <p>We may add, modify, or remove Services at any time.</p>
+
+        <h2>3. Accounts & Access</h2>
+        <ul>
+            <li>You may be required to register an account. You agree to provide accurate, current, and complete information.</li>
+            <li>You are responsible for maintaining confidentiality of login credentials and for all activity on your account.</li>
+            <li>Notify us immediately of any unauthorized access or security incident.</li>
+        </ul>
+
+        <h2>4. Acceptable Use</h2>
+        <p>You agree not to use the Services to:</p>
+        <ul>
+            <li>Violate any laws or regulations.</li>
+            <li>Infringe intellectual property, privacy, or contractual rights of others.</li>
+            <li>Introduce malware, unauthorized scripts, or harmful code.</li>
+            <li>Interfere with or disrupt the Services or networks connected to the Services.</li>
+        </ul>
+        <p>We reserve the right to suspend or terminate access if these rules are violated.</p>
+
+        <h2>5. Payment & Subscriptions</h2>
+        <ul>
+            <li>Certain Services require paid subscriptions. Fees are recurring unless otherwise specified.</li>
+            <li>Payments are processed by third-party providers (e.g., Stripe, PayPal). By providing payment information, you authorize us to charge recurring fees until canceled.</li>
+            <li>See our Billing Policy for full details.</li>
+        </ul>
+
+        <h2>6. Data Ownership & Usage</h2>
+        <ul>
+            <li>You retain ownership of the data you upload or input into Arnetrice.com (operating as Qoat, pending trademark approval).</li>
+            <li>By using our Services, you grant us a limited license to process, host, and back up your data solely to provide the Services.</li>
+            <li>We will never sell your personal data. See our Privacy Policy for details.</li>
+        </ul>
+
+        <h2>7. Intellectual Property</h2>
+        <ul>
+            <li>The Arnetrice.com (operating as Qoat, pending trademark approval) platform, software, and related materials are protected by copyright, trademark, and other laws.</li>
+            <li>You are granted a limited, non-exclusive, non-transferable license to use the Services in accordance with these Terms.</li>
+            <li>You may not copy, modify, or reverse engineer our software without prior written consent.</li>
+        </ul>
+
+        <h2>8. Disclaimer of Warranties</h2>
+        <p>The Services are provided "as is" and "as available" without warranties of any kind. We do not guarantee uninterrupted or error-free operation.</p>
+
+        <h2>9. Limitation of Liability</h2>
+        <p>To the maximum extent permitted by law:</p>
+        <ul>
+            <li>Arnetrice.com (operating as Qoat, pending trademark approval) is not liable for indirect, incidental, or consequential damages.</li>
+            <li>Our total liability in any 12-month period will not exceed the total fees paid by you during that period.</li>
+        </ul>
+
+        <h2>10. Termination</h2>
+        <ul>
+            <li>You may cancel your account at any time.</li>
+            <li>We may suspend or terminate your account for violations of these Terms or non-payment.</li>
+        </ul>
+
+        <h2>11. Governing Law</h2>
+        <p>These Terms shall be governed by the laws of [Insert State, e.g., Florida], without regard to conflict of law rules.</p>
+
+        <h2>12. Service Level Agreement (SLA)</h2>
+        <p>Arnetrice.com (operating as Qoat, pending trademark approval) aims to provide 99.9% uptime for Services. Scheduled maintenance will be communicated in advance. Support requests will be addressed within [X] business hours depending on subscription tier.</p>
+
+        <h2>13. Changes</h2>
+        <p>We may update these Terms at any time. We will notify users by posting revised Terms with a new "Last Updated" date.</p>
+
+        <h2>14. Contact Us</h2>
+        <p>Arnetrice.com (operating as Qoat, pending trademark approval)<br>
+        Email: [Insert Email]<br>
+        Phone: [Insert Phone]<br>
+        Address: [Insert Address]</p>
+    </div>
+
+    <!-- Back to Checkout -->
+    <div class="back-to-checkout">
+        <h5 class="mb-3">Ready to continue?</h5>
+        <a href="javascript:history.back()" class="btn btn-primary btn-lg">
+            <i class="fas fa-arrow-left me-2"></i>Back to Checkout
+        </a>
+        <a href="/" class="btn btn-outline-primary btn-lg">
+            <i class="fas fa-home me-2"></i>Home
+        </a>
+    </div>
+</div>
+{% endblock %}

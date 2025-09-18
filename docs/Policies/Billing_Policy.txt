@@ -1,0 +1,40 @@
+Billing Policy
+
+Effective Date: [Insert Date]
+Last Updated: [Insert Date]
+
+This Billing Policy outlines how subscriptions and charges work for Arnetrice.com (operating as Qoat, pending trademark approval).
+
+1. Subscriptions & Fees
+- Services are billed on a recurring basis (monthly or annual, depending on your selection).
+- Subscription fees are disclosed at sign-up. By subscribing, you authorize recurring charges.
+
+2. Payment Methods
+- Payments are processed via Stripe, PayPal, or other approved providers.
+- You must maintain valid payment information. If a charge is declined, we may suspend or terminate your account.
+
+3. Renewal & Cancellation
+- Subscriptions automatically renew at the end of each term unless canceled.
+- You may cancel anytime via your account dashboard. Cancellation will take effect at the end of the current billing period.
+
+4. Refunds
+- Fees are non-refundable unless otherwise required by law.
+- Partial refunds are not provided for unused time.
+
+5. Usage-Based Charges
+- Text Alerts and other add-on features may incur usage-based fees (e.g., $0.05 per additional message beyond plan limits).
+- These charges will appear on your next invoice.
+
+6. Late Payments
+- If payment fails, we may retry up to [X] times.
+- After [X] days of non-payment, your account may be suspended.
+
+7. Changes to Fees
+- We may update subscription or usage fees with prior notice.
+- Continued use after fee changes constitutes agreement.
+
+8. Contact Us
+Arnetrice.com (operating as Qoat, pending trademark approval)
+Email: [Insert Email]
+Phone: [Insert Phone]
+Address: [Insert Address]

@@ -1,0 +1,274 @@
+{% extends "base.html" %}
+
+{% block title %}Frequently Asked Questions About Data Hosting & Analytics - Arnetrice Smith{% endblock %}
+{% block description %}Get answers to common questions about data hosting, analytics services, custom applications, pricing, and our proven 4-step process. Transparent pricing and clear solutions.{% endblock %}
+{% block og_title %}FAQ: Data Hosting & Analytics Services - Arnetrice Smith{% endblock %}
+{% block og_description %}Complete guide to data hosting, analytics services, pricing, and custom solutions. Get all your questions answered.{% endblock %}
+
+{% block extra_css %}
+<style>
+.faq-hero {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #0056b3 100%);
+    color: white;
+    padding: 4rem 0;
+}
+
+.faq-content {
+    padding: 3rem 0;
+}
+
+.faq-question {
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 1.25rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--primary-color);
+}
+
+.faq-answer {
+    color: var(--text-light);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+}
+
+.faq-answer ul {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+}
+
+.faq-answer li {
+    margin-bottom: 0.5rem;
+}
+
+.faq-conclusion {
+    background: var(--light-color);
+    padding: 2rem;
+    border-radius: var(--radius-md);
+    margin-top: 3rem;
+}
+
+.back-to-services {
+    background: var(--primary-color);
+    color: white;
+    padding: 1.5rem;
+    border-radius: var(--radius-md);
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.back-to-services a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.back-to-services a:hover {
+    color: #e3f2fd;
+}
+
+/* FAQ Accordion Styling - Match Services Page */
+.accordion-button:not(.collapsed) {
+    background-color: rgba(107, 125, 149, 0.1) !important;
+    border-color: rgba(107, 125, 149, 0.2) !important;
+    color: var(--text-dark) !important;
+}
+
+.accordion-button:focus {
+    box-shadow: 0 0 0 0.25rem rgba(107, 125, 149, 0.15) !important;
+    border-color: rgba(107, 125, 149, 0.3) !important;
+}
+
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="faq-hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h1 class="mb-4">Frequently Asked Questions</h1>
+                <p class="lead mb-0">Complete guide to data hosting, analytics, and custom solutions</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Content -->
+<section class="faq-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                
+                <div class="mb-4">
+                    <p class="lead fw-bold">Choosing the right partner for your data and AI-driven projects can feel overwhelming — especially if you're new to concepts like hosting, dashboards, or custom applications. To help, I've compiled answers to some of the most common questions I receive about my services, pricing, and process.</p>
+                </div>
+
+                <!-- Pricing Questions Section -->
+                <div class="accordion mb-4" id="pricingAccordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="pricingHeading">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#pricingCollapse" aria-expanded="false" aria-controls="pricingCollapse">
+                                <h2 class="faq-question mb-0" style="margin-top: 0;">Pricing Questions</h2>
+                            </button>
+                        </h2>
+                        <div id="pricingCollapse" class="accordion-collapse collapse" aria-labelledby="pricingHeading" data-bs-parent="#pricingAccordion">
+                            <div class="accordion-body">
+                                <h3 class="faq-question">1. What's included in the monthly hosting fee?</h3>
+                                <div class="faq-answer">
+                                    <p>Your hosting plan covers secure storage for your business data, dashboards, user access, and support. Each tier includes a different level of analytics and reporting, with optional add-ons available for more advanced solutions.</p>
+                                </div>
+
+                                <h3 class="faq-question">2. What is your pricing structure?</h3>
+                                <div class="faq-answer">
+                                    <p>I use a tiered hosting model as the foundation for my services.</p>
+                                    <ul>
+                                        <li><strong>Hosting Plans (Starter, Growth, Enterprise)</strong> → Monthly subscriptions starting at $199+ per month. These cover secure data hosting, dashboards, and user access.</li>
+                                        <li><strong>Migration Fees</strong> → One-time setup costs starting at $299, depending on complexity.</li>
+                                        <li><strong>Add-On Services</strong> → Optional extras such as websites, advanced analytics packages, or custom applications.</li>
+                                    </ul>
+                                    <p>This structure keeps costs predictable while giving you flexibility to add more services as your needs grow.</p>
+                                </div>
+
+                                <h3 class="faq-question">3. Do I have to buy add-ons, or can I just use hosting?</h3>
+                                <div class="faq-answer">
+                                    <p>Hosting alone provides dashboards and analytics based on your chosen plan. Add-ons are optional — you only pay for them if you need them. For example, a Starter plan may be perfect for small businesses that want dashboards and basic analytics, while Growth or Enterprise clients often add on web development or custom applications.</p>
+                                </div>
+
+                                <h3 class="faq-question">4. What does "+" mean in the pricing?</h3>
+                                <div class="faq-answer">
+                                    <p>The "+" indicates that pricing is a starting point. Final costs may vary depending on factors like additional users, data storage, or optional add-ons. I always confirm scope and pricing with you before work begins, so there are no surprises.</p>
+                                </div>
+
+                                <h3 class="faq-question">5. How much does a website cost?</h3>
+                                <div class="faq-answer">
+                                    <p>Websites are offered as an add-on service. Pricing starts at $1,500 for a basic site (up to 5 pages, responsive design, SEO-ready). More advanced websites with features like e-commerce or integrations are scoped separately. Ongoing hosting and maintenance is available from $49–$99 per month.</p>
+                                </div>
+
+                                <h3 class="faq-question">6. What counts as a custom application?</h3>
+                                <div class="faq-answer">
+                                    <p>A custom application is any lightweight tool or system built to streamline your specific workflows. Examples include:</p>
+                                    <ul>
+                                        <li>Order entry systems</li>
+                                        <li>Workflow automation tools</li>
+                                        <li>Custom reporting dashboards</li>
+                                        <li>AI-powered recommendations</li>
+                                    </ul>
+                                    <p>Custom applications start at $2,000 setup with ongoing hosting and maintenance from $99–$299 per month. Pricing depends on complexity.</p>
+                                </div>
+
+                                <h3 class="faq-question">7. Can I upgrade my plan later?</h3>
+                                <div class="faq-answer">
+                                    <p>Yes. You can upgrade or downgrade hosting tiers at any time, and add-ons can be added or removed as your business needs evolve.</p>
+                                </div>
+
+                                <h3 class="faq-question">8. How much does migration cost?</h3>
+                                <div class="faq-answer">
+                                    <p>Migration starts at $299 for Starter, $499 for Growth, and $999 for Enterprise. Discounts are available with annual billing. Pricing may vary depending on data complexity.</p>
+                                </div>
+
+                                <h3 class="faq-question">9. Do you build websites as part of hosting?</h3>
+                                <div class="faq-answer">
+                                    <p>No — web development is offered as a separate add-on starting at $1,500. This ensures hosting costs stay predictable, and you can choose a website package only if needed.</p>
+                                </div>
+
+                                <h3 class="faq-question">10. Do you offer discounts?</h3>
+                                <div class="faq-answer">
+                                    <p>Yes. You can save 15% with annual billing across all hosting tiers. Referral bonuses are also available — for each client you refer, you'll receive additional savings on your next renewal.</p>
+                                </div>
+
+                                <div class="text-center mt-4">
+                                    <a href="/services" class="btn btn-danger btn-lg me-2">View Services & Pricing</a>
+                                    <a href="/contact" class="btn btn-outline-light btn-lg">Contact Me</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project & Service Questions Section -->
+                <div class="accordion mb-4" id="projectAccordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="projectHeading">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#projectCollapse" aria-expanded="false" aria-controls="projectCollapse">
+                                <h2 class="faq-question mb-0" style="margin-top: 0;">Project & Service Questions</h2>
+                            </button>
+                        </h2>
+                        <div id="projectCollapse" class="accordion-collapse collapse" aria-labelledby="projectHeading" data-bs-parent="#projectAccordion">
+                            <div class="accordion-body">
+                                <h3 class="faq-question">11. What types of projects do you work on?</h3>
+                                <div class="faq-answer">
+                                    <p>I work on a wide range of projects that help businesses make better use of their data:</p>
+                                    <ul>
+                                        <li>Business intelligence dashboards that provide real-time visibility into performance.</li>
+                                        <li>AI-driven data analytics to uncover patterns, trends, and opportunities.</li>
+                                        <li>Custom applications to automate workflows or solve unique business problems.</li>
+                                        <li>Web development for modern, responsive websites optimized for speed and SEO.</li>
+                                    </ul>
+                                    <p>Whether you're a small business owner looking for clearer reporting, or a growing company in need of scalable data infrastructure, I provide tailored solutions that fit your goals.</p>
+                                </div>
+
+                                <h3 class="faq-question">12. How long does a typical project take?</h3>
+                                <div class="faq-answer">
+                                    <p>Timelines vary depending on the complexity and scope of your project:</p>
+                                    <ul>
+                                        <li>Simple analytics reports → typically 1–2 weeks.</li>
+                                        <li>Business intelligence dashboards → 3–6 weeks.</li>
+                                        <li>Custom applications or multi-feature projects → 6–12 weeks or more.</li>
+                                    </ul>
+                                    <p>Every project begins with a discovery phase to define requirements, so you'll have a clear timeline before we begin.</p>
+                                </div>
+
+                                <h3 class="faq-question">13. Do you work with remote clients?</h3>
+                                <div class="faq-answer">
+                                    <p>Absolutely! I collaborate with clients across the U.S. and worldwide. All meetings, progress updates, and final deliverables can be managed virtually. Remote work ensures flexibility and efficiency while still providing the same level of communication and accountability.</p>
+                                </div>
+
+                                <h3 class="faq-question">14. How do you deliver projects?</h3>
+                                <div class="faq-answer">
+                                    <p>Every project follows my 4-step process:</p>
+                                    <ul>
+                                        <li><strong>Discovery</strong> – understanding your goals and current setup.</li>
+                                        <li><strong>Analysis</strong> – reviewing your data and defining the best solution.</li>
+                                        <li><strong>Solution</strong> – designing and implementing your dashboards, apps, or site.</li>
+                                        <li><strong>Optimization</strong> – refining, supporting, and scaling as your needs grow.</li>
+                                    </ul>
+                                    <p>This process ensures consistency, transparency, and measurable results across every engagement.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Technical & Security Questions Section -->
+                <div class="accordion mb-4" id="technicalAccordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="technicalHeading">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#technicalCollapse" aria-expanded="false" aria-controls="technicalCollapse">
+                                <h2 class="faq-question mb-0" style="margin-top: 0;">Technical & Security Questions</h2>
+                            </button>
+                        </h2>
+                        <div id="technicalCollapse" class="accordion-collapse collapse" aria-labelledby="technicalHeading" data-bs-parent="#technicalAccordion">
+                            <div class="accordion-body">
+                                <h3 class="faq-question">15. How do you keep my data secure?</h3>
+                                <div class="faq-answer">
+                                    <p>Security is a top priority. All hosted data is stored in secure environments with role-based access controls. Backups and updates are managed to ensure your data is safe, available, and reliable.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                                 <!-- Conclusion -->
+                 <div class="mb-4">
+                     <p class="lead fw-bold">I know that evaluating new technology and services can feel like a big decision. My goal with hosting, analytics, and add-on services is to make the process simple, transparent, and scalable. If you still have questions not covered here, I'd be happy to talk — reach out anytime, and I'll help you find the right solution for your business.</p>
+                 </div>
+
+             </div>
+         </div>
+     </div>
+ </section>
+
+{% endblock %}

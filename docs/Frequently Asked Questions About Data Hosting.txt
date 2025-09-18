@@ -1,0 +1,70 @@
+Frequently Asked Questions About Data Hosting, Analytics, and Custom Solutions
+Choosing the right partner for your data and AI-driven projects can feel overwhelming — especially if you’re new to concepts like hosting, dashboards, or custom applications. To help, I’ve compiled answers to some of the most common questions I receive about my services, pricing, and process.
+________________________________________
+1. What types of projects do you work on?
+I work on a wide range of projects that help businesses make better use of their data:
+•	Business intelligence dashboards that provide real-time visibility into performance.
+•	AI-driven data analytics to uncover patterns, trends, and opportunities.
+•	Custom applications to automate workflows or solve unique business problems.
+•	Web development for modern, responsive websites optimized for speed and SEO.
+Whether you’re a small business owner looking for clearer reporting, or a growing company in need of scalable data infrastructure, I provide tailored solutions that fit your goals.
+________________________________________
+2. How long does a typical project take?
+Timelines vary depending on the complexity and scope of your project:
+•	Simple analytics reports → typically 1–2 weeks.
+•	Business intelligence dashboards → 3–6 weeks.
+•	Custom applications or multi-feature projects → 6–12 weeks or more.
+Every project begins with a discovery phase to define requirements, so you’ll have a clear timeline before we begin.
+________________________________________
+3. Do you work with remote clients?
+Absolutely! I collaborate with clients across the U.S. and worldwide. All meetings, progress updates, and final deliverables can be managed virtually. Remote work ensures flexibility and efficiency while still providing the same level of communication and accountability.
+________________________________________
+4. What is your pricing structure?
+I use a tiered hosting model as the foundation for my services.
+•	Hosting Plans (Starter, Growth, Enterprise) → Monthly subscriptions starting at $199+ per month. These cover secure data hosting, dashboards, and user access.
+•	Migration Fees → One-time setup costs starting at $299, depending on complexity.
+•	Add-On Services → Optional extras such as websites, advanced analytics packages, or custom applications.
+This structure keeps costs predictable while giving you flexibility to add more services as your needs grow.
+________________________________________
+5. Do I have to buy add-ons, or can I just use hosting?
+Hosting alone provides dashboards and analytics based on your chosen plan. Add-ons are optional — you only pay for them if you need them. For example, a Starter plan may be perfect for small businesses that want dashboards and basic analytics, while Growth or Enterprise clients often add on web development or custom applications.
+________________________________________
+6. What does “+” mean in the pricing?
+The “+” indicates that pricing is a starting point. Final costs may vary depending on factors like additional users, data storage, or optional add-ons. I always confirm scope and pricing with you before work begins, so there are no surprises.
+________________________________________
+7. How much does a website cost?
+Websites are offered as an add-on service. Pricing starts at $1,500 for a basic site (up to 5 pages, responsive design, SEO-ready). More advanced websites with features like e-commerce or integrations are scoped separately. Ongoing hosting and maintenance is available from $49–$99 per month.
+________________________________________
+8. What counts as a custom application?
+A custom application is any lightweight tool or system built to streamline your specific workflows. Examples include:
+•	Order entry systems
+•	Workflow automation tools
+•	Custom reporting dashboards
+•	AI-powered recommendations
+Custom applications start at $2,000 setup with ongoing hosting and maintenance from $99–$299 per month. Pricing depends on complexity.
+________________________________________
+9. How do you keep my data secure?
+Security is a top priority. All hosted data is stored in secure environments with role-based access controls. Backups and updates are managed to ensure your data is safe, available, and reliable.
+________________________________________
+10. Can I upgrade my plan later?
+Yes. You can upgrade or downgrade hosting tiers at any time, and add-ons can be added or removed as your business needs evolve.
+________________________________________
+11. How do you deliver projects?
+Every project follows my 4-step process:
+1.	Discovery – understanding your goals and current setup.
+2.	Analysis – reviewing your data and defining the best solution.
+3.	Solution – designing and implementing your dashboards, apps, or site.
+4.	Optimization – refining, supporting, and scaling as your needs grow.
+This process ensures consistency, transparency, and measurable results across every engagement.
+________________________________________
+12. Do you offer discounts?
+Yes. You can save 15% with annual billing across all hosting tiers. Referral bonuses are also available — for each client you refer, you’ll receive additional savings on your next renewal.
+________________________________________
+Conclusion
+I know that evaluating new technology and services can feel like a big decision. My goal with hosting, analytics, and add-on services is to make the process simple, transparent, and scalable. If you still have questions not covered here, I’d be happy to talk — reach out anytime, and I’ll help you find the right solution for your business.
+________________________________________
+✨ This blog post is written in a way that:
+•	Doubles as SEO content (keywords like AI-driven analytics, hosting, custom applications, business intelligence dashboards).
+•	Addresses confusion points (pricing “+”, add-ons vs. included, migration fees).
+•	Positions you as trustworthy and structured (4-step process + security note).
+

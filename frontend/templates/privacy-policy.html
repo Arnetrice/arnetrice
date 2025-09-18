@@ -1,0 +1,180 @@
+{% extends "base.html" %}
+
+{% block title %}Privacy Policy - Arnetrice Smith{% endblock %}
+
+{% block extra_css %}
+<style>
+.policy-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+.policy-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, var(--accent-green) 0%, var(--accent-green-light) 100%);
+    color: white;
+    border-radius: var(--radius-lg);
+}
+
+.pending-notice {
+    background: linear-gradient(135deg, #FFF3CD 0%, #FFF7DC 100%);
+    border: 2px solid #FFCC02;
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.pending-notice h4 {
+    color: #856404;
+    margin-bottom: 0.5rem;
+}
+
+.pending-notice p {
+    color: #856404;
+    margin-bottom: 0;
+    font-size: 0.95rem;
+}
+
+.policy-content {
+    background: white;
+    padding: 2rem;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-light);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.policy-content h1 {
+    color: var(--accent-green);
+    border-bottom: 3px solid var(--primary-blue);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.policy-content h2 {
+    color: var(--accent-green);
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.policy-content ul {
+    margin-left: 1rem;
+}
+
+.policy-content li {
+    margin-bottom: 0.5rem;
+}
+
+.back-to-checkout {
+    text-align: center;
+    padding: 2rem;
+    background: var(--light-gray);
+    border-radius: var(--radius-md);
+    margin-top: 2rem;
+}
+
+.back-to-checkout .btn {
+    margin: 0 0.5rem;
+}
+
+@media (max-width: 768px) {
+    .policy-container {
+        padding: 1rem 0.5rem;
+    }
+    
+    .policy-content {
+        padding: 1.5rem;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="policy-container">
+    <!-- Policy Header -->
+    <div class="policy-header">
+        <h1 class="mb-2">Privacy Policy</h1>
+        <p class="mb-0">Pending Status - Effective Immediately</p>
+    </div>
+
+    <!-- Pending Notice -->
+    <div class="pending-notice">
+        <h4><i class="fas fa-info-circle me-2"></i>Pending Status Notice</h4>
+        <p>This Privacy Policy is currently in a "pending" state as we finalize our trademark and migrate services under Qoat. The policy is effective immediately for Arnetrice.com and will be updated upon transition.</p>
+    </div>
+
+    <!-- Policy Content -->
+    <div class="policy-content">
+        <p><strong>Effective Date:</strong> [Insert Date]<br>
+        <strong>Last Updated:</strong> [Insert Date]</p>
+
+        <p>Arnetrice.com (operating as Qoat, pending trademark approval) values your privacy. This Privacy Policy explains how we collect, use, and protect your information.</p>
+
+        <h2>1. Information We Collect</h2>
+        <ul>
+            <li><strong>Account Information:</strong> Name, email, phone number, billing details.</li>
+            <li><strong>Usage Data:</strong> Log files, device info, IP address, cookies.</li>
+            <li><strong>Customer Data:</strong> Content and data uploaded to the platform.</li>
+            <li><strong>Payment Data:</strong> Processed securely through third-party providers (Stripe, PayPal).</li>
+        </ul>
+
+        <h2>2. How We Use Information</h2>
+        <ul>
+            <li>To provide, maintain, and improve our Services.</li>
+            <li>To process payments and manage subscriptions.</li>
+            <li>To communicate important notices, updates, or offers.</li>
+            <li>To comply with legal obligations.</li>
+        </ul>
+
+        <h2>3. Data Sharing & Disclosure</h2>
+        <p>We do not sell your personal information. We may share limited data with:</p>
+        <ul>
+            <li>Payment processors for billing.</li>
+            <li>Service providers (e.g., hosting, support, analytics).</li>
+            <li>Legal authorities when required by law.</li>
+        </ul>
+
+        <h2>4. Data Retention</h2>
+        <p>We retain your data as long as necessary to provide Services. Upon cancellation, we will delete or anonymize your data within a reasonable period unless required by law to retain it.</p>
+
+        <h2>5. Security</h2>
+        <p>We use industry-standard safeguards (encryption, access controls, secure hosting). However, no system is 100% secure. You use the Services at your own risk.</p>
+
+        <h2>6. Your Rights</h2>
+        <p>Depending on your location, you may have rights to:</p>
+        <ul>
+            <li>Access, correct, or delete your data.</li>
+            <li>Restrict or object to processing.</li>
+            <li>Data portability.</li>
+        </ul>
+        <p>Requests can be made via [Insert Contact Email].</p>
+
+        <h2>7. International Users</h2>
+        <p>If you access the Services outside the U.S., note that data may be stored and processed in the U.S. or other jurisdictions.</p>
+
+        <h2>8. Changes to Policy</h2>
+        <p>We may update this Privacy Policy. Continued use of Services after updates constitutes acceptance.</p>
+
+        <h2>9. Contact Us</h2>
+        <p>Arnetrice.com (operating as Qoat, pending trademark approval)<br>
+        Email: [Insert Email]<br>
+        Phone: [Insert Phone]<br>
+        Address: [Insert Address]</p>
+    </div>
+
+    <!-- Back to Checkout -->
+    <div class="back-to-checkout">
+        <h5 class="mb-3">Ready to continue?</h5>
+        <a href="javascript:history.back()" class="btn btn-primary btn-lg">
+            <i class="fas fa-arrow-left me-2"></i>Back to Checkout
+        </a>
+        <a href="/" class="btn btn-outline-primary btn-lg">
+            <i class="fas fa-home me-2"></i>Home
+        </a>
+    </div>
+</div>
+{% endblock %}

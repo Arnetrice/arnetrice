@@ -1,0 +1,79 @@
+Terms of Service
+
+Effective Date: [Insert Date]
+Last Updated: [Insert Date]
+
+Welcome to Arnetrice.com (operating as Qoat, pending trademark approval) (“Company,” “we,” “our,” or “us”). These Terms of Service (“Terms”) govern your access to and use of our websites, applications, platforms, and services (collectively, the “Services”). By accessing or using our Services, you agree to these Terms.
+
+If you do not agree, do not use our Services.
+
+1. Eligibility
+- You must be at least 18 years old (or the age of majority in your jurisdiction) to use our Services.
+- By using the Services, you represent and warrant that you meet these requirements.
+
+2. Services Provided
+Arnetrice.com (operating as Qoat, pending trademark approval) offers:
+- Web Development & Hosting
+- Data Storage & Share
+- Data Management
+- Exploratory Data Analysis
+- AI/ML Recommendations
+- Text Alerts (add-on service)
+
+We may add, modify, or remove Services at any time.
+
+3. Accounts & Access
+- You may be required to register an account. You agree to provide accurate, current, and complete information.
+- You are responsible for maintaining confidentiality of login credentials and for all activity on your account.
+- Notify us immediately of any unauthorized access or security incident.
+
+4. Acceptable Use
+You agree not to use the Services to:
+- Violate any laws or regulations.
+- Infringe intellectual property, privacy, or contractual rights of others.
+- Introduce malware, unauthorized scripts, or harmful code.
+- Interfere with or disrupt the Services or networks connected to the Services.
+
+We reserve the right to suspend or terminate access if these rules are violated.
+
+5. Payment & Subscriptions
+- Certain Services require paid subscriptions. Fees are recurring unless otherwise specified.
+- Payments are processed by third-party providers (e.g., Stripe, PayPal). By providing payment information, you authorize us to charge recurring fees until canceled.
+- See our Billing Policy for full details.
+
+6. Data Ownership & Usage
+- You retain ownership of the data you upload or input into Arnetrice.com (operating as Qoat, pending trademark approval).
+- By using our Services, you grant us a limited license to process, host, and back up your data solely to provide the Services.
+- We will never sell your personal data. See our Privacy Policy for details.
+
+7. Intellectual Property
+- The Arnetrice.com (operating as Qoat, pending trademark approval) platform, software, and related materials are protected by copyright, trademark, and other laws.
+- You are granted a limited, non-exclusive, non-transferable license to use the Services in accordance with these Terms.
+- You may not copy, modify, or reverse engineer our software without prior written consent.
+
+8. Disclaimer of Warranties
+The Services are provided “as is” and “as available” without warranties of any kind. We do not guarantee uninterrupted or error-free operation.
+
+9. Limitation of Liability
+To the maximum extent permitted by law:
+- Arnetrice.com (operating as Qoat, pending trademark approval) is not liable for indirect, incidental, or consequential damages.
+- Our total liability in any 12-month period will not exceed the total fees paid by you during that period.
+
+10. Termination
+- You may cancel your account at any time.
+- We may suspend or terminate your account for violations of these Terms or non-payment.
+
+11. Governing Law
+These Terms shall be governed by the laws of [Insert State, e.g., Florida], without regard to conflict of law rules.
+
+12. Service Level Agreement (SLA)
+Arnetrice.com (operating as Qoat, pending trademark approval) aims to provide 99.9% uptime for Services. Scheduled maintenance will be communicated in advance. Support requests will be addressed within [X] business hours depending on subscription tier.
+
+13. Changes
+We may update these Terms at any time. We will notify users by posting revised Terms with a new “Last Updated” date.
+
+14. Contact Us
+Arnetrice.com (operating as Qoat, pending trademark approval)
+Email: [Insert Email]
+Phone: [Insert Phone]
+Address: [Insert Address]

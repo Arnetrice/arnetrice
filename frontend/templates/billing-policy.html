@@ -1,0 +1,177 @@
+{% extends "base.html" %}
+
+{% block title %}Billing Policy - Arnetrice Smith{% endblock %}
+
+{% block extra_css %}
+<style>
+.policy-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+.policy-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, var(--primary-blue-dark) 0%, var(--accent-red) 100%);
+    color: white;
+    border-radius: var(--radius-lg);
+}
+
+.pending-notice {
+    background: linear-gradient(135deg, #FFF3CD 0%, #FFF7DC 100%);
+    border: 2px solid #FFCC02;
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.pending-notice h4 {
+    color: #856404;
+    margin-bottom: 0.5rem;
+}
+
+.pending-notice p {
+    color: #856404;
+    margin-bottom: 0;
+    font-size: 0.95rem;
+}
+
+.policy-content {
+    background: white;
+    padding: 2rem;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-light);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.policy-content h1 {
+    color: var(--primary-blue-dark);
+    border-bottom: 3px solid var(--accent-red);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.policy-content h2 {
+    color: var(--primary-blue-dark);
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.policy-content ul {
+    margin-left: 1rem;
+}
+
+.policy-content li {
+    margin-bottom: 0.5rem;
+}
+
+.back-to-checkout {
+    text-align: center;
+    padding: 2rem;
+    background: var(--light-gray);
+    border-radius: var(--radius-md);
+    margin-top: 2rem;
+}
+
+.back-to-checkout .btn {
+    margin: 0 0.5rem;
+}
+
+@media (max-width: 768px) {
+    .policy-container {
+        padding: 1rem 0.5rem;
+    }
+    
+    .policy-content {
+        padding: 1.5rem;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="policy-container">
+    <!-- Policy Header -->
+    <div class="policy-header">
+        <h1 class="mb-2">Billing Policy</h1>
+        <p class="mb-0">Pending Status - Effective Immediately</p>
+    </div>
+
+    <!-- Pending Notice -->
+    <div class="pending-notice">
+        <h4><i class="fas fa-info-circle me-2"></i>Pending Status Notice</h4>
+        <p>This Billing Policy is currently in a "pending" state as we finalize our trademark and migrate services under Qoat. The policy is effective immediately for Arnetrice.com and will be updated upon transition.</p>
+    </div>
+
+    <!-- Policy Content -->
+    <div class="policy-content">
+        <p><strong>Effective Date:</strong> [Insert Date]<br>
+        <strong>Last Updated:</strong> [Insert Date]</p>
+
+        <p>This Billing Policy outlines how subscriptions and charges work for Arnetrice.com (operating as Qoat, pending trademark approval).</p>
+
+        <h2>1. Subscriptions & Fees</h2>
+        <ul>
+            <li>Services are billed on a recurring basis (monthly or annual, depending on your selection).</li>
+            <li>Subscription fees are disclosed at sign-up. By subscribing, you authorize recurring charges.</li>
+        </ul>
+
+        <h2>2. Payment Methods</h2>
+        <ul>
+            <li>Payments are processed via Stripe, PayPal, or other approved providers.</li>
+            <li>You must maintain valid payment information. If a charge is declined, we may suspend or terminate your account.</li>
+        </ul>
+
+        <h2>3. Renewal & Cancellation</h2>
+        <ul>
+            <li>Subscriptions automatically renew at the end of each term unless canceled.</li>
+            <li>You may cancel anytime via your account dashboard. Cancellation will take effect at the end of the current billing period.</li>
+        </ul>
+
+        <h2>4. Refunds</h2>
+        <ul>
+            <li>Fees are non-refundable unless otherwise required by law.</li>
+            <li>Partial refunds are not provided for unused time.</li>
+        </ul>
+
+        <h2>5. Usage-Based Charges</h2>
+        <ul>
+            <li>Text Alerts and other add-on features may incur usage-based fees (e.g., $0.05 per additional message beyond plan limits).</li>
+            <li>These charges will appear on your next invoice.</li>
+        </ul>
+
+        <h2>6. Late Payments</h2>
+        <ul>
+            <li>If payment fails, we may retry up to [X] times.</li>
+            <li>After [X] days of non-payment, your account may be suspended.</li>
+        </ul>
+
+        <h2>7. Changes to Fees</h2>
+        <ul>
+            <li>We may update subscription or usage fees with prior notice.</li>
+            <li>Continued use after fee changes constitutes agreement.</li>
+        </ul>
+
+        <h2>8. Contact Us</h2>
+        <p>Arnetrice.com (operating as Qoat, pending trademark approval)<br>
+        Email: [Insert Email]<br>
+        Phone: [Insert Phone]<br>
+        Address: [Insert Address]</p>
+    </div>
+
+    <!-- Back to Checkout -->
+    <div class="back-to-checkout">
+        <h5 class="mb-3">Ready to continue?</h5>
+        <a href="javascript:history.back()" class="btn btn-primary btn-lg">
+            <i class="fas fa-arrow-left me-2"></i>Back to Checkout
+        </a>
+        <a href="/" class="btn btn-outline-primary btn-lg">
+            <i class="fas fa-home me-2"></i>Home
+        </a>
+    </div>
+</div>
+{% endblock %}

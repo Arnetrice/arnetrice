@@ -1,0 +1,603 @@
+{% extends "base.html" %}
+
+{% block title %}Blog - Data Insights & Analytics - Arnetrice Smith{% endblock %}
+{% block description %}Read insights on data analytics, business intelligence, and strategic consulting from Arnetrice Smith. Expert analysis and practical tips for data-driven decision making.{% endblock %}
+{% block og_title %}Blog - Data Insights & Analytics - Arnetrice Smith{% endblock %}
+{% block og_description %}Expert insights on data analytics, business intelligence, and strategic consulting.{% endblock %}
+
+{% block extra_css %}
+<style>
+/* Blog Hero Section with Services styling */
+.blog-hero {
+    background: linear-gradient(135deg, var(--off-white) 0%, var(--white) 100%);
+    padding: calc(var(--spacing-xxl) + 2rem) 0 var(--spacing-xxl) 0;
+    position: relative;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.blog-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, 
+        rgba(91, 130, 175, 0.03) 0%, 
+        rgba(127, 176, 105, 0.03) 50%, 
+        rgba(231, 76, 60, 0.03) 100%);
+    pointer-events: none;
+}
+
+.blog-hero .container {
+    position: relative;
+    z-index: 1;
+}
+
+.blog-hero h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--dark-color);
+}
+
+.blog-hero .lead {
+    font-size: 1.3rem;
+    color: var(--text-dark);
+}
+
+.blog-card {
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+    transition: all 0.4s ease;
+    overflow: hidden;
+    height: 100%;
+    position: relative;
+    background: white;
+}
+
+.blog-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), #0056b3, var(--secondary-color));
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+}
+
+.blog-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+}
+
+.blog-card:hover::before {
+    transform: scaleX(1);
+}
+
+.blog-card .card-img-top {
+    height: 220px;
+    object-fit: cover;
+    background: linear-gradient(135deg, var(--primary-color) 0%, #0056b3 50%, var(--secondary-color) 100%);
+    position: relative;
+    transition: all 0.4s ease;
+}
+
+.blog-card:hover .card-img-top {
+    background: linear-gradient(135deg, #0056b3 0%, var(--primary-color) 50%, #003d82 100%);
+    transform: scale(1.05);
+}
+
+.blog-card .card-img-top i {
+    transition: all 0.4s ease;
+}
+
+.blog-card:hover .card-img-top i {
+    transform: scale(1.2) rotate(5deg);
+}
+
+.blog-meta {
+    font-size: 0.875rem;
+    color: var(--gray-color);
+    margin-bottom: 1rem;
+}
+
+.blog-category {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.blog-excerpt {
+    color: var(--gray-color);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.search-section {
+    background: linear-gradient(45deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 3rem 0;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.search-box {
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.search-box .form-control {
+    border: none;
+    border-radius: 50px;
+    padding: 1rem 1.5rem;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.search-box .form-control:focus {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(0,0,0,0.15);
+}
+
+.search-box .btn {
+    border-radius: 50px;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+}
+
+.search-box .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+}
+
+.category-filters {
+    margin-bottom: 2rem;
+}
+
+.category-filter {
+    margin: 0.25rem;
+    border-radius: 30px;
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    border: 2px solid #dee2e6;
+    background: white;
+    color: var(--dark-color);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+.category-filter::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+.category-filter:hover::before {
+    left: 100%;
+}
+
+.category-filter:hover,
+.category-filter.active {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #0056b3 100%);
+    border-color: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.read-more-btn {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 0;
+}
+
+.read-more-btn::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary-color), #0056b3);
+    transition: width 0.3s ease;
+}
+
+.read-more-btn:hover {
+    color: #0056b3;
+    transform: translateX(5px);
+}
+
+.read-more-btn:hover::after {
+    width: 100%;
+}
+
+.read-more-btn i {
+    transition: transform 0.3s ease;
+}
+
+.read-more-btn:hover i {
+    transform: translateX(5px);
+}
+
+.featured-post {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #0056b3 100%, #003d82 100%);
+    color: white;
+    border-radius: 20px;
+    padding: 3rem;
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+}
+
+.featured-post::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -30%;
+    width: 400px;
+    height: 400px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+    transform: rotate(45deg);
+}
+
+.featured-post:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 50px rgba(0,0,0,0.25);
+}
+
+.featured-post h2 {
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.featured-post .blog-meta {
+    color: rgba(255,255,255,0.8);
+}
+
+.pagination .page-link {
+    color: var(--primary-color);
+    border-color: var(--light-gray);
+}
+
+.pagination .page-item.active .page-link {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="blog-hero">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8 mx-auto text-center">
+                <h1 class="mb-4">Data Insights & Analytics</h1>
+                <p class="lead mb-4">Discover the emerging trends in data analytics and how businesses can leverage AI, machine learning, and real-time analytics to gain competitive advantages in an increasingly data-driven world.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Featured Post -->
+<section class="py-4">
+    <div class="container">
+        <div class="featured-post">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <div class="d-flex align-items-center mb-3">
+                        <span class="blog-category me-3">Featured</span>
+                        <div class="d-flex align-items-center text-white-50">
+                            <i class="fas fa-star me-1"></i>
+                            <small>Most Helpful</small>
+                        </div>
+                    </div>
+                    <h2 class="h2 mb-3" style="font-weight: 700; line-height: 1.2;">Frequently Asked Questions: Data Hosting & Analytics</h2>
+                    <div class="blog-meta mb-3">
+                        <span class="me-4"><i class="fas fa-calendar me-2"></i>September 1, 2025</span>
+                        <span class="me-4"><i class="fas fa-clock me-2"></i>8 min read</span>
+                        <span><i class="fas fa-user me-2"></i>Arnetrice Smith</span>
+                    </div>
+                    <p class="lead mb-4" style="font-size: 1.2rem; line-height: 1.6;">Get answers to the most common questions about data hosting plans, add-on services, pricing, and how our analytics solutions work for your business.</p>
+                    <div class="d-flex align-items-center">
+                        <a href="/faq" class="btn btn-light btn-lg me-3" style="border-radius: 50px; font-weight: 600;">Read FAQ</a>
+                        <div class="d-flex align-items-center text-white-50">
+                            <i class="fas fa-question-circle me-2"></i>
+                            <small>Essential for new clients</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <div class="position-relative">
+                        <i class="fas fa-question-circle" style="font-size: 6rem; opacity: 0.3;"></i>
+                        <i class="fas fa-lightbulb position-absolute" style="font-size: 2rem; top: 20%; right: 30%; opacity: 0.7;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Blog Posts Grid -->
+<section class="pt-4 pb-5">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-12 text-center">
+                <div class="d-inline-flex align-items-center mb-3">
+                    <div class="me-3" style="width: 60px; height: 2px; background: linear-gradient(90deg, transparent, var(--primary-color));"></div>
+                    <h3 class="mb-0 position-relative">
+                        <i class="fas fa-newspaper me-2 text-primary"></i>
+                        Latest Articles
+                    </h3>
+                    <div class="ms-3" style="width: 60px; height: 2px; background: linear-gradient(90deg, var(--primary-color), transparent);"></div>
+                </div>
+                <p class="text-muted mb-0">Explore our collection of data insights and analytics expertise</p>
+            </div>
+        </div>
+        <div class="row" id="blog-grid">
+            <!-- Data Trends Article (formerly featured) -->
+            <div class="col-lg-4 col-md-6 mb-4 blog-item" data-category="data-analysis">
+                <div class="card blog-card h-100">
+                    <div class="card-img-top d-flex align-items-center justify-content-center">
+                        <i class="fas fa-chart-line" style="font-size: 3rem; color: white;"></i>
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <span class="blog-category">Data Analysis</span>
+                        <h5 class="card-title mt-2">The Future of Data-Driven Decision Making in 2024</h5>
+                        <div class="blog-meta">
+                            <i class="fas fa-calendar me-1"></i>January 15, 2024
+                            <i class="fas fa-clock ms-2 me-1"></i>8 min read
+                        </div>
+                        <p class="blog-excerpt">Explore practical applications and implementation strategies for modern data solutions that drive measurable business results.</p>
+                        <div class="mt-auto">
+                            <a href="#" class="read-more-btn">Read More <i class="fas fa-arrow-right ms-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Data Analysis Article -->
+            <div class="col-lg-4 col-md-6 mb-4 blog-item" data-category="data-analysis">
+                <div class="card blog-card h-100">
+                    <div class="card-img-top d-flex align-items-center justify-content-center">
+                        <i class="fas fa-chart-bar" style="font-size: 3rem; color: white;"></i>
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <span class="blog-category">Data Analysis</span>
+                        <h5 class="card-title mt-2">5 Essential Python Libraries for Data Analysis</h5>
+                        <div class="blog-meta">
+                            <i class="fas fa-calendar me-1"></i>January 10, 2024
+                            <i class="fas fa-clock ms-2 me-1"></i>6 min read
+                        </div>
+                        <p class="blog-excerpt">Explore the most powerful Python libraries that every data analyst should master, from Pandas for data manipulation to Matplotlib for visualization.</p>
+                        <a href="#" class="read-more-btn mt-auto">Read More <i class="fas fa-arrow-right ms-1"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Business Intelligence Article -->
+            <div class="col-lg-4 col-md-6 mb-4 blog-item" data-category="business-intelligence">
+                <div class="card blog-card h-100">
+                    <div class="card-img-top d-flex align-items-center justify-content-center">
+                        <i class="fas fa-database" style="font-size: 3rem; color: white;"></i>
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <span class="blog-category">Business Intelligence</span>
+                        <h5 class="card-title mt-2">Building Effective BI Dashboards: Best Practices</h5>
+                        <div class="blog-meta">
+                            <i class="fas fa-calendar me-1"></i>January 8, 2024
+                            <i class="fas fa-clock ms-2 me-1"></i>7 min read
+                        </div>
+                        <p class="blog-excerpt">Learn the key principles for creating BI dashboards that drive action and provide real business value to stakeholders.</p>
+                        <a href="#" class="read-more-btn mt-auto">Read More <i class="fas fa-arrow-right ms-1"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Strategic Consulting Article -->
+            <div class="col-lg-4 col-md-6 mb-4 blog-item" data-category="website-development">
+                <div class="card blog-card h-100">
+                    <div class="card-img-top d-flex align-items-center justify-content-center">
+                        <i class="fas fa-lightbulb" style="font-size: 3rem; color: white;"></i>
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <span class="blog-category">Strategic Consulting</span>
+                        <h5 class="card-title mt-2">Data Strategy: Aligning Analytics with Business Goals</h5>
+                        <div class="blog-meta">
+                            <i class="fas fa-calendar me-1"></i>January 5, 2024
+                            <i class="fas fa-clock ms-2 me-1"></i>9 min read
+                        </div>
+                        <p class="blog-excerpt">Discover how to develop a comprehensive data strategy that aligns with your organization's objectives and drives measurable results.</p>
+                        <a href="#" class="read-more-btn mt-auto">Read More <i class="fas fa-arrow-right ms-1"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technology Article -->
+            <div class="col-lg-4 col-md-6 mb-4 blog-item" data-category="technology">
+                <div class="card blog-card h-100">
+                    <div class="card-img-top d-flex align-items-center justify-content-center">
+                        <i class="fas fa-robot" style="font-size: 3rem; color: white;"></i>
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <span class="blog-category">Technology</span>
+                        <h5 class="card-title mt-2">AI and Machine Learning in Business Analytics</h5>
+                        <div class="blog-meta">
+                            <i class="fas fa-calendar me-1"></i>January 3, 2024
+                            <i class="fas fa-clock ms-2 me-1"></i>10 min read
+                        </div>
+                        <p class="blog-excerpt">Explore practical applications of AI and ML in business analytics, from predictive modeling to automated insights generation.</p>
+                        <a href="#" class="read-more-btn mt-auto">Read More <i class="fas fa-arrow-right ms-1"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Data Analysis Article -->
+            <div class="col-lg-4 col-md-6 mb-4 blog-item" data-category="data-analysis">
+                <div class="card blog-card h-100">
+                    <div class="card-img-top d-flex align-items-center justify-content-center">
+                        <i class="fas fa-chart-pie" style="font-size: 3rem; color: white;"></i>
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <span class="blog-category">Data Analysis</span>
+                        <h5 class="card-title mt-2">Statistical Analysis for Business Decisions</h5>
+                        <div class="blog-meta">
+                            <i class="fas fa-calendar me-1"></i>December 28, 2023
+                            <i class="fas fa-clock ms-2 me-1"></i>8 min read
+                        </div>
+                        <p class="blog-excerpt">Master the essential statistical concepts that every business analyst needs to make confident, data-driven decisions.</p>
+                        <a href="#" class="read-more-btn mt-auto">Read More <i class="fas fa-arrow-right ms-1"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Business Intelligence Article -->
+            <div class="col-lg-4 col-md-6 mb-4 blog-item" data-category="business-intelligence">
+                <div class="card blog-card h-100">
+                    <div class="card-img-top d-flex align-items-center justify-content-center">
+                        <i class="fas fa-tachometer-alt" style="font-size: 3rem; color: white;"></i>
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <span class="blog-category">Business Intelligence</span>
+                        <h5 class="card-title mt-2">Real-time Analytics: From Data to Action</h5>
+                        <div class="blog-meta">
+                            <i class="fas fa-calendar me-1"></i>December 25, 2023
+                            <i class="fas fa-clock ms-2 me-1"></i>7 min read
+                        </div>
+                        <p class="blog-excerpt">Learn how to implement real-time analytics solutions that enable immediate response to business events and opportunities.</p>
+                        <a href="#" class="read-more-btn mt-auto">Read More <i class="fas fa-arrow-right ms-1"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <nav aria-label="Blog pagination" class="mt-5">
+            <ul class="pagination justify-content-center">
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                </li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</section>
+
+<!-- Newsletter Signup -->
+<section class="py-5" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); position: relative;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <div class="position-relative">
+                    <div class="d-inline-flex align-items-center mb-4">
+                        <i class="fas fa-envelope-open text-primary me-3" style="font-size: 2.5rem;"></i>
+                        <div class="text-start">
+                            <h3 class="mb-1" style="color: var(--dark-color); font-weight: 700;">Stay Updated with Data Insights</h3>
+                            <p class="mb-0 text-muted">Join 2,500+ professionals getting weekly insights</p>
+                        </div>
+                    </div>
+                    <p class="mb-4 text-muted">Get the latest articles on data analytics, business intelligence, and strategic consulting delivered to your inbox.</p>
+                    <div class="input-group mb-3" style="max-width: 500px; margin: 0 auto;">
+                        <input type="email" class="form-control form-control-lg" placeholder="Enter your email address" style="border-radius: 50px 0 0 50px; border: none; padding: 1rem 1.5rem; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                        <button class="btn btn-primary btn-lg" type="button" style="border-radius: 0 50px 50px 0; padding: 1rem 2rem; font-weight: 600; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">Subscribe</button>
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center gap-4 mt-4">
+                        <small class="text-muted d-flex align-items-center"><i class="fas fa-check-circle text-success me-2"></i>No spam, ever</small>
+                        <small class="text-muted d-flex align-items-center"><i class="fas fa-times-circle text-danger me-2"></i>Unsubscribe anytime</small>
+                        <small class="text-muted d-flex align-items-center"><i class="fas fa-shield-alt text-info me-2"></i>Privacy protected</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Decorative elements -->
+    <div class="position-absolute" style="top: 20px; right: 50px; opacity: 0.1;">
+        <i class="fas fa-chart-line" style="font-size: 3rem;"></i>
+    </div>
+    <div class="position-absolute" style="bottom: 20px; left: 50px; opacity: 0.1;">
+        <i class="fas fa-database" style="font-size: 2rem;"></i>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Blog search functionality
+function searchBlog() {
+    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+    const blogItems = document.querySelectorAll('.blog-item');
+    
+    blogItems.forEach(item => {
+        const title = item.querySelector('.card-title').textContent.toLowerCase();
+        const excerpt = item.querySelector('.blog-excerpt').textContent.toLowerCase();
+        const category = item.querySelector('.blog-category').textContent.toLowerCase();
+        
+        if (title.includes(searchTerm) || excerpt.includes(searchTerm) || category.includes(searchTerm)) {
+            item.style.display = 'block';
+        } else {
+            item.style.display = 'none';
+        }
+    });
+}
+
+// Category filtering
+function filterByCategory(category) {
+    const blogItems = document.querySelectorAll('.blog-item');
+    const filterButtons = document.querySelectorAll('.category-filter');
+    
+    // Update active button
+    filterButtons.forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+    
+    // Filter items
+    blogItems.forEach(item => {
+        if (category === 'all' || item.dataset.category === category) {
+            item.style.display = 'block';
+        } else {
+            item.style.display = 'none';
+        }
+    });
+}
+
+// Search on Enter key
+document.getElementById('searchInput').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+        searchBlog();
+    }
+});
+</script>
+{% endblock %}
