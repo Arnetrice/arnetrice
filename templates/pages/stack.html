@@ -1,0 +1,173 @@
+{% extends "base.html" %}
+
+{% block title %}Stack — Arnetrice{% endblock %}
+{% block description %}The tools, methodology, and operational principles behind Arnetrice systems.{% endblock %}
+{% block og_title %}Stack — Arnetrice{% endblock %}
+{% block og_description %}Tools and methodology: FastAPI, Python, SQL, HTMX, Tailwind, Railway. Architecture-first, AI-assisted, human-supervised.{% endblock %}
+
+{% block content %}
+
+{# ===== STACK HERO ===== #}
+<section class="relative overflow-hidden">
+
+  <div aria-hidden="true" class="absolute inset-0 pointer-events-none opacity-[0.35]">
+    <svg class="absolute inset-0 h-full w-full text-hairline" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="grid-stack" width="48" height="48" patternUnits="userSpaceOnUse">
+          <path d="M 48 0 L 0 0 0 48" fill="none" stroke="currentColor" stroke-width="1"/>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#grid-stack)" />
+    </svg>
+    <div class="absolute inset-x-0 top-0 h-72 bg-gradient-to-b from-surface to-transparent"></div>
+    <div class="absolute inset-x-0 bottom-0 h-72 bg-gradient-to-t from-surface to-transparent"></div>
+  </div>
+
+  <div class="relative mx-auto max-w-[1280px] px-6 lg:px-8 pt-28 lg:pt-44 pb-20 lg:pb-28">
+
+    <div class="flex items-center gap-4 mb-14" data-reveal>
+      <span class="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-surface-elev border border-hairline">
+        <span class="mono-id text-ink-muted">STK-001</span>
+      </span>
+      <span class="inline-flex items-center gap-2">
+        <span class="status-dot status-dot--info" aria-hidden="true"></span>
+        <span class="mono-label !text-[11px]">CURRENT · STABLE</span>
+      </span>
+    </div>
+
+    <h1 class="display-h1 max-w-5xl" data-reveal style="transition-delay: 120ms;">
+      The
+      <span class="display-accent">stack</span>
+      and the discipline.
+    </h1>
+
+    <p class="mt-14 max-w-2xl text-lg text-ink-muted leading-relaxed" data-reveal style="transition-delay: 220ms;">
+      What I build with, why those choices, and the principles that shape
+      what stays out of the stack. Tools picked for stack consistency with
+      operational systems, not for fashion.
+    </p>
+
+  </div>
+</section>
+
+{# ===== STACK CATEGORIES ===== #}
+{% set categories = [
+  {
+    "number": "01",
+    "label": "RUNTIME",
+    "description": "What runs in production.",
+    "entries": [
+      {"name": "Python 3.12", "note": "Async-native, type-hinted, mature ecosystem."},
+      {"name": "FastAPI", "note": "Async route layer, dependency injection, OpenAPI-first."},
+      {"name": "Uvicorn", "note": "ASGI server, proxy-aware, runs under Railway."},
+      {"name": "Pydantic v2", "note": "Schema validation for content frontmatter and settings."},
+    ]
+  },
+  {
+    "number": "02",
+    "label": "SURFACE",
+    "description": "What you see and interact with.",
+    "entries": [
+      {"name": "Jinja2", "note": "Server-rendered templates, macro-driven components."},
+      {"name": "Tailwind v4", "note": "Token-driven utility CSS, @theme-based design system."},
+      {"name": "HTMX", "note": "Server-driven fragment swaps where they earn their keep."},
+      {"name": "Vanilla JS", "note": "IntersectionObserver reveals, nav shrink, count-ups. No framework."},
+    ]
+  },
+  {
+    "number": "03",
+    "label": "CONTENT",
+    "description": "How writing becomes pages.",
+    "entries": [
+      {"name": "Markdown + YAML frontmatter", "note": "Case studies, insights, architecture topics — version-controlled, schema-validated."},
+      {"name": "markdown-it-py", "note": "CommonMark rendering with table support and trusted-HTML for inline diagrams."},
+      {"name": "python-frontmatter", "note": "Frontmatter parsing into typed Pydantic models."},
+    ]
+  },
+  {
+    "number": "04",
+    "label": "INFRASTRUCTURE",
+    "description": "How it ships and stays up.",
+    "entries": [
+      {"name": "Railway", "note": "Build, deploy, env vars, preview environments per PR."},
+      {"name": "Docker (multi-stage)", "note": "node:20-alpine builds CSS; python:3.12-slim runs the app."},
+      {"name": "/healthz", "note": "JSON healthcheck. Railway watches it; visitors can read it."},
+      {"name": "RSS + sitemap", "note": "Both auto-generated from content loaders. Discoverable, indexable."},
+    ]
+  }
+] %}
+
+{% for cat in categories %}
+<section class="relative{% if loop.index0 % 2 == 1 %} bg-surface-tint border-y border-hairline{% endif %}">
+  <div class="mx-auto max-w-[1280px] px-6 lg:px-8 py-24 lg:py-32">
+    <div class="grid gap-16 lg:grid-cols-[280px_1fr]">
+
+      <aside class="lg:sticky lg:top-28 lg:self-start" data-reveal>
+        <div class="flex items-center gap-3 mb-6">
+          <span class="status-dot status-dot--info" aria-hidden="true"></span>
+          <span class="mono-label">{{ cat.number }} · {{ cat.label }}</span>
+        </div>
+        <p class="mono-label !text-[11px] !text-ink-faint leading-relaxed normal-case tracking-normal">
+          {{ cat.description }}
+        </p>
+      </aside>
+
+      <div class="max-w-3xl" data-reveal style="transition-delay: 120ms;">
+        <div class="grid gap-px bg-hairline border border-hairline rounded-xl overflow-hidden md:grid-cols-2">
+          {% for item in cat.entries %}
+            <div class="bg-surface-elev p-6 lg:p-7">
+              <div class="font-display text-lg font-semibold text-ink-strong leading-snug">{{ item.name }}</div>
+              <p class="mt-2 text-sm text-ink-muted leading-relaxed">{{ item.note }}</p>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+{% endfor %}
+
+{# ===== PRINCIPLES ===== #}
+<section class="relative">
+  <div class="mx-auto max-w-[1280px] px-6 lg:px-8 py-24 lg:py-32">
+    <div class="grid gap-16 lg:grid-cols-[280px_1fr]">
+
+      <aside class="lg:sticky lg:top-28 lg:self-start" data-reveal>
+        <div class="flex items-center gap-3 mb-6">
+          <span class="status-dot status-dot--info" aria-hidden="true"></span>
+          <span class="mono-label">05 · DISCIPLINE</span>
+        </div>
+        <p class="mono-label !text-[11px] !text-ink-faint leading-relaxed normal-case tracking-normal">
+          What stays out of the stack, and why.
+        </p>
+      </aside>
+
+      <div class="max-w-2xl space-y-8 text-lg text-ink leading-relaxed" data-reveal style="transition-delay: 120ms;">
+        <p>
+          The stack is small on purpose. Every dependency is something I am
+          willing to operate, debug, and upgrade — not just install. New tools
+          have to earn their place against the cost of one more thing to
+          maintain.
+        </p>
+        <p>
+          No JS framework. No SPA. No bundler beyond Tailwind's CSS compile.
+          The site renders HTML on the server because that is what an
+          operational identity platform needs to do — show up fast, be
+          indexable, work without JavaScript if it has to.
+        </p>
+        <p>
+          AI-assisted, human-supervised. Drafting, refactoring, and exploration
+          use AI as leverage. Every load-bearing decision — architecture, copy,
+          shipping — stays with a human. The trade is real; the discipline is
+          the trade.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% include "sections/quiet_contact.html" %}
+
+{% endblock %}

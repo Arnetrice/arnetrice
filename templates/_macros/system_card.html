@@ -1,0 +1,46 @@
+{# Tile card — deferred or live. Used by /systems, /architecture indexes and home's featured strip. #}
+{% macro system_card(id, title, summary, state="queued", channel="SYS", href=None, delay=0, read_label="read system", deferred_label="in development") %}
+{% set state_label = {
+  "queued": "QUEUED",
+  "draft": "DRAFT",
+  "live": "LIVE"
+}.get(state, state | upper) %}
+{% set state_color_class = {
+  "queued": "text-ink-faint",
+  "draft": "!text-amber",
+  "live": "!text-signal-ok"
+}.get(state, "text-ink-faint") %}
+{% set interactive = href is not none %}
+<{{ "a" if interactive else "div" }}
+  {% if interactive %}href="{{ href }}"{% endif %}
+  class="card {% if interactive %}card-interactive{% endif %} block p-7 lg:p-8 h-full flex flex-col"
+  data-reveal
+  style="transition-delay: {{ delay }}ms;"
+>
+  <div class="flex items-center justify-between gap-4">
+    <span class="mono-id text-ink-muted">{{ id }}</span>
+    <span class="inline-flex items-center gap-2">
+      <span class="mono-label !text-[10px] {{ state_color_class }}">{{ state_label }}</span>
+      <span class="mono-label !text-[10px] !text-ink-faint">· {{ channel }}</span>
+    </span>
+  </div>
+
+  <h3 class="mt-7 font-display text-2xl font-semibold text-ink-strong leading-tight">
+    {{ title }}
+  </h3>
+
+  <p class="mt-4 text-sm text-ink-muted leading-relaxed flex-1">
+    {{ summary }}
+  </p>
+
+  <div class="mt-8 pt-5 border-t border-hairline flex items-center justify-between">
+    {% if interactive %}
+      <span class="mono-label !text-[11px]">{{ read_label }}</span>
+      <span class="text-ink-muted">→</span>
+    {% else %}
+      <span class="mono-label !text-[11px] !text-ink-faint">{{ deferred_label }}</span>
+      <span class="text-ink-faint">→</span>
+    {% endif %}
+  </div>
+</{{ "a" if interactive else "div" }}>
+{% endmacro %}

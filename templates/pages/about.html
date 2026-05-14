@@ -1,0 +1,245 @@
+{% extends "base.html" %}
+
+{% block title %}About — Arnetrice{% endblock %}
+{% block description %}Operational leadership, evolved into operational systems architecture. The narrative behind Arnetrice.{% endblock %}
+
+{% block content %}
+
+{# ===== ABOUT HERO ===== #}
+<section class="relative overflow-hidden">
+
+  <div aria-hidden="true" class="absolute inset-0 pointer-events-none opacity-[0.35]">
+    <svg class="absolute inset-0 h-full w-full text-hairline" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="grid-about" width="48" height="48" patternUnits="userSpaceOnUse">
+          <path d="M 48 0 L 0 0 0 48" fill="none" stroke="currentColor" stroke-width="1"/>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#grid-about)" />
+    </svg>
+    <div class="absolute inset-x-0 top-0 h-72 bg-gradient-to-b from-surface to-transparent"></div>
+    <div class="absolute inset-x-0 bottom-0 h-72 bg-gradient-to-t from-surface to-transparent"></div>
+  </div>
+
+  <div class="relative mx-auto max-w-[1280px] px-6 lg:px-8 pt-28 lg:pt-44 pb-32 lg:pb-44">
+
+    {# Operational meta row — case-study-style ID + status #}
+    <div class="flex items-center gap-4 mb-14" data-reveal>
+      <span class="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-surface-elev border border-hairline">
+        <span class="mono-id text-ink-muted">ABT-001</span>
+      </span>
+      <span class="inline-flex items-center gap-2">
+        <span class="status-dot status-dot--info" aria-hidden="true"></span>
+        <span class="mono-label !text-[11px]">NARRATIVE · CURRENT</span>
+      </span>
+    </div>
+
+    <h1 class="display-h1 max-w-5xl" data-reveal style="transition-delay: 120ms;">
+      Operational leadership,
+      <span class="display-accent">evolved</span>
+      into operational systems architecture.
+    </h1>
+
+    {# Subtitle chips — identity vector #}
+    <div class="mt-14 flex flex-wrap items-center gap-2" data-reveal style="transition-delay: 220ms;">
+      {% for chip in ["OPERATIONAL BACKGROUND", "SYSTEMS ARCHITECT", "AI-ENABLED BUILDER"] %}
+        <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-pill border border-hairline bg-surface-elev">
+          <span class="mono-label !text-[11px]">{{ chip }}</span>
+        </span>
+        {% if not loop.last %}<span class="text-ink-faint">·</span>{% endif %}
+      {% endfor %}
+    </div>
+
+    {# Lead — two-beat structure: claim, then frame #}
+    <div class="mt-16 max-w-2xl space-y-6" data-reveal style="transition-delay: 320ms;">
+      <p class="text-lg text-ink-muted leading-relaxed">
+        After decades leading operational environments, I began building the
+        systems I wished existed.
+      </p>
+      <p class="text-lg text-ink-muted leading-relaxed">
+        Not because the tools didn't exist — because the tools didn't think
+        about operations the way operators do.
+      </p>
+    </div>
+
+    {# Identity strip — biographical facts as operational metadata. #}
+    {# Mirrors home hero's 'Operational footprint' rhythm for design continuity. #}
+    <div class="mt-32 lg:mt-44 pt-14 border-t border-hairline" data-reveal style="transition-delay: 460ms;">
+      <div class="flex items-center gap-3 mb-10">
+        <span class="status-dot status-dot--info" aria-hidden="true"></span>
+        <span class="mono-label">Identity at a glance</span>
+      </div>
+      {% set facets = [
+        {"label": "Background", "value": "Operational leadership"},
+        {"label": "Evolution", "value": "Operator → architect"},
+        {"label": "Domain", "value": "Workflow · Governance · Visibility"},
+        {"label": "Method", "value": "AI-assisted, human-led"}
+      ] %}
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-px bg-hairline border border-hairline rounded-xl overflow-hidden">
+        {% for f in facets %}
+          <div class="bg-surface-elev p-6 lg:p-8">
+            <div class="mono-label">{{ f.label }}</div>
+            <div class="mt-4 font-display text-lg font-medium text-ink-strong leading-snug">{{ f.value }}</div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{# ===== 01 · BACKGROUND ===== #}
+<section class="relative">
+  <div class="mx-auto max-w-[1280px] px-6 lg:px-8 py-28 lg:py-40">
+    <div class="grid gap-16 lg:grid-cols-[280px_1fr]">
+
+      <aside class="lg:sticky lg:top-28 lg:self-start" data-reveal>
+        <div class="flex items-center gap-3 mb-6">
+          <span class="status-dot status-dot--info" aria-hidden="true"></span>
+          <span class="mono-label">01 · BACKGROUND</span>
+        </div>
+        <p class="mono-label !text-[11px] !text-ink-faint leading-relaxed normal-case tracking-normal">
+          The operational layer is where strategy meets reality. I spent years there before writing systems for it.
+        </p>
+      </aside>
+
+      <div class="max-w-2xl" data-reveal style="transition-delay: 120ms;">
+
+        <p class="text-lg text-ink leading-relaxed">
+          Three decades inside operational environments — leading teams, owning
+          processes, watching workflows break and rebuild themselves under
+          real load. That perspective shapes everything I now build.
+        </p>
+
+        {# Pulled quote — thesis of the page, lifted out of the narrative for weight. #}
+        <figure class="my-14 lg:my-16 relative pl-6 lg:pl-8 border-l-2 border-accent">
+          <span class="mono-label !text-[10px] !text-accent absolute -top-1 left-6 lg:left-8 bg-surface px-2 -ml-2">THESIS</span>
+          <blockquote>
+            <p class="font-display text-2xl lg:text-[1.75rem] font-medium text-ink-strong leading-[1.25] tracking-tight">
+              Operators understand workflows the way architects understand
+              buildings — as living structures with load-bearing decisions,
+              failure modes, and the quiet places where pressure accumulates.
+            </p>
+          </blockquote>
+        </figure>
+
+        <p class="text-lg text-ink leading-relaxed">
+          Most operational software is built by people who have read about
+          workflows. I built mine after running them.
+        </p>
+
+        <p class="mt-6 text-lg text-ink leading-relaxed">
+          The shift from running operations to building systems for them was
+          gradual, then sudden. AI-assisted development was the inflection
+          point — the difference between "I wish this existed" and "I'm
+          shipping it on Saturday."
+        </p>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{# ===== 02 · METHODOLOGY ===== #}
+<section class="relative bg-surface-tint border-y border-hairline">
+  <div class="mx-auto max-w-[1280px] px-6 lg:px-8 py-28 lg:py-40">
+    <div class="grid gap-16 lg:grid-cols-[280px_1fr]">
+
+      <aside class="lg:sticky lg:top-28 lg:self-start" data-reveal>
+        <div class="flex items-center gap-3 mb-6">
+          <span class="status-dot status-dot--info" aria-hidden="true"></span>
+          <span class="mono-label">02 · METHODOLOGY</span>
+        </div>
+        <p class="mono-label !text-[11px] !text-ink-faint leading-relaxed normal-case tracking-normal">
+          How I work. Three principles, repeated until they're invisible.
+        </p>
+      </aside>
+
+      <div class="max-w-3xl" data-reveal style="transition-delay: 120ms;">
+
+        {% set methods = [
+          {
+            "code": "M-01",
+            "title": "Architecture before implementation.",
+            "body": "Most operational systems fail at the modeling layer, not the coding layer. I spend longer than feels comfortable getting the architecture right — then implementation moves quickly because the shape is already settled."
+          },
+          {
+            "code": "M-02",
+            "title": "Operational restraint over feature accumulation.",
+            "body": "Every operational system accumulates features until it becomes the problem it was built to solve. I optimize for the smallest system that does the actual job — and the discipline to refuse the rest."
+          },
+          {
+            "code": "M-03",
+            "title": "AI-assisted, human-supervised, always.",
+            "body": "AI is operational leverage, not autonomy. The systems I build use it where it earns its keep — drafting, classifying, summarizing — and keep humans on every load-bearing decision."
+          }
+        ] %}
+
+        {% for m in methods %}
+          <article class="grid gap-6 lg:gap-10 lg:grid-cols-[88px_1fr] py-10 lg:py-12{% if not loop.first %} border-t border-hairline-strong{% endif %}">
+            <div class="flex lg:flex-col items-baseline lg:items-start gap-3 lg:gap-2 pt-1">
+              <span class="mono-label !text-amber !text-[12px] tracking-[0.12em]">{{ m.code }}</span>
+              <span class="mono-label !text-[10px] !text-ink-faint">principle</span>
+            </div>
+            <div>
+              <h3 class="font-display text-2xl lg:text-[1.75rem] font-semibold text-ink-strong leading-[1.2] tracking-tight">{{ m.title }}</h3>
+              <p class="mt-5 text-base lg:text-lg text-ink-muted leading-relaxed">{{ m.body }}</p>
+            </div>
+          </article>
+        {% endfor %}
+
+      </div>
+    </div>
+  </div>
+</section>
+
+{# ===== 03 · CURRENT ===== #}
+<section class="relative">
+  <div class="mx-auto max-w-[1280px] px-6 lg:px-8 py-28 lg:py-40">
+    <div class="grid gap-16 lg:grid-cols-[280px_1fr]">
+
+      <aside class="lg:sticky lg:top-28 lg:self-start" data-reveal>
+        <div class="flex items-center gap-3 mb-6">
+          <span class="status-dot status-dot--info" aria-hidden="true"></span>
+          <span class="mono-label">03 · CURRENT</span>
+        </div>
+        <p class="mono-label !text-[11px] !text-ink-faint leading-relaxed normal-case tracking-normal">
+          Where I am now. Operational state, in four readings.
+        </p>
+      </aside>
+
+      <div data-reveal style="transition-delay: 120ms;">
+
+        <h2 class="font-display text-3xl lg:text-5xl font-semibold tracking-tight text-ink-strong leading-[1.1] max-w-2xl">
+          Current operational state.
+        </h2>
+
+        {% set status = [
+          {"id": "S-01", "label": "Stack focus", "value": "FastAPI · Python · SQL", "note": "Python-native operational systems."},
+          {"id": "S-02", "label": "Operational interest", "value": "Workflow · Governance", "note": "Process design and approval logic."},
+          {"id": "S-03", "label": "Development model", "value": "AI-assisted, human-led", "note": "Leverage where it earns it; humans on every load-bearing call."},
+          {"id": "S-04", "label": "Availability", "value": "Advisory + builds", "note": "Systems advisory, workflow architecture, AI-assisted infrastructure."}
+        ] %}
+
+        <div class="mt-14 grid gap-px bg-hairline border border-hairline rounded-xl overflow-hidden md:grid-cols-2">
+          {% for s in status %}
+            <div class="bg-surface-elev p-7 lg:p-8 flex flex-col">
+              <div class="flex items-center justify-between gap-4">
+                <span class="mono-id text-ink-muted">{{ s.id }}</span>
+                <span class="mono-label !text-[10px] !text-ink-faint">{{ s.label }}</span>
+              </div>
+              <div class="mt-6 font-display text-xl font-medium text-ink-strong leading-snug">{{ s.value }}</div>
+              <p class="mt-3 text-sm text-ink-muted leading-relaxed">{{ s.note }}</p>
+            </div>
+          {% endfor %}
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+{% include "sections/quiet_contact.html" %}
+
+{% endblock %}

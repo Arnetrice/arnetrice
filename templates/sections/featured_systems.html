@@ -1,0 +1,61 @@
+{# 02 · SYSTEMS — Phase 1 placeholders; Phase 2 replaces these with real cases. #}
+{% from "_macros/section_header.html" import section_header %}
+{% from "_macros/system_card.html" import system_card %}
+
+<section class="relative bg-surface-tint border-y border-hairline">
+  <div class="mx-auto max-w-[1280px] px-6 lg:px-8 py-28 lg:py-40">
+
+    {{ section_header(
+      number="02",
+      label="SYSTEMS",
+      title="Systems in development.",
+      intro="Operational platforms being shipped. Each case study follows the same shape — challenge, architecture, outcome — once it ships."
+    ) }}
+
+    {% set systems = [
+      {
+        "id": "SYS-001",
+        "channel": "WKF",
+        "state": "queued",
+        "title": "Operational Visibility Platform",
+        "summary": "Real-time view of workflow state, SLA timing, and intervention surfaces — the control room for operations leaders running multiple processes in parallel."
+      },
+      {
+        "id": "SYS-002",
+        "channel": "GOV",
+        "state": "queued",
+        "title": "Governance Workflow Engine",
+        "summary": "Approval logic, role-aware routing, and full audit trail as code. Compliance and operational speed in the same primitive, not in tension."
+      },
+      {
+        "id": "SYS-003",
+        "channel": "SYS",
+        "state": "draft",
+        "title": "AI-Assisted Operations Layer",
+        "summary": "LLM-augmented decision support sitting inside operational workflows — drafting, classifying, routing — with the human always in the loop."
+      }
+    ] %}
+
+    <div class="mt-16 lg:mt-20 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {% for sys in systems %}
+        {{ system_card(
+          id=sys.id,
+          title=sys.title,
+          summary=sys.summary,
+          state=sys.state,
+          channel=sys.channel,
+          delay=80 * loop.index0
+        ) }}
+      {% endfor %}
+    </div>
+
+    <div class="mt-14" data-reveal style="transition-delay: 320ms;">
+      <a href="/systems" class="group inline-flex items-center gap-3 hover:gap-4 transition-all">
+        <span class="mono-label group-hover:!text-ink transition-colors">view all systems</span>
+        <span class="text-ink-muted group-hover:text-accent transition-colors">→</span>
+        <span class="mono-id text-ink-faint group-hover:text-ink-muted transition-colors">/systems</span>
+      </a>
+    </div>
+
+  </div>
+</section>

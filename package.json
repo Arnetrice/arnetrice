@@ -1,0 +1,14 @@
+{
+  "name": "arnetrice",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Tailwind build pipeline for Arnetrice.com (FastAPI + Jinja). The Python app is the runtime; this package.json exists only to compile design tokens to CSS.",
+  "scripts": {
+    "build:css": "tailwindcss -i ./static/css/input.css -o ./static/dist/output.css --minify",
+    "watch:css": "tailwindcss -i ./static/css/input.css -o ./static/dist/output.css --watch"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.0.0",
+    "tailwindcss": "^4.0.0"
+  }
+}

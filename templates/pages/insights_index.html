@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+
+{% block title %}Insights — Arnetrice{% endblock %}
+{% block description %}Operational systems thinking, written down. Pieces on systems, workflow, governance, and AI-assisted operations.{% endblock %}
+
+{% block content %}
+
+{# ===== INDEX HERO ===== #}
+<section class="relative overflow-hidden">
+
+  <div aria-hidden="true" class="absolute inset-0 pointer-events-none opacity-[0.35]">
+    <svg class="absolute inset-0 h-full w-full text-hairline" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="grid-insights" width="48" height="48" patternUnits="userSpaceOnUse">
+          <path d="M 48 0 L 0 0 0 48" fill="none" stroke="currentColor" stroke-width="1"/>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#grid-insights)" />
+    </svg>
+    <div class="absolute inset-x-0 top-0 h-72 bg-gradient-to-b from-surface to-transparent"></div>
+    <div class="absolute inset-x-0 bottom-0 h-72 bg-gradient-to-t from-surface to-transparent"></div>
+  </div>
+
+  <div class="relative mx-auto max-w-[1280px] px-6 lg:px-8 pt-28 lg:pt-44 pb-20 lg:pb-28">
+
+    <div class="flex items-center gap-4 mb-14" data-reveal>
+      <span class="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-surface-elev border border-hairline">
+        <span class="mono-id text-ink-muted">INS · INDEX</span>
+      </span>
+      <span class="inline-flex items-center gap-2">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span class="mono-label !text-[11px] !text-signal-ok">{{ total_count }} {{ 'INSIGHT' if total_count == 1 else 'INSIGHTS' }} LIVE</span>
+      </span>
+      <a href="/insights/rss.xml" class="ml-auto inline-flex items-center gap-2 mono-label !text-[11px] hover:!text-ink transition-colors" aria-label="RSS feed">
+        <span>RSS</span>
+        <span class="text-ink-faint">→</span>
+      </a>
+    </div>
+
+    <h1 class="display-h1 max-w-5xl" data-reveal style="transition-delay: 120ms;">
+      Operational thinking,
+      <span class="display-accent">written down</span>.
+    </h1>
+
+    <p class="mt-14 max-w-2xl text-lg text-ink-muted leading-relaxed" data-reveal style="transition-delay: 220ms;">
+      Pieces on systems, workflow, governance, and AI-assisted operations.
+      Filter by channel, or read everything.
+    </p>
+
+  </div>
+</section>
+
+{# ===== FILTER + LIST ===== #}
+<section class="relative">
+  <div class="mx-auto max-w-[1280px] px-6 lg:px-8 pb-20 lg:pb-28">
+
+    {# Channel filter bar — HTMX swaps the list fragment. #}
+    {% set channels = [
+      ("ALL", "All"),
+      ("SYS", "SYS"),
+      ("WKF", "WKF"),
+      ("GOV", "GOV"),
+      ("VIS", "VIS"),
+    ] %}
+    <div class="flex flex-wrap items-center gap-2 mb-10" data-reveal>
+      <span class="mono-label !text-[11px] mr-2">FILTER</span>
+      {% for code, label in channels %}
+        <button
+          type="button"
+          class="filter-btn{% if active_channel == code %} is-active{% endif %}"
+          data-channel-btn="{{ code }}"
+          hx-get="/insights/_list"
+          hx-vals='{"channel": "{{ code }}"}'
+          hx-target="#insights-list"
+          hx-swap="innerHTML"
+          hx-push-url="{% if code == 'ALL' %}/insights{% else %}/insights?channel={{ code }}{% endif %}"
+        >{{ label }}</button>
+      {% endfor %}
+    </div>
+
+    <div id="insights-list" data-reveal style="transition-delay: 100ms;">
+      {% include "_partials/insights_list.html" %}
+    </div>
+
+  </div>
+</section>
+
+{# ===== COMING UP ===== #}
+<section class="relative bg-surface-tint border-y border-hairline">
+  <div class="mx-auto max-w-[1280px] px-6 lg:px-8 py-28 lg:py-36">
+
+    <div class="flex items-center gap-3 mb-10" data-reveal>
+      <span class="status-dot status-dot--info" aria-hidden="true"></span>
+      <span class="mono-label">Coming up</span>
+    </div>
+
+    <h2 class="font-display text-3xl lg:text-5xl font-semibold tracking-tight text-ink-strong leading-[1.1] max-w-3xl" data-reveal style="transition-delay: 80ms;">
+      Drafting.
+    </h2>
+
+    <p class="mt-6 max-w-2xl text-lg text-ink-muted leading-relaxed" data-reveal style="transition-delay: 160ms;">
+      Pieces in the writing queue. They land here once they are finished, not before.
+    </p>
+
+    {% set drafting = [
+      {"channel": "WKF", "topic": "OPERATIONS", "title": "Workflow as code: the SLA layer"},
+      {"channel": "GOV", "topic": "GOVERNANCE", "title": "Approval workflows that don't slow you down"},
+      {"channel": "VIS", "topic": "DESIGN", "title": "Dashboards are not control surfaces"},
+    ] %}
+
+    <div class="mt-14 grid gap-px bg-hairline border border-hairline rounded-xl overflow-hidden md:grid-cols-3">
+      {% for d in drafting %}
+        <article class="bg-surface-elev p-7 lg:p-8 flex flex-col" data-reveal style="transition-delay: {{ 80 * loop.index0 }}ms;">
+          <div class="flex items-center justify-between gap-4">
+            <span class="mono-label !text-[11px]">{{ d.channel }}</span>
+            <span class="mono-label !text-[10px] !text-ink-faint">{{ d.topic }}</span>
+          </div>
+          <h3 class="mt-7 font-display text-lg font-semibold text-ink-strong leading-snug flex-1">{{ d.title }}</h3>
+          <div class="mt-7 pt-5 border-t border-hairline flex items-center justify-between">
+            <span class="mono-label !text-[11px] !text-ink-faint">drafting</span>
+            <span class="text-ink-faint">→</span>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+{% include "sections/quiet_contact.html" %}
+
+{% endblock %}

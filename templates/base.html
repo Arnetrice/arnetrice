@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light" />
+  <meta name="theme-color" content="#F7F8FA" />
+
+  {% set canonical_url = site_url_clean ~ request.url.path %}
+  {% set og_image_url = site_url_clean ~ '/og/default.png' %}
+
+  <title>{% block title %}Arnetrice — Operations Systems Architect{% endblock %}</title>
+  <meta name="description" content="{% block description %}Building operational systems that create visibility, structure, and scalable workflow.{% endblock %}" />
+
+  <link rel="canonical" href="{{ canonical_url }}" />
+
+  {# Open Graph #}
+  <meta property="og:type" content="{% block og_type %}website{% endblock %}" />
+  <meta property="og:site_name" content="Arnetrice" />
+  <meta property="og:url" content="{{ canonical_url }}" />
+  <meta property="og:title" content="{% block og_title %}Arnetrice — Operations Systems Architect{% endblock %}" />
+  <meta property="og:description" content="{% block og_description %}Operational systems, workflow architecture, governance infrastructure.{% endblock %}" />
+  <meta property="og:image" content="{% block og_image %}{{ og_image_url }}{% endblock %}" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="en_US" />
+
+  {# Twitter / X #}
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="{{ self.og_title() }}" />
+  <meta name="twitter:description" content="{{ self.og_description() }}" />
+  <meta name="twitter:image" content="{{ self.og_image() }}" />
+
+  {# Robots — explicit signal for production indexability #}
+  <meta name="robots" content="{% if is_production %}index, follow{% else %}noindex, nofollow{% endif %}" />
+
+  {# JSON-LD structured data — Person + WebSite are universal. Article pages override. #}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "{{ site_url_clean }}/#person",
+        "name": "Arnetrice Smith",
+        "jobTitle": "Operations Systems Architect",
+        "url": "{{ site_url_clean }}/",
+        "email": "mailto:align@qoat.ai",
+        "knowsAbout": ["Operational systems", "Workflow architecture", "Governance systems", "Operational visibility", "AI-assisted development"]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "{{ site_url_clean }}/#website",
+        "url": "{{ site_url_clean }}/",
+        "name": "Arnetrice",
+        "description": "Operations Systems Architect identity platform.",
+        "publisher": { "@id": "{{ site_url_clean }}/#person" },
+        "inLanguage": "en-US"
+      }
+    ]
+  }
+  </script>
+  {% block structured_data %}{% endblock %}
+
+  {# Fonts — preconnect + display:swap. Preload the variable font that the hero needs. #}
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&family=Geist+Mono:wght@400;500;600&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&family=Geist+Mono:wght@400;500;600&display=swap" />
+
+  {# Design system — versioned URL forces fresh fetch when output.css changes #}
+  <link rel="stylesheet" href="{{ asset_url('dist/output.css') }}" />
+
+  {# HTMX — server-driven fragment swaps where they earn their keep #}
+  <script src="https://unpkg.com/htmx.org@2.0.3" defer></script>
+
+  {# Feed discovery #}
+  <link rel="alternate" type="application/rss+xml" title="Arnetrice — Insights" href="/insights/rss.xml" />
+
+  {% block head_extra %}{% endblock %}
+</head>
+<body class="min-h-screen flex flex-col">
+
+  {# ===== SKIP TO CONTENT — keyboard-first accessibility ===== #}
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  {# ===== STATUS STRIP — operational signal row, top of page ===== #}
+  {% include "_macros/status_strip.html" %}
+
+  {# ===== TOP NAV ===== #}
+  <header
+    data-nav
+    class="sticky top-0 z-40 bg-surface/80 backdrop-blur border-b border-hairline transition-[background-color,box-shadow,border-color] duration-300 [&.is-scrolled]:bg-surface/95 [&.is-scrolled]:shadow-1 [&.is-scrolled]:border-hairline-strong"
+    role="banner"
+  >
+    <div class="mx-auto max-w-[1280px] px-6 lg:px-8 flex h-16 items-center justify-between gap-8 transition-[height] duration-300 [.is-scrolled_&]:h-14">
+      <a href="/" class="flex items-center gap-3 group" aria-label="Arnetrice home">
+        <span class="inline-block h-2.5 w-2.5 rounded-sm bg-accent transition-transform group-hover:rotate-45" aria-hidden="true"></span>
+        <span class="font-display text-[15px] font-semibold tracking-tight text-ink-strong">Arnetrice</span>
+        <span class="mono-id hidden md:inline-block ml-1 text-ink-faint" aria-hidden="true">v{{ site_version }}</span>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-1" aria-label="Primary">
+        {% for item in nav_primary %}
+          <a
+            href="{{ item.href }}"
+            class="group relative px-3 py-2 text-sm text-ink-muted hover:text-ink transition-colors"
+            {% if item.state == 'placeholder' %}data-placeholder="true" aria-disabled="true" tabindex="-1"{% endif %}
+            {% if request.url.path == item.href %}aria-current="page"{% endif %}
+          >
+            {{ item.label }}
+            {% if item.state == 'placeholder' %}
+              <span class="mono-label ml-1 text-ink-faint">soon</span>
+            {% endif %}
+            <span class="absolute left-3 right-3 -bottom-px h-px scale-x-0 origin-left bg-ink transition-transform duration-300 group-hover:scale-x-100" aria-hidden="true"></span>
+          </a>
+        {% endfor %}
+      </nav>
+
+      <div class="hidden md:flex items-center gap-2">
+        {% for item in nav_utility %}
+          <a
+            href="{{ item.href }}"
+            class="px-3 py-2 text-sm text-ink-muted hover:text-ink transition-colors"
+            {% if item.state == 'placeholder' %}data-placeholder="true" aria-disabled="true" tabindex="-1"{% endif %}
+            {% if request.url.path == item.href %}aria-current="page"{% endif %}
+          >{{ item.label }}</a>
+        {% endfor %}
+      </div>
+
+      <button
+        type="button"
+        data-nav-toggle
+        aria-expanded="false"
+        aria-controls="mobile-nav"
+        aria-label="Open menu"
+        class="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-md border border-hairline text-ink"
+      >
+        <span class="sr-only">Open menu</span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <path d="M3 6h18M3 12h18M3 18h18" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  {# ===== MOBILE NAV OVERLAY ===== #}
+  <div
+    id="mobile-nav"
+    data-nav-overlay
+    class="fixed inset-0 z-50 hidden flex-col bg-surface [&.is-open]:flex"
+    role="dialog"
+    aria-label="Mobile navigation"
+    aria-modal="true"
+  >
+    <div class="flex items-center justify-between px-6 h-16 border-b border-hairline">
+      <span class="font-display text-[15px] font-semibold tracking-tight text-ink-strong">Arnetrice</span>
+      <button type="button" data-nav-toggle class="inline-flex h-10 w-10 items-center justify-center rounded-md border border-hairline" aria-label="Close menu">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <path d="M6 6l12 12M18 6l-12 12" stroke-linecap="round" />
+        </svg>
+        <span class="sr-only">Close menu</span>
+      </button>
+    </div>
+    <nav class="flex-1 px-6 py-10 flex flex-col gap-1" aria-label="Mobile">
+      {% for item in nav_primary + nav_utility %}
+        <a href="{{ item.href }}" class="flex items-center justify-between py-3 text-2xl font-display text-ink-strong border-b border-hairline" {% if request.url.path == item.href %}aria-current="page"{% endif %}>
+          <span>{{ item.label }}</span>
+          {% if item.state == 'placeholder' %}<span class="mono-label">soon</span>{% endif %}
+        </a>
+      {% endfor %}
+    </nav>
+  </div>
+
+  {# ===== PAGE CONTENT ===== #}
+  <main id="main" role="main" class="flex-1">
+    {% block content %}{% endblock %}
+  </main>
+
+  {# ===== FOOTER ===== #}
+  {% include "_macros/footer_meta.html" %}
+
+  {# ===== APP JS — versioned URL for cache-bust on rebuild ===== #}
+  <script src="{{ asset_url('js/arnetrice.js') }}" defer></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

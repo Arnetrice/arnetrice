@@ -1,0 +1,15 @@
+{# Section header — numbered mono label + display title + optional intro. #}
+{% macro section_header(number, label, title, intro="", id_anchor="") %}
+<header class="max-w-3xl"{% if id_anchor %} id="{{ id_anchor }}"{% endif %}>
+  <div class="flex items-center gap-3 mb-6" data-reveal>
+    <span class="status-dot status-dot--info" aria-hidden="true"></span>
+    <span class="mono-label">{{ number }} · {{ label }}</span>
+  </div>
+  <h2 class="font-display text-3xl lg:text-5xl font-semibold tracking-tight text-ink-strong leading-[1.1]" data-reveal style="transition-delay: 80ms;">
+    {{ title }}
+  </h2>
+  {% if intro %}
+  <p class="mt-6 text-lg text-ink-muted leading-relaxed" data-reveal style="transition-delay: 160ms;">{{ intro }}</p>
+  {% endif %}
+</header>
+{% endmacro %}

@@ -1,0 +1,18 @@
+{# Operational status strip — top of every page. Mono row, pulse dots. #}
+<div class="bg-surface-tint border-b border-hairline">
+  <div class="mx-auto max-w-[1280px] px-6 lg:px-8 h-9 flex items-center justify-between gap-6 text-[11px]">
+    <ul class="flex items-center gap-5 overflow-x-auto">
+      {% for ch in status_channels %}
+        <li class="flex items-center gap-2 whitespace-nowrap">
+          <span class="status-dot{% if ch.state == 'warn' %} status-dot--warn{% elif ch.state == 'info' %} status-dot--info{% endif %}" aria-hidden="true"></span>
+          <span class="mono-label !text-[11px] !text-ink-muted">{{ ch.label }}</span>
+        </li>
+      {% endfor %}
+    </ul>
+    <div class="hidden sm:flex items-center gap-4">
+      <span class="mono-label !text-[11px] !text-ink-faint">v{{ site_version }}</span>
+      <span class="mono-label !text-[11px] !text-ink-faint">{{ commit_short }}</span>
+      <span class="mono-label !text-[11px] !text-signal-ok">LIVE</span>
+    </div>
+  </div>
+</div>

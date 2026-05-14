@@ -1,0 +1,492 @@
+@import "tailwindcss";
+
+/* ============================================================
+   Arnetrice — Operations Console design tokens
+   Single source of truth for surface, ink, accent, type, motion.
+   Tokens map to Tailwind utilities via @theme (Tailwind v4).
+   ============================================================ */
+
+@theme {
+  /* Surfaces — cool light */
+  --color-surface: #F7F8FA;
+  --color-surface-elev: #FFFFFF;
+  --color-surface-tint: #EEF1F5;
+  --color-surface-deep: #E7EBF0;
+
+  /* Ink */
+  --color-ink: #111827;
+  --color-ink-strong: #0B1220;
+  --color-ink-muted: #4B5563;
+  --color-ink-faint: #9CA3AF;
+  --color-ink-inverse: #F7F8FA;
+
+  /* Lines */
+  --color-hairline: #E5E7EB;
+  --color-hairline-strong: #D1D5DB;
+
+  /* Accents — indigo + amber operational signal */
+  --color-accent: #4338CA;
+  --color-accent-soft: #EEF0FB;
+  --color-accent-strong: #3730A3;
+  --color-amber: #D97706;
+  --color-amber-soft: #FEF3E2;
+
+  /* Operational state */
+  --color-signal-ok: #10B981;
+  --color-signal-warn: #D97706;
+  --color-signal-err: #DC2626;
+  --color-signal-info: #4338CA;
+
+  /* Typography */
+  --font-display: "Inter Display", "Inter", system-ui, sans-serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* Radii */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-pill: 999px;
+
+  /* Shadows — restrained, hairline-first */
+  --shadow-1: 0 1px 2px rgba(17, 24, 39, 0.04);
+  --shadow-2: 0 8px 24px rgba(17, 24, 39, 0.06);
+  --shadow-3: 0 16px 40px rgba(17, 24, 39, 0.08);
+
+  /* Motion — slower, atmospheric defaults; restraint over spectacle */
+  --ease-standard: cubic-bezier(0.2, 0, 0.2, 1);
+  --ease-emphasized: cubic-bezier(0.2, 0, 0, 1);
+  --ease-soft: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast: 180ms;
+  --dur-base: 280ms;
+  --dur-slow: 480ms;
+  --dur-reveal: 900ms;
+}
+
+/* ============================================================
+   Base layer — html / body defaults
+   ============================================================ */
+@layer base {
+  html {
+    background: var(--color-surface);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background: var(--color-surface);
+    color: var(--color-ink);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  ::selection {
+    background: var(--color-accent);
+    color: var(--color-ink-inverse);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+/* ============================================================
+   Component primitives expressed as utility classes
+   ============================================================ */
+@layer components {
+
+  /* Mono operational label — uppercase, tight, the brand's texture */
+  .mono-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-ink-muted);
+  }
+
+  .mono-id {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--color-ink-muted);
+  }
+
+  /* Status pulse dot — used in status strip and chips */
+  .status-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 999px;
+    background: var(--color-signal-ok);
+    position: relative;
+  }
+
+  .status-dot::after {
+    content: "";
+    position: absolute;
+    inset: -3px;
+    border-radius: 999px;
+    background: var(--color-signal-ok);
+    opacity: 0.3;
+    animation: pulse 2.4s var(--ease-standard) infinite;
+  }
+
+  .status-dot--warn { background: var(--color-signal-warn); }
+  .status-dot--warn::after { background: var(--color-signal-warn); }
+
+  .status-dot--info { background: var(--color-accent); }
+  .status-dot--info::after { background: var(--color-accent); }
+
+  /* Display headline — used for hero */
+  .display-h1 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(2.25rem, 4.5vw + 0.5rem, 4.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    color: var(--color-ink-strong);
+  }
+
+  .display-accent {
+    background: linear-gradient(120deg, var(--color-accent), var(--color-amber), var(--color-accent));
+    background-size: 220% 100%;
+    background-position: 0% 50%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: gradient-drift 24s var(--ease-soft) infinite alternate;
+  }
+
+  /* Hairline divider */
+  .hairline {
+    height: 1px;
+    background: var(--color-hairline);
+    border: 0;
+  }
+
+  /* Card — system tile, dashboard influence */
+  .card {
+    background: var(--color-surface-elev);
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-1);
+    transition: transform var(--dur-base, 240ms) var(--ease-standard),
+                box-shadow var(--dur-base, 240ms) var(--ease-standard),
+                border-color var(--dur-base, 240ms) var(--ease-standard);
+  }
+
+  .card-interactive:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-3);
+    border-color: var(--color-hairline-strong);
+  }
+
+  /* Button — primary action */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1rem;
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1;
+    border-radius: var(--radius-md);
+    transition: all var(--dur-fast, 150ms) var(--ease-standard);
+  }
+
+  .btn-primary {
+    background: var(--color-accent);
+    color: var(--color-ink-inverse);
+  }
+
+  .btn-primary:hover {
+    background: var(--color-accent-strong);
+    box-shadow: var(--shadow-2);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--color-ink);
+    border: 1px solid var(--color-hairline);
+  }
+
+  .btn-ghost:hover {
+    border-color: var(--color-ink);
+  }
+
+  /* ---------- Prose — rendered markdown for case studies + insights ---------- */
+  .prose-arnetrice {
+    color: var(--color-ink);
+    font-size: 1.0625rem;
+    line-height: 1.7;
+  }
+  .prose-arnetrice > * + * { margin-top: 1.25em; }
+  .prose-arnetrice > p + p { margin-top: 1.25em; }
+
+  .prose-arnetrice h2 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.5rem;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    color: var(--color-ink-strong);
+    margin-top: 2.25em;
+  }
+  .prose-arnetrice h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.125rem;
+    line-height: 1.3;
+    color: var(--color-ink-strong);
+    margin-top: 1.75em;
+  }
+  .prose-arnetrice h4 {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-ink-muted);
+    margin-top: 1.75em;
+  }
+  .prose-arnetrice strong {
+    font-weight: 600;
+    color: var(--color-ink-strong);
+  }
+  .prose-arnetrice em { font-style: italic; }
+
+  .prose-arnetrice a {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    transition: color var(--dur-fast) var(--ease-standard);
+  }
+  .prose-arnetrice a:hover { color: var(--color-accent-strong); }
+
+  .prose-arnetrice ul,
+  .prose-arnetrice ol {
+    padding-left: 1.5em;
+  }
+  .prose-arnetrice ul { list-style: disc; }
+  .prose-arnetrice ol { list-style: decimal; }
+  .prose-arnetrice li + li { margin-top: 0.5em; }
+  .prose-arnetrice li > p { margin: 0; }
+
+  .prose-arnetrice code {
+    font-family: var(--font-mono);
+    font-size: 0.92em;
+    background: var(--color-surface-tint);
+    border: 1px solid var(--color-hairline);
+    padding: 0.1em 0.45em;
+    border-radius: var(--radius-xs);
+    color: var(--color-ink-strong);
+  }
+  .prose-arnetrice pre {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    line-height: 1.6;
+    background: var(--color-surface-tint);
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-md);
+    padding: 1.25rem 1.5rem;
+    overflow-x: auto;
+  }
+  .prose-arnetrice pre code {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    font-size: inherit;
+    color: inherit;
+  }
+
+  .prose-arnetrice blockquote {
+    border-left: 2px solid var(--color-accent);
+    padding-left: 1.25em;
+    color: var(--color-ink-muted);
+    font-style: italic;
+  }
+
+  .prose-arnetrice hr {
+    border: 0;
+    height: 1px;
+    background: var(--color-hairline);
+    margin: 2.5em 0;
+  }
+
+  .prose-arnetrice svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 2.5em 0;
+  }
+  .prose-arnetrice svg.arc-diagram {
+    margin: 3em auto;
+    padding: 1.5em 0;
+    border-top: 1px solid var(--color-hairline);
+    border-bottom: 1px solid var(--color-hairline);
+  }
+
+  /* ---------- Filter buttons — HTMX-driven channel filter on /insights ---------- */
+  .filter-btn {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-ink-muted);
+    background: var(--color-surface-elev);
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-pill);
+    padding: 0.5rem 0.875rem;
+    cursor: pointer;
+    transition: all var(--dur-fast) var(--ease-standard);
+  }
+  .filter-btn:hover {
+    color: var(--color-ink);
+    border-color: var(--color-hairline-strong);
+  }
+  .filter-btn.is-active {
+    color: var(--color-ink-inverse);
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+  }
+  .filter-btn.is-active:hover {
+    background: var(--color-accent-strong);
+    border-color: var(--color-accent-strong);
+  }
+
+  /* ---------- Form fields — contact form on /contact ---------- */
+  .field-label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-ink-muted);
+    margin-bottom: 0.5rem;
+  }
+  .input,
+  .textarea {
+    display: block;
+    width: 100%;
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--color-ink);
+    background: var(--color-surface-elev);
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-md);
+    padding: 0.75rem 1rem;
+    transition: border-color var(--dur-fast) var(--ease-standard),
+                box-shadow var(--dur-fast) var(--ease-standard);
+  }
+  .input:hover,
+  .textarea:hover {
+    border-color: var(--color-hairline-strong);
+  }
+  .input:focus,
+  .textarea:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px var(--color-accent-soft);
+  }
+  .textarea {
+    min-height: 9rem;
+    resize: vertical;
+  }
+
+  /* ---------- HTMX indicator — show "sending" only during request ---------- */
+  .htmx-indicator { display: none; }
+  .htmx-request .htmx-indicator { display: inline-flex; }
+  .htmx-request .htmx-indicator + svg,
+  .htmx-request button[type=submit] > span:first-child {
+    display: none;
+  }
+
+  /* ---------- Skip link — keyboard accessibility, first-tab focus ---------- */
+  .skip-link {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -120%);
+    z-index: 100;
+    padding: 0.625rem 1rem;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-ink-inverse);
+    background: var(--color-ink-strong);
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+    transition: transform var(--dur-base) var(--ease-emphasized);
+  }
+  .skip-link:focus,
+  .skip-link:focus-visible {
+    transform: translate(-50%, 0);
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+}
+
+/* ============================================================
+   Motion — reveal animations + respect for reduced-motion
+   ============================================================ */
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.3; }
+  50% { transform: scale(1.8); opacity: 0; }
+}
+
+@keyframes gradient-drift {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px) scale(0.985); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Ultra-soft reveal — atmospheric, not flashy. */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(20px) scale(0.985);
+  transition:
+    opacity var(--dur-reveal) var(--ease-soft),
+    transform var(--dur-reveal) var(--ease-soft);
+  will-change: opacity, transform;
+}
+
+[data-reveal].is-revealed {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  [data-reveal] { opacity: 1; transform: none; }
+  .status-dot::after { display: none; }
+  .display-accent { animation: none; }
+}

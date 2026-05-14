@@ -1,0 +1,28 @@
+{# Contact success — HTMX-swapped over the form on successful submission. #}
+<div class="card p-8 lg:p-10" role="status" aria-live="polite">
+  <div class="flex items-center gap-3 mb-6">
+    <span class="status-dot" aria-hidden="true"></span>
+    <span class="mono-label !text-signal-ok">MESSAGE SENT</span>
+    {% if delivery_mode == "log-only" %}
+      <span class="mono-label !text-[10px] !text-ink-faint">· dev · log-only</span>
+    {% endif %}
+  </div>
+  <h3 class="font-display text-2xl font-semibold text-ink-strong leading-snug">
+    Thanks — I'll respond within 1-2 business days.
+  </h3>
+  <p class="mt-4 text-base text-ink-muted leading-relaxed max-w-prose">
+    The message is on its way. If it's urgent, you can also email
+    <a href="mailto:align@qoat.ai" class="text-accent underline underline-offset-4 hover:text-accent-strong">align@qoat.ai</a>
+    directly.
+  </p>
+  <div class="mt-8 pt-6 border-t border-hairline flex flex-wrap items-center gap-4">
+    <a href="/systems" class="mono-label hover:!text-ink transition-colors">
+      explore the systems
+      <span class="text-ink-faint">→</span>
+    </a>
+    <a href="/insights" class="mono-label hover:!text-ink transition-colors">
+      read insights
+      <span class="text-ink-faint">→</span>
+    </a>
+  </div>
+</div>

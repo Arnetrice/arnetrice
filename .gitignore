@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.venv/
+venv/
+env/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Node (Tailwind build only)
+node_modules/
+
+# Build output (Dockerfile rebuilds from source on deploy)
+static/dist/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+uvicorn.err
+uvicorn.out
+
+# Local OG image samples / dev artifacts (regenerable from /og/* routes)
+og-*-sample.png
+og-*-test.png
+fresh-*.png
+
+# Windows reserved-name artifact (from prior project wipe)
+nul
+
+# Archive of prior attempts (per isolate-over-delete preference)
+archive/
+
+# Bundled font release archives — only top-level variable TTFs are used by OG generator.
+# Keeps the repo lean; users add specific TTFs per static/fonts/README.md.
+static/fonts/GeistMono/
+static/fonts/Inter/

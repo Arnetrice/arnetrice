@@ -1,0 +1,51 @@
+{# 01 · OPERATING PRINCIPLES — 4 channel cards mirroring the status strip. #}
+{% from "_macros/section_header.html" import section_header %}
+
+<section class="relative">
+  <div class="mx-auto max-w-[1280px] px-6 lg:px-8 py-28 lg:py-40">
+
+    {{ section_header(
+      number="01",
+      label="OPERATING PRINCIPLES",
+      title="How systems get built.",
+      intro="Four channels every operational system runs on. The same codes you see in the status strip — they are the brand because they are the discipline."
+    ) }}
+
+    {% set principles = [
+      {
+        "code": "SYS",
+        "title": "Systems thinking",
+        "body": "Treat operations like an architecture problem. Every workflow is a system, every decision a contract, every exception a missing primitive."
+      },
+      {
+        "code": "WKF",
+        "title": "Workflow architecture",
+        "body": "Process modeled, paths instrumented, SLAs explicit. Workflows that operate, not just exist."
+      },
+      {
+        "code": "GOV",
+        "title": "Governance",
+        "body": "Approval logic as code. Roles, permissions, and audit as first-class system primitives — not retrofits."
+      },
+      {
+        "code": "VIS",
+        "title": "Operational visibility",
+        "body": "What you cannot see, you cannot operate. Dashboards as control surfaces, not vanity displays."
+      }
+    ] %}
+
+    <div class="mt-16 lg:mt-20 grid gap-px bg-hairline border border-hairline rounded-xl overflow-hidden md:grid-cols-2 lg:grid-cols-4">
+      {% for p in principles %}
+        <div class="bg-surface-elev p-7 lg:p-8 flex flex-col" data-reveal style="transition-delay: {{ 80 * loop.index0 }}ms;">
+          <div class="flex items-center gap-2 mb-7">
+            <span class="status-dot status-dot--info" aria-hidden="true"></span>
+            <span class="mono-label !text-[11px]">{{ p.code }}</span>
+          </div>
+          <h3 class="font-display text-xl font-semibold text-ink-strong leading-tight">{{ p.title }}</h3>
+          <p class="mt-3 text-sm text-ink-muted leading-relaxed">{{ p.body }}</p>
+        </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>

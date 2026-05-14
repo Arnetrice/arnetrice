@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+{% from "_macros/system_card.html" import system_card %}
+
+{% block title %}Architecture — Arnetrice{% endblock %}
+{% block description %}Operational architecture, channel by channel. Each topic is one channel examined in depth — patterns, primitives, and the disciplines that scale them.{% endblock %}
+
+{% block content %}
+
+{# ===== INDEX HERO ===== #}
+<section class="relative overflow-hidden">
+
+  <div aria-hidden="true" class="absolute inset-0 pointer-events-none opacity-[0.35]">
+    <svg class="absolute inset-0 h-full w-full text-hairline" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="grid-arch" width="48" height="48" patternUnits="userSpaceOnUse">
+          <path d="M 48 0 L 0 0 0 48" fill="none" stroke="currentColor" stroke-width="1"/>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#grid-arch)" />
+    </svg>
+    <div class="absolute inset-x-0 top-0 h-72 bg-gradient-to-b from-surface to-transparent"></div>
+    <div class="absolute inset-x-0 bottom-0 h-72 bg-gradient-to-t from-surface to-transparent"></div>
+  </div>
+
+  <div class="relative mx-auto max-w-[1280px] px-6 lg:px-8 pt-28 lg:pt-44 pb-20 lg:pb-28">
+
+    <div class="flex items-center gap-4 mb-14" data-reveal>
+      <span class="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-surface-elev border border-hairline">
+        <span class="mono-id text-ink-muted">ARC · INDEX</span>
+      </span>
+      <span class="inline-flex items-center gap-2">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span class="mono-label !text-[11px] !text-signal-ok">{{ topics | length }} {{ 'TOPIC' if topics | length == 1 else 'TOPICS' }} LIVE</span>
+      </span>
+    </div>
+
+    <h1 class="display-h1 max-w-5xl" data-reveal style="transition-delay: 120ms;">
+      Architecture deep-dives,
+      <span class="display-accent">channel by channel</span>.
+    </h1>
+
+    <p class="mt-14 max-w-2xl text-lg text-ink-muted leading-relaxed" data-reveal style="transition-delay: 220ms;">
+      Each topic is one operational channel — Systems, Workflow, Governance,
+      Visibility — examined as architecture: patterns, primitives, and the
+      disciplines that scale them.
+    </p>
+
+  </div>
+</section>
+
+{# ===== LIVE TOPICS ===== #}
+{% if topics %}
+<section class="relative">
+  <div class="mx-auto max-w-[1280px] px-6 lg:px-8 pb-20 lg:pb-28">
+
+    <div class="flex items-center gap-3 mb-10" data-reveal>
+      <span class="status-dot" aria-hidden="true"></span>
+      <span class="mono-label">Published</span>
+    </div>
+
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {% for doc in topics %}
+        {{ system_card(
+          id=doc.topic.id,
+          title=doc.topic.title,
+          summary=doc.topic.summary,
+          state=doc.topic.state,
+          channel=doc.topic.channel,
+          href=doc.url if doc.topic.state == 'live' else none,
+          delay=80 * loop.index0,
+          read_label="read topic",
+          deferred_label="drafting"
+        ) }}
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+{% endif %}
+
+{# ===== IN DEVELOPMENT — visible-but-deferred ===== #}
+<section class="relative bg-surface-tint border-y border-hairline">
+  <div class="mx-auto max-w-[1280px] px-6 lg:px-8 py-28 lg:py-36">
+
+    <div class="flex items-center gap-3 mb-10" data-reveal>
+      <span class="status-dot status-dot--info" aria-hidden="true"></span>
+      <span class="mono-label">In development</span>
+    </div>
+
+    <h2 class="font-display text-3xl lg:text-5xl font-semibold tracking-tight text-ink-strong leading-[1.1] max-w-3xl" data-reveal style="transition-delay: 80ms;">
+      Topics being drafted.
+    </h2>
+
+    <p class="mt-6 max-w-2xl text-lg text-ink-muted leading-relaxed" data-reveal style="transition-delay: 160ms;">
+      One topic per operational channel — these are in the writing queue.
+      Each will arrive with the same structure: position, architecture, practice.
+    </p>
+
+    {% set deferred = [
+      {
+        "id": "ARC-002",
+        "channel": "SYS",
+        "state": "queued",
+        "title": "Operations as an architecture problem",
+        "summary": "The systems-thinking lens applied to operational software. Why workflows, governance, and visibility deserve the same architectural rigor as the services that surround them."
+      },
+      {
+        "id": "ARC-003",
+        "channel": "GOV",
+        "state": "queued",
+        "title": "Governance as primitive, not afterthought",
+        "summary": "Approval workflows, audit trails, and role-aware routing modeled as architectural primitives inside the workflow definition — not as middleware layered on top."
+      },
+      {
+        "id": "ARC-004",
+        "channel": "VIS",
+        "state": "draft",
+        "title": "Operational visibility is a control surface",
+        "summary": "Dashboards inform. Control surfaces operate. The difference matters more than tooling vendors admit, and it changes the shape of every operational system that touches them."
+      }
+    ] %}
+
+    <div class="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {% for t in deferred %}
+        {{ system_card(
+          id=t.id,
+          title=t.title,
+          summary=t.summary,
+          state=t.state,
+          channel=t.channel,
+          delay=80 * loop.index0,
+          read_label="read topic",
+          deferred_label="drafting"
+        ) }}
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+{% include "sections/quiet_contact.html" %}
+
+{% endblock %}

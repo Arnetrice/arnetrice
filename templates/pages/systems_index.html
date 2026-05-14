@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+{% from "_macros/system_card.html" import system_card %}
+
+{% block title %}Systems — Arnetrice{% endblock %}
+{% block description %}Operational platforms in service and in development. Each case study follows the same shape — challenge, architecture, outcome.{% endblock %}
+
+{% block content %}
+
+{# ===== INDEX HERO ===== #}
+<section class="relative overflow-hidden">
+
+  <div aria-hidden="true" class="absolute inset-0 pointer-events-none opacity-[0.35]">
+    <svg class="absolute inset-0 h-full w-full text-hairline" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="grid-systems" width="48" height="48" patternUnits="userSpaceOnUse">
+          <path d="M 48 0 L 0 0 0 48" fill="none" stroke="currentColor" stroke-width="1"/>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#grid-systems)" />
+    </svg>
+    <div class="absolute inset-x-0 top-0 h-72 bg-gradient-to-b from-surface to-transparent"></div>
+    <div class="absolute inset-x-0 bottom-0 h-72 bg-gradient-to-t from-surface to-transparent"></div>
+  </div>
+
+  <div class="relative mx-auto max-w-[1280px] px-6 lg:px-8 pt-28 lg:pt-44 pb-20 lg:pb-28">
+
+    <div class="flex items-center gap-4 mb-14" data-reveal>
+      <span class="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-surface-elev border border-hairline">
+        <span class="mono-id text-ink-muted">SYS · INDEX</span>
+      </span>
+      <span class="inline-flex items-center gap-2">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span class="mono-label !text-[11px] !text-signal-ok">{{ systems | length }} {{ 'SYSTEM' if systems | length == 1 else 'SYSTEMS' }} LIVE</span>
+      </span>
+    </div>
+
+    <h1 class="display-h1 max-w-5xl" data-reveal style="transition-delay: 120ms;">
+      Systems
+      <span class="display-accent">in service</span>
+      and in development.
+    </h1>
+
+    <p class="mt-14 max-w-2xl text-lg text-ink-muted leading-relaxed" data-reveal style="transition-delay: 220ms;">
+      Each case study follows the same shape — challenge, architecture, outcome.
+      Systems live here once they ship. Systems in development surface below.
+    </p>
+
+  </div>
+</section>
+
+{# ===== LIVE CASES ===== #}
+{% if systems %}
+<section class="relative">
+  <div class="mx-auto max-w-[1280px] px-6 lg:px-8 pb-20 lg:pb-28">
+
+    <div class="flex items-center gap-3 mb-10" data-reveal>
+      <span class="status-dot" aria-hidden="true"></span>
+      <span class="mono-label">In service</span>
+    </div>
+
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {% for doc in systems %}
+        {{ system_card(
+          id=doc.case.id,
+          title=doc.case.title,
+          summary=doc.case.summary,
+          state=doc.case.state,
+          channel=doc.case.channel,
+          href=doc.url if doc.case.state == 'live' else none,
+          delay=80 * loop.index0
+        ) }}
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+{% endif %}
+
+{# ===== IN DEVELOPMENT — visible-but-deferred ===== #}
+<section class="relative bg-surface-tint border-y border-hairline">
+  <div class="mx-auto max-w-[1280px] px-6 lg:px-8 py-28 lg:py-36">
+
+    <div class="flex items-center gap-3 mb-10" data-reveal>
+      <span class="status-dot status-dot--info" aria-hidden="true"></span>
+      <span class="mono-label">In development</span>
+    </div>
+
+    <h2 class="font-display text-3xl lg:text-5xl font-semibold tracking-tight text-ink-strong leading-[1.1] max-w-3xl" data-reveal style="transition-delay: 80ms;">
+      Systems being shipped.
+    </h2>
+
+    <p class="mt-6 max-w-2xl text-lg text-ink-muted leading-relaxed" data-reveal style="transition-delay: 160ms;">
+      Operational platforms in flight. Each will arrive here with the same
+      structure as the systems in service.
+    </p>
+
+    {% set deferred = [
+      {
+        "id": "SYS-001",
+        "channel": "WKF",
+        "state": "queued",
+        "title": "Operational Visibility Platform",
+        "summary": "Real-time view of workflow state, SLA timing, and intervention surfaces — the control room for operations leaders running multiple processes in parallel."
+      },
+      {
+        "id": "SYS-002",
+        "channel": "GOV",
+        "state": "queued",
+        "title": "Governance Workflow Engine",
+        "summary": "Approval logic, role-aware routing, and full audit trail as code. Compliance and operational speed in the same primitive, not in tension."
+      },
+      {
+        "id": "SYS-003",
+        "channel": "SYS",
+        "state": "draft",
+        "title": "AI-Assisted Operations Layer",
+        "summary": "LLM-augmented decision support sitting inside operational workflows — drafting, classifying, routing — with the human always in the loop."
+      }
+    ] %}
+
+    <div class="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {% for sys in deferred %}
+        {{ system_card(
+          id=sys.id,
+          title=sys.title,
+          summary=sys.summary,
+          state=sys.state,
+          channel=sys.channel,
+          delay=80 * loop.index0
+        ) }}
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+{% include "sections/quiet_contact.html" %}
+
+{% endblock %}

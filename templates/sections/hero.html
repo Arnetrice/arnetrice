@@ -1,0 +1,91 @@
+{# Hero — Phase 0 signature section. Establishes the Operations Console design language. #}
+<section class="relative overflow-hidden">
+
+  {# Background — subtle grid lines (dashboard influence), no gradient mesh #}
+  <div aria-hidden="true" class="absolute inset-0 pointer-events-none opacity-[0.35]">
+    <svg class="absolute inset-0 h-full w-full text-hairline" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+          <path d="M 48 0 L 0 0 0 48" fill="none" stroke="currentColor" stroke-width="1"/>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#grid)" />
+    </svg>
+    <div class="absolute inset-x-0 top-0 h-72 bg-gradient-to-b from-surface to-transparent"></div>
+    <div class="absolute inset-x-0 bottom-0 h-72 bg-gradient-to-t from-surface to-transparent"></div>
+  </div>
+
+  <div class="relative mx-auto max-w-[1280px] px-6 lg:px-8 pt-28 lg:pt-44 pb-40 lg:pb-56">
+
+    {# Operational meta row — case-study-style ID + status #}
+    <div class="flex items-center gap-4 mb-14" data-reveal>
+      <span class="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-surface-elev border border-hairline">
+        <span class="mono-id text-ink-muted">{{ hero.id }}</span>
+      </span>
+      <span class="inline-flex items-center gap-2">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span class="mono-label !text-[11px] !text-signal-ok">STATUS: {{ hero.status }}</span>
+      </span>
+    </div>
+
+    {# Headline — gradient accent on the key fragment #}
+    <h1 class="display-h1 max-w-5xl" data-reveal style="transition-delay: 120ms;">
+      {{ hero.headline_lead }}
+      <span class="display-accent">{{ hero.headline_accent }}</span>
+      {{ hero.headline_tail }}
+    </h1>
+
+    {# Subtitle chips — mono uppercase, operational texture #}
+    <div class="mt-14 flex flex-wrap items-center gap-2" data-reveal style="transition-delay: 220ms;">
+      {% for chip in hero.subtitle_chips %}
+        <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-pill border border-hairline bg-surface-elev">
+          <span class="mono-label !text-[11px]">{{ chip }}</span>
+        </span>
+        {% if not loop.last %}<span class="text-ink-faint">·</span>{% endif %}
+      {% endfor %}
+    </div>
+
+    {# Lead paragraph — sets the operational identity tone #}
+    <p class="mt-16 max-w-2xl text-lg text-ink-muted leading-relaxed" data-reveal style="transition-delay: 320ms;">
+      After decades leading operational environments, I began building the
+      systems I wished existed — workflow infrastructure, governance, and
+      operational visibility, designed and shipped with AI-assisted execution.
+    </p>
+
+    {# CTA row #}
+    <div class="mt-14 flex flex-wrap items-center gap-3" data-reveal style="transition-delay: 420ms;">
+      <a href="/systems" class="btn btn-primary" aria-disabled="true">
+        Explore the systems
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="/about" class="btn btn-ghost" aria-disabled="true">Read the narrative</a>
+      <span class="mono-label ml-2">portfolio · phase 2</span>
+    </div>
+
+    {# Atmospheric breath before the metric strip — explicit sub-section divider #}
+    <div class="mt-40 lg:mt-56 pt-16 border-t border-hairline" data-reveal style="transition-delay: 560ms;">
+      <div class="flex items-center gap-3 mb-10">
+        <span class="status-dot status-dot--info" aria-hidden="true"></span>
+        <span class="mono-label">Operational footprint</span>
+      </div>
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-px bg-hairline border border-hairline rounded-xl overflow-hidden">
+        {% set metrics = [
+          {"label": "Years operational leadership", "value": 30, "suffix": "+"},
+          {"label": "Systems shipped", "value": 14, "suffix": ""},
+          {"label": "Workflow automations", "value": 47, "suffix": ""},
+          {"label": "Lines of operational logic", "value": 38000, "suffix": "+"}
+        ] %}
+        {% for m in metrics %}
+          <div class="bg-surface-elev p-6 lg:p-8">
+            <div class="mono-label">{{ m.label }}</div>
+            <div class="mt-4 flex items-baseline gap-1">
+              <span class="font-display text-3xl lg:text-4xl font-semibold text-ink-strong" data-count="{{ m.value }}">0</span>
+              {% if m.suffix %}<span class="font-display text-xl text-ink-muted">{{ m.suffix }}</span>{% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+  </div>
+</section>

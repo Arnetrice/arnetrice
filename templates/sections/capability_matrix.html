@@ -1,0 +1,76 @@
+{# 03 · CAPABILITY MATRIX — 12-cell grid organized by channel. #}
+{% from "_macros/section_header.html" import section_header %}
+
+<section class="relative">
+  <div class="mx-auto max-w-[1280px] px-6 lg:px-8 py-28 lg:py-40">
+
+    {{ section_header(
+      number="03",
+      label="CAPABILITY MATRIX",
+      title="What I build, how I think.",
+      intro="Capability mapped by operational channel. Each cell is a discipline, not a tool — tools are listed on /stack."
+    ) }}
+
+    {% set rows = [
+      {
+        "code": "SYS",
+        "label": "Systems thinking",
+        "cells": [
+          {"name": "Architecture-first design", "body": "Modeling operations as systems before writing code."},
+          {"name": "Process orchestration", "body": "Composable workflow primitives over scripted automation."},
+          {"name": "Service architecture", "body": "Modular operational surfaces with clear contracts."}
+        ]
+      },
+      {
+        "code": "WKF",
+        "label": "Workflow architecture",
+        "cells": [
+          {"name": "Workflow orchestration", "body": "State machines, queues, and retries as first-class primitives."},
+          {"name": "SLA-driven logic", "body": "Time and threshold as explicit operational dimensions."},
+          {"name": "Workflow as code", "body": "Process definitions in the same review pipeline as the rest of the system."}
+        ]
+      },
+      {
+        "code": "GOV",
+        "label": "Governance",
+        "cells": [
+          {"name": "Approval workflows", "body": "Multi-stage approvals with explicit roles and audit trails."},
+          {"name": "Role-aware routing", "body": "Routing logic that understands organizational structure."},
+          {"name": "Audit as code", "body": "Operational history as a query surface, not a log file."}
+        ]
+      },
+      {
+        "code": "VIS",
+        "label": "Operational visibility",
+        "cells": [
+          {"name": "Operational dashboards", "body": "Control surfaces for live workflow state and intervention."},
+          {"name": "Metric instrumentation", "body": "Measurement built into the workflow, not bolted on after."},
+          {"name": "AI-assisted operations", "body": "LLM augmentation inside the operational loop, human-supervised."}
+        ]
+      }
+    ] %}
+
+    <div class="mt-16 lg:mt-20 space-y-px bg-hairline border border-hairline rounded-xl overflow-hidden">
+      {% for row in rows %}
+        <div class="bg-surface-elev grid gap-px bg-hairline lg:grid-cols-[180px_1fr_1fr_1fr]" data-reveal style="transition-delay: {{ 100 * loop.index0 }}ms;">
+          {# Row label cell #}
+          <div class="bg-surface-tint p-6 lg:p-7 flex flex-col justify-between">
+            <div class="flex items-center gap-2">
+              <span class="status-dot status-dot--info" aria-hidden="true"></span>
+              <span class="mono-label !text-[11px]">{{ row.code }}</span>
+            </div>
+            <div class="mt-6 lg:mt-0 mono-label !text-[12px] !text-ink-muted">{{ row.label }}</div>
+          </div>
+          {# Three capability cells #}
+          {% for c in row.cells %}
+            <div class="bg-surface-elev p-6 lg:p-7">
+              <h3 class="font-display text-base font-semibold text-ink-strong leading-snug">{{ c.name }}</h3>
+              <p class="mt-2 text-sm text-ink-muted leading-relaxed">{{ c.body }}</p>
+            </div>
+          {% endfor %}
+        </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>

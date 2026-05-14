@@ -1,0 +1,61 @@
+{# Contact form — initial render + HTMX target for re-render on error. #}
+<form
+  id="contact-form"
+  method="post"
+  action="/contact"
+  hx-post="/contact"
+  hx-target="this"
+  hx-swap="outerHTML"
+  hx-disabled-elt="button[type=submit]"
+  class="space-y-8"
+  novalidate
+>
+  {% if error_message %}
+    <div class="rounded-md border border-signal-err bg-surface-elev p-4 flex items-start gap-3" role="alert">
+      <span class="status-dot status-dot--warn shrink-0 mt-2" aria-hidden="true"></span>
+      <div>
+        <span class="mono-label !text-[11px]" style="color: var(--color-signal-err);">ERROR</span>
+        <p class="mt-1 text-sm text-ink">{{ error_message }}</p>
+      </div>
+    </div>
+  {% endif %}
+
+  {# Honeypot — hidden from humans, irresistible to bots. #}
+  <div class="sr-only" aria-hidden="true">
+    <label for="contact-honeypot">Leave this empty</label>
+    <input id="contact-honeypot" name="honeypot" type="text" tabindex="-1" autocomplete="off" />
+  </div>
+
+  <div class="grid gap-6 md:grid-cols-2">
+    <div>
+      <label for="contact-name" class="field-label">Name</label>
+      <input id="contact-name" name="name" type="text" required maxlength="200" class="input" autocomplete="name" />
+    </div>
+    <div>
+      <label for="contact-email" class="field-label">Email</label>
+      <input id="contact-email" name="email" type="email" required maxlength="200" class="input" autocomplete="email" />
+    </div>
+  </div>
+
+  <div>
+    <label for="contact-subject" class="field-label">Subject <span class="mono-label !text-[10px] !text-ink-faint normal-case tracking-normal">(optional)</span></label>
+    <input id="contact-subject" name="subject" type="text" maxlength="200" class="input" />
+  </div>
+
+  <div>
+    <label for="contact-message" class="field-label">Message</label>
+    <textarea id="contact-message" name="message" required maxlength="10000" rows="7" class="textarea"></textarea>
+  </div>
+
+  <div class="flex flex-wrap items-center gap-4 pt-2">
+    <button type="submit" class="btn btn-primary">
+      <span>Send message</span>
+      <span class="htmx-indicator inline-flex items-center gap-2">
+        <span class="status-dot status-dot--info" aria-hidden="true"></span>
+        <span>sending</span>
+      </span>
+      <svg class="ml-1" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <span class="mono-label !text-[11px] !text-ink-faint">response: 1-2 business days</span>
+  </div>
+</form>

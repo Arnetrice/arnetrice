@@ -1,0 +1,59 @@
+{# Footer — operational meta texture. Real values, not vanity. #}
+<footer class="mt-48 lg:mt-64 border-t border-hairline bg-surface-tint">
+  <div class="mx-auto max-w-[1280px] px-6 lg:px-8 py-16 lg:py-20 grid gap-12 lg:grid-cols-[2fr_1fr_1fr_1fr]">
+
+    <div>
+      <div class="flex items-center gap-3">
+        <span class="inline-block h-2.5 w-2.5 rounded-sm bg-accent"></span>
+        <span class="font-display text-[15px] font-semibold tracking-tight text-ink-strong">Arnetrice</span>
+      </div>
+      <p class="mt-4 max-w-sm text-sm text-ink-muted leading-relaxed">
+        Operational systems, workflow architecture, governance infrastructure.
+        Built by an operator who became a systems architect.
+      </p>
+    </div>
+
+    <div>
+      <div class="mono-label mb-3">Systems</div>
+      <ul class="space-y-2 text-sm text-ink-muted">
+        <li><a class="hover:text-ink" href="/systems">Case Studies</a></li>
+        <li><a class="hover:text-ink" href="/architecture">Architecture</a></li>
+        <li><a class="hover:text-ink" href="/stack">Stack</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="mono-label mb-3">Identity</div>
+      <ul class="space-y-2 text-sm text-ink-muted">
+        <li><a class="hover:text-ink" href="/about">About</a></li>
+        <li><a class="hover:text-ink" href="/insights">Insights</a></li>
+        <li><a class="hover:text-ink" href="/contact">Contact</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="mono-label mb-3">Operational</div>
+      <ul class="space-y-2 text-sm text-ink-muted">
+        <li class="flex items-center gap-2">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span class="mono-id text-signal-ok">all systems operational</span>
+        </li>
+        <li><a class="hover:text-ink mono-id" href="/healthz">/healthz</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-hairline">
+    <div class="mx-auto max-w-[1280px] px-6 lg:px-8 py-6 flex flex-wrap items-center justify-between gap-4 text-[11px]">
+      <div class="flex flex-wrap items-center gap-4">
+        <span class="mono-label !text-[11px]">deploy</span>
+        <code class="mono-id text-ink-muted">{{ commit_short }}</code>
+        <span class="mono-label !text-[11px]">version</span>
+        <code class="mono-id text-ink-muted">v{{ site_version }}</code>
+      </div>
+      <div class="mono-label !text-[11px] !text-ink-faint">
+        © Arnetrice 2026 · operational systems · ai-enabled
+      </div>
+    </div>
+  </div>
+</footer>

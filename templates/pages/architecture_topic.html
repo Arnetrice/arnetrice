@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+
+{% block title %}{{ doc.topic.title }} — Architecture · Arnetrice{% endblock %}
+{% block description %}{{ doc.topic.summary }}{% endblock %}
+{% block og_type %}article{% endblock %}
+{% block og_title %}{{ doc.topic.title }}{% endblock %}
+{% block og_description %}{{ doc.topic.summary }}{% endblock %}
+{% block og_image %}{{ site_url_clean }}/og/topic/{{ doc.topic.slug }}.png{% endblock %}
+
+{% set rail_sections = [
+  ("01", "POSITION", "position", "What we believe about this domain."),
+  ("02", "ARCHITECTURE", "architecture", "How it is modeled as a system."),
+  ("03", "PRACTICE", "practice", "How it shows up in execution."),
+] %}
+
+{% block content %}
+
+{# ===== TOPIC HERO ===== #}
+<section class="relative overflow-hidden">
+
+  <div aria-hidden="true" class="absolute inset-0 pointer-events-none opacity-[0.35]">
+    <svg class="absolute inset-0 h-full w-full text-hairline" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="grid-arc-topic" width="48" height="48" patternUnits="userSpaceOnUse">
+          <path d="M 48 0 L 0 0 0 48" fill="none" stroke="currentColor" stroke-width="1"/>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#grid-arc-topic)" />
+    </svg>
+    <div class="absolute inset-x-0 top-0 h-72 bg-gradient-to-b from-surface to-transparent"></div>
+    <div class="absolute inset-x-0 bottom-0 h-72 bg-gradient-to-t from-surface to-transparent"></div>
+  </div>
+
+  <div class="relative mx-auto max-w-[1280px] px-6 lg:px-8 pt-28 lg:pt-44 pb-24 lg:pb-32">
+
+    {# Back link #}
+    <div class="mb-10" data-reveal>
+      <a href="/architecture" class="inline-flex items-center gap-2 mono-label !text-[11px] hover:!text-ink transition-colors">
+        <span>←</span>
+        <span>back to architecture</span>
+      </a>
+    </div>
+
+    {# Operational meta row #}
+    <div class="flex flex-wrap items-center gap-3 mb-14" data-reveal style="transition-delay: 80ms;">
+      <span class="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-surface-elev border border-hairline">
+        <span class="mono-id text-ink-muted">{{ doc.topic.id }}</span>
+      </span>
+      <span class="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-surface-elev border border-hairline">
+        <span class="mono-label !text-[10px]">{{ doc.topic.channel }}</span>
+      </span>
+      <span class="inline-flex items-center gap-2">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span class="mono-label !text-[11px] !text-signal-ok">{{ doc.topic.state | upper }}</span>
+      </span>
+    </div>
+
+    {# Title #}
+    <h1 class="display-h1 max-w-5xl" data-reveal style="transition-delay: 160ms;">
+      {{ doc.topic.title }}
+    </h1>
+
+    {# Summary #}
+    <p class="mt-12 max-w-3xl text-lg text-ink-muted leading-relaxed" data-reveal style="transition-delay: 240ms;">
+      {{ doc.topic.summary }}
+    </p>
+
+    {# Primitives chips — equivalent to stack chips on case studies #}
+    {% if doc.topic.primitives %}
+    <div class="mt-12" data-reveal style="transition-delay: 320ms;">
+      <div class="mono-label mb-4">Primitives</div>
+      <div class="flex flex-wrap items-center gap-2">
+        {% for item in doc.topic.primitives %}
+          <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-pill border border-hairline bg-surface-elev">
+            <span class="mono-label !text-[11px]">{{ item }}</span>
+          </span>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+  </div>
+</section>
+
+{# ===== SECTIONS: POSITION / ARCHITECTURE / PRACTICE ===== #}
+{% for number, label, key, description in rail_sections %}
+{% set has_body = doc.section(key) | length > 0 %}
+<section class="relative{% if loop.index0 % 2 == 1 %} bg-surface-tint border-y border-hairline{% endif %}">
+  <div class="mx-auto max-w-[1280px] px-6 lg:px-8 py-28 lg:py-36">
+    <div class="grid gap-16 lg:grid-cols-[280px_1fr]">
+
+      <aside class="lg:sticky lg:top-28 lg:self-start" data-reveal>
+        <div class="flex items-center gap-3 mb-6">
+          <span class="status-dot status-dot--info" aria-hidden="true"></span>
+          <span class="mono-label">{{ number }} · {{ label }}</span>
+        </div>
+        <p class="mono-label !text-[11px] !text-ink-faint leading-relaxed normal-case tracking-normal">
+          {{ description }}
+        </p>
+      </aside>
+
+      <div class="max-w-2xl" data-reveal style="transition-delay: 120ms;">
+        {% if has_body %}
+          <div class="prose-arnetrice">{{ doc.section(key) | safe }}</div>
+        {% else %}
+          <p class="mono-label !text-[11px] !text-ink-faint">section not yet drafted</p>
+        {% endif %}
+      </div>
+
+    </div>
+  </div>
+</section>
+{% endfor %}
+
+{# ===== FOOTER NAV ===== #}
+<section class="relative">
+  <div class="mx-auto max-w-[1280px] px-6 lg:px-8 py-20">
+    <div class="flex items-center justify-between gap-6 pt-10 border-t border-hairline" data-reveal>
+      <a href="/architecture" class="inline-flex items-center gap-2 group">
+        <span class="text-ink-muted group-hover:text-ink transition-colors">←</span>
+        <span class="font-display text-ink group-hover:text-accent transition-colors">All architecture</span>
+      </a>
+      <a href="/systems" class="inline-flex items-center gap-2 group">
+        <span class="font-display text-ink group-hover:text-accent transition-colors">Systems in service</span>
+        <span class="text-ink-muted group-hover:text-ink transition-colors">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+{% include "sections/quiet_contact.html" %}
+
+{% endblock %}

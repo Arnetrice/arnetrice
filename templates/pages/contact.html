@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block title %}Contact — Arnetrice{% endblock %}
+{% block description %}Reach out about systems advisory, workflow architecture, or AI-assisted infrastructure work.{% endblock %}
+{% block og_title %}Contact — Arnetrice{% endblock %}
+{% block og_description %}Available for systems advisory, workflow architecture, and AI-assisted infrastructure work.{% endblock %}
+
+{% block content %}
+
+{# ===== CONTACT HERO ===== #}
+<section class="relative overflow-hidden">
+
+  <div aria-hidden="true" class="absolute inset-0 pointer-events-none opacity-[0.35]">
+    <svg class="absolute inset-0 h-full w-full text-hairline" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="grid-contact" width="48" height="48" patternUnits="userSpaceOnUse">
+          <path d="M 48 0 L 0 0 0 48" fill="none" stroke="currentColor" stroke-width="1"/>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#grid-contact)" />
+    </svg>
+    <div class="absolute inset-x-0 top-0 h-72 bg-gradient-to-b from-surface to-transparent"></div>
+    <div class="absolute inset-x-0 bottom-0 h-72 bg-gradient-to-t from-surface to-transparent"></div>
+  </div>
+
+  <div class="relative mx-auto max-w-[1280px] px-6 lg:px-8 pt-28 lg:pt-44 pb-20 lg:pb-28">
+
+    <div class="flex items-center gap-4 mb-14" data-reveal>
+      <span class="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-surface-elev border border-hairline">
+        <span class="mono-id text-ink-muted">CNT-001</span>
+      </span>
+      <span class="inline-flex items-center gap-2">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span class="mono-label !text-[11px] !text-signal-ok">AVAILABLE</span>
+      </span>
+    </div>
+
+    <h1 class="display-h1 max-w-5xl" data-reveal style="transition-delay: 120ms;">
+      Let's
+      <span class="display-accent">talk systems</span>.
+    </h1>
+
+    <p class="mt-14 max-w-2xl text-lg text-ink-muted leading-relaxed" data-reveal style="transition-delay: 220ms;">
+      Advisory, workflow architecture, and AI-assisted infrastructure work.
+      Send a note — I respond inside two business days, and prefer specific
+      questions over generic introductions.
+    </p>
+
+  </div>
+</section>
+
+{# ===== FORM + DIRECT-CONTACT RAIL ===== #}
+<section class="relative">
+  <div class="mx-auto max-w-[1280px] px-6 lg:px-8 pb-28 lg:pb-36">
+    <div class="grid gap-16 lg:grid-cols-[280px_1fr]">
+
+      <aside class="lg:sticky lg:top-28 lg:self-start" data-reveal>
+        <div class="flex items-center gap-3 mb-6">
+          <span class="status-dot status-dot--info" aria-hidden="true"></span>
+          <span class="mono-label">01 · DIRECT</span>
+        </div>
+        <p class="mono-label !text-[11px] !text-ink-faint leading-relaxed normal-case tracking-normal mb-6">
+          Email works too. Faster for known contacts.
+        </p>
+        <a href="mailto:align@qoat.ai" class="group inline-flex items-center gap-2 font-display text-lg text-ink hover:text-accent transition-colors">
+          <span class="border-b border-current pb-0.5">align@qoat.ai</span>
+          <span class="text-ink-muted group-hover:text-accent transition-colors">→</span>
+        </a>
+        <dl class="mt-10 space-y-4">
+          <div>
+            <dt class="mono-label !text-[10px]">Response time</dt>
+            <dd class="mt-1 text-sm text-ink">1-2 business days</dd>
+          </div>
+          <div>
+            <dt class="mono-label !text-[10px]">Best for</dt>
+            <dd class="mt-1 text-sm text-ink">Specific operational systems questions, advisory engagements, build collaborations</dd>
+          </div>
+          <div>
+            <dt class="mono-label !text-[10px]">Not a fit</dt>
+            <dd class="mt-1 text-sm text-ink-muted">Cold sales, recruiting, generic intros</dd>
+          </div>
+        </dl>
+      </aside>
+
+      <div class="max-w-2xl" data-reveal style="transition-delay: 120ms;">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="status-dot status-dot--info" aria-hidden="true"></span>
+          <span class="mono-label">02 · FORM</span>
+        </div>
+        {% include "_partials/contact_form.html" %}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% endblock %}

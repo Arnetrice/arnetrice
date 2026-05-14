@@ -1,0 +1,88 @@
+{# 04 · INSIGHTS — Real insights from the loader, with deferred fallback. #}
+{% from "_macros/section_header.html" import section_header %}
+
+<section class="relative bg-surface-tint border-y border-hairline">
+  <div class="mx-auto max-w-[1280px] px-6 lg:px-8 py-28 lg:py-40">
+
+    {{ section_header(
+      number="04",
+      label="INSIGHTS",
+      title="Operational thinking, written down.",
+      intro="Pieces on systems, workflow, governance, and AI-assisted operations."
+    ) }}
+
+    {% if recent_insights and recent_insights | length > 0 %}
+      {# Real insights from /content/insights/ — linked, with deferred placeholders filling the row. #}
+      {% set placeholder_count = 3 - (recent_insights | length) %}
+      <div class="mt-16 lg:mt-20 grid gap-px bg-hairline border border-hairline rounded-xl overflow-hidden md:grid-cols-3">
+        {% for d in recent_insights %}
+          <a
+            href="{{ d.url }}"
+            class="bg-surface-elev p-7 lg:p-8 flex flex-col hover:bg-surface transition-colors"
+            data-reveal style="transition-delay: {{ 80 * loop.index0 }}ms;"
+          >
+            <div class="flex items-center justify-between gap-4">
+              <span class="mono-label !text-[11px]">{{ d.insight.channel }}</span>
+              <span class="mono-label !text-[10px] !text-signal-ok">PUBLISHED</span>
+            </div>
+            <h3 class="mt-7 font-display text-lg font-semibold text-ink-strong leading-snug flex-1">{{ d.insight.title }}</h3>
+            <p class="mt-3 text-sm text-ink-muted leading-relaxed">{{ d.insight.summary }}</p>
+            <div class="mt-7 pt-5 border-t border-hairline flex items-center justify-between">
+              <span class="mono-label !text-[11px]">read insight</span>
+              <span class="text-ink-muted">→</span>
+            </div>
+          </a>
+        {% endfor %}
+        {% set drafting = [
+          {"channel": "WKF", "title": "Workflow as code: the SLA layer"},
+          {"channel": "VIS", "title": "Dashboards are not control surfaces"},
+        ] %}
+        {% for i in range(placeholder_count) %}
+          {% set d = drafting[i] %}
+          <article class="bg-surface-elev p-7 lg:p-8 flex flex-col" data-reveal style="transition-delay: {{ 80 * (recent_insights | length + loop.index0) }}ms;">
+            <div class="flex items-center justify-between gap-4">
+              <span class="mono-label !text-[11px]">{{ d.channel }}</span>
+              <span class="mono-label !text-[10px] !text-ink-faint">DRAFTING</span>
+            </div>
+            <h3 class="mt-7 font-display text-lg font-semibold text-ink-strong leading-snug flex-1">{{ d.title }}</h3>
+            <div class="mt-7 pt-5 border-t border-hairline flex items-center justify-between">
+              <span class="mono-label !text-[11px] !text-ink-faint">coming up</span>
+              <span class="text-ink-faint">→</span>
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+
+      <div class="mt-14" data-reveal style="transition-delay: 320ms;">
+        <a href="/insights" class="group inline-flex items-center gap-3 hover:gap-4 transition-all">
+          <span class="mono-label group-hover:!text-ink transition-colors">view all insights</span>
+          <span class="text-ink-muted group-hover:text-accent transition-colors">→</span>
+          <span class="mono-id text-ink-faint group-hover:text-ink-muted transition-colors">/insights</span>
+        </a>
+      </div>
+    {% else %}
+      {# Fallback: no insights loaded yet — show drafting placeholders only. #}
+      {% set drafting = [
+        {"channel": "SYS", "title": "Why operational systems are an architecture problem"},
+        {"channel": "WKF", "title": "Workflow as code: the SLA layer"},
+        {"channel": "VIS", "title": "Operational visibility is a control surface, not a dashboard"},
+      ] %}
+      <div class="mt-16 lg:mt-20 grid gap-px bg-hairline border border-hairline rounded-xl overflow-hidden md:grid-cols-3">
+        {% for d in drafting %}
+          <article class="bg-surface-elev p-7 lg:p-8 flex flex-col" data-reveal style="transition-delay: {{ 80 * loop.index0 }}ms;">
+            <div class="flex items-center justify-between gap-4">
+              <span class="mono-label !text-[11px]">{{ d.channel }}</span>
+              <span class="mono-label !text-[10px] !text-ink-faint">DRAFTING</span>
+            </div>
+            <h3 class="mt-7 font-display text-lg font-semibold text-ink-strong leading-snug">{{ d.title }}</h3>
+            <div class="mt-7 pt-5 border-t border-hairline flex items-center justify-between">
+              <span class="mono-label !text-[11px] !text-ink-faint">coming up</span>
+              <span class="text-ink-faint">→</span>
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+  </div>
+</section>
