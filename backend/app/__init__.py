@@ -1,2 +1,0 @@
-# Arnetrice.com Backend Application
-
