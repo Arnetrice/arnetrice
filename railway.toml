@@ -2,8 +2,11 @@
 builder = "DOCKERFILE"
 dockerfilePath = "Dockerfile"
 
+# startCommand intentionally omitted — the Dockerfile CMD already wraps
+# uvicorn in `sh -c` so ${PORT} expands correctly. Setting startCommand
+# here would override CMD and bypass shell expansion, causing uvicorn to
+# receive the literal string "$PORT" as the port argument.
 [deploy]
-startCommand = "uvicorn app.main:app --host 0.0.0.0 --port $PORT --proxy-headers --forwarded-allow-ips=*"
 healthcheckPath = "/healthz"
 healthcheckTimeout = 60
 restartPolicyType = "ON_FAILURE"
