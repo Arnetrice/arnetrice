@@ -1,0 +1,37 @@
+{# KPI tile — compact metric cell for operations console previews.
+   Used inside hairline-divided grids. Keeps to the existing status-dot +
+   mono-label texture. State drives the dot/trend color only. #}
+{% macro kpi_tile(label, value, suffix="", trend="", trend_dir="up", state="info") %}
+{% set dot_class = {
+  "ok":   "",
+  "warn": "status-dot--warn",
+  "info": "status-dot--info",
+}.get(state, "") %}
+{% set trend_color = {
+  "ok":   "!text-signal-ok",
+  "warn": "!text-amber",
+  "info": "!text-accent",
+}.get(state, "!text-ink-muted") %}
+{% set trend_glyph = {
+  "up":   "▲",
+  "down": "▼",
+  "flat": "—",
+}.get(trend_dir, "▲") %}
+<div class="bg-surface-elev p-5 lg:p-6 flex flex-col">
+  <div class="flex items-center gap-2">
+    <span class="status-dot {{ dot_class }}" aria-hidden="true"></span>
+    <span class="mono-label !text-[10px] !text-ink-faint">{{ label }}</span>
+  </div>
+  <div class="mt-4 flex items-baseline gap-1">
+    <span class="font-display text-2xl lg:text-3xl font-semibold text-ink-strong leading-none">{{ value }}</span>
+    {% if suffix %}<span class="font-display text-base text-ink-muted">{{ suffix }}</span>{% endif %}
+  </div>
+  {% if trend %}
+  <div class="mt-3 flex items-center gap-1.5">
+    <span class="mono-label !text-[10px] {{ trend_color }}" aria-hidden="true">{{ trend_glyph }}</span>
+    <span class="mono-label !text-[10px] {{ trend_color }}">{{ trend }}</span>
+    <span class="mono-label !text-[10px] !text-ink-faint">vs prior</span>
+  </div>
+  {% endif %}
+</div>
+{% endmacro %}

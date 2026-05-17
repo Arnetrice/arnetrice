@@ -1,0 +1,50 @@
+{# Workflow lane — single row in the operations console preview.
+   Two-line on mobile/tablet, one-line on desktop. Hairline separators
+   above/below come from the container. #}
+{% macro status_lane(code, name, channel, state, sla_label, sla_pct, owner) %}
+{% set state_meta = {
+  "on_track":    {"label": "ON TRACK",       "text": "!text-signal-ok", "dot": "",                  "bar": "bg-signal-ok"},
+  "approaching": {"label": "APPROACHING SLA", "text": "!text-amber",    "dot": "status-dot--warn",  "bar": "bg-amber"},
+  "blocked":     {"label": "BLOCKED",         "text": "!text-signal-err","dot": "status-dot--warn",  "bar": "bg-signal-err"},
+  "complete":    {"label": "COMPLETE",        "text": "!text-ink-muted", "dot": "",                  "bar": "bg-ink-faint"},
+  "pending":     {"label": "PENDING",         "text": "!text-accent",    "dot": "status-dot--info",  "bar": "bg-accent"},
+}[state] %}
+<div class="px-5 py-4 lg:px-7 lg:py-5">
+  <div class="grid gap-y-3 gap-x-5 items-center lg:grid-cols-[68px_1fr_220px_160px]">
+
+    {# 1 · ID + channel (mobile groups with the name) #}
+    <div class="flex items-center gap-3 lg:contents">
+      <span class="mono-id !text-ink-muted">{{ code }}</span>
+      <div class="lg:contents">
+        <div class="lg:col-start-2">
+          <div class="font-display text-sm lg:text-[15px] font-medium text-ink-strong leading-tight">{{ name }}</div>
+          <div class="mt-1 mono-label !text-[10px] !text-ink-faint">{{ channel }} · {{ owner }}</div>
+        </div>
+      </div>
+    </div>
+
+    {# 2 · SLA bar — full row on mobile, column on desktop #}
+    <div class="lg:col-start-3">
+      <div class="flex items-center justify-between">
+        <span class="mono-label !text-[10px]">{{ sla_label }}</span>
+        <span class="mono-label !text-[10px] !text-ink-faint">{{ sla_pct }}%</span>
+      </div>
+      <div class="mt-2 h-1 rounded-full bg-surface-deep overflow-hidden">
+        <div
+          class="h-full {{ state_meta.bar }} rounded-full origin-left"
+          data-sla-bar
+          data-sla-fill="{{ sla_pct }}"
+          style="transform: scaleX(0);"
+        ></div>
+      </div>
+    </div>
+
+    {# 3 · State pill — right-aligned on desktop #}
+    <div class="lg:col-start-4 lg:justify-self-end flex items-center gap-2">
+      <span class="status-dot {{ state_meta.dot }}" aria-hidden="true"></span>
+      <span class="mono-label !text-[10px] {{ state_meta.text }}">{{ state_meta.label }}</span>
+    </div>
+
+  </div>
+</div>
+{% endmacro %}

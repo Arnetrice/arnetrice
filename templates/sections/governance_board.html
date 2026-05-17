@@ -1,0 +1,101 @@
+{# GOVERNANCE BOARD
+   Three-lane kanban — Pending · In Review · Approved.
+   Each card carries a role-aware routing chip and time-in-lane.
+   Sits on tint to anchor it as a contained system inside the
+   platform band, matching the rhythm established by Process Flow. #}
+{% from "_macros/section_header.html" import section_header %}
+{% from "_macros/gov_card.html" import gov_card %}
+
+<section class="relative bg-surface-tint border-y border-hairline">
+  <div class="mx-auto max-w-[1280px] px-6 lg:px-8 py-28 lg:py-40">
+
+    {{ section_header(
+      number="GOV",
+      label="GOVERNANCE BOARD",
+      title="Change management as a workflow.",
+      intro="Approval logic, role-aware routing, and time-in-lane visibility. Decisions have a place, an owner, and an SLA — not an inbox."
+    ) }}
+
+    <div class="mt-16 lg:mt-20" data-reveal>
+
+      {# Three lanes — stack with breath on mobile, hairline-joined on lg. #}
+      <div class="grid gap-5 lg:gap-px lg:bg-hairline lg:border lg:border-hairline lg:rounded-xl lg:overflow-hidden lg:grid-cols-3">
+
+        {# Lane: Pending #}
+        <div class="bg-surface-elev rounded-xl lg:rounded-none border border-hairline lg:border-0 p-5 lg:p-6 flex flex-col">
+          <div class="flex items-center justify-between gap-3 pb-4 border-b border-hairline">
+            <div class="flex items-center gap-2">
+              <span class="status-dot status-dot--info" aria-hidden="true"></span>
+              <span class="mono-label !text-[11px]">PENDING</span>
+            </div>
+            <span class="mono-label !text-[10px] !text-ink-faint">2 OPEN</span>
+          </div>
+          <div class="mt-5 space-y-4 flex-1">
+            {{ gov_card(
+              code="CR-0142",
+              title="Finance routing rule update · Q3 vendors",
+              role="APPR · LEVEL 2",
+              time_in_lane="3D · 4H"
+            ) }}
+            {{ gov_card(
+              code="CR-0141",
+              title="Warehouse intake SLA · NorthRiver carrier",
+              role="APPR · LEVEL 1",
+              time_in_lane="1D · 2H"
+            ) }}
+          </div>
+        </div>
+
+        {# Lane: In Review #}
+        <div class="bg-surface-elev rounded-xl lg:rounded-none border border-hairline lg:border-0 p-5 lg:p-6 flex flex-col">
+          <div class="flex items-center justify-between gap-3 pb-4 border-b border-hairline">
+            <div class="flex items-center gap-2">
+              <span class="status-dot status-dot--warn" aria-hidden="true"></span>
+              <span class="mono-label !text-[11px] !text-amber">IN REVIEW</span>
+            </div>
+            <span class="mono-label !text-[10px] !text-ink-faint">1 OPEN</span>
+          </div>
+          <div class="mt-5 space-y-4 flex-1">
+            {{ gov_card(
+              code="CR-0140",
+              title="Install completion criteria · Q2 audit",
+              role="REV · OPS LEAD",
+              time_in_lane="5H"
+            ) }}
+          </div>
+        </div>
+
+        {# Lane: Approved #}
+        <div class="bg-surface-elev rounded-xl lg:rounded-none border border-hairline lg:border-0 p-5 lg:p-6 flex flex-col">
+          <div class="flex items-center justify-between gap-3 pb-4 border-b border-hairline">
+            <div class="flex items-center gap-2">
+              <span class="status-dot" aria-hidden="true"></span>
+              <span class="mono-label !text-[11px] !text-signal-ok">APPROVED</span>
+            </div>
+            <span class="mono-label !text-[10px] !text-ink-faint">2 RECENT</span>
+          </div>
+          <div class="mt-5 space-y-4 flex-1">
+            {{ gov_card(
+              code="CR-0138",
+              title="Reconciliation cadence · daily → 4-hourly",
+              role="APPR · LEVEL 2",
+              time_in_lane="CLOSED 2D AGO"
+            ) }}
+            {{ gov_card(
+              code="CR-0136",
+              title="Audit retention policy · 7y → 10y",
+              role="APPR · LEVEL 3",
+              time_in_lane="CLOSED 5D AGO"
+            ) }}
+          </div>
+        </div>
+
+      </div>
+
+      <p class="mt-6 mono-label !text-[10px] !text-ink-faint text-center">
+        PREVIEW · PLACEHOLDER BOARD · REPLACE WITH LIVE CHANGE REQUESTS
+      </p>
+    </div>
+
+  </div>
+</section>

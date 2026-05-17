@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% from "_macros/portrait_frame.html" import portrait_frame %}
 
 {% block title %}About — Arnetrice{% endblock %}
 {% block description %}Operational leadership, evolved into operational systems architecture. The narrative behind Arnetrice.{% endblock %}
@@ -50,16 +51,33 @@
       {% endfor %}
     </div>
 
-    {# Lead — two-beat structure: claim, then frame #}
-    <div class="mt-16 max-w-2xl space-y-6" data-reveal style="transition-delay: 320ms;">
-      <p class="text-lg text-ink-muted leading-relaxed">
-        After decades leading operational environments, I began building the
-        systems I wished existed.
-      </p>
-      <p class="text-lg text-ink-muted leading-relaxed">
-        Not because the tools didn't exist — because the tools didn't think
-        about operations the way operators do.
-      </p>
+    {# Lead + portrait — stacks on mobile/tablet, splits on lg+.
+       Portrait sits on the right at desktop sizes so the narrative reads
+       first; on smaller screens the portrait drops below the prose. #}
+    <div class="mt-16 grid gap-10 lg:gap-16 lg:grid-cols-[1fr_minmax(0,360px)] items-start">
+
+      {# Two-beat lead: claim, then frame. #}
+      <div class="max-w-2xl space-y-6" data-reveal style="transition-delay: 320ms;">
+        <p class="text-lg text-ink-muted leading-relaxed">
+          After decades leading operational environments, I began building the
+          systems I wished existed.
+        </p>
+        <p class="text-lg text-ink-muted leading-relaxed">
+          Not because the tools didn't exist — because the tools didn't think
+          about operations the way operators do.
+        </p>
+      </div>
+
+      {# Portrait — shared macro. Caption identifies the page context.
+         max_width is generous here; this is the long-form about page. #}
+      <div data-reveal style="transition-delay: 420ms;">
+        {{ portrait_frame(
+          max_width="360px",
+          caption="A. SMITH · PORTRAIT PLACEHOLDER",
+          uid="about-hero"
+        ) }}
+      </div>
+
     </div>
 
     {# Identity strip — biographical facts as operational metadata. #}
@@ -113,7 +131,7 @@
 
         {# Pulled quote — thesis of the page, lifted out of the narrative for weight. #}
         <figure class="my-14 lg:my-16 relative pl-6 lg:pl-8 border-l-2 border-accent">
-          <span class="mono-label !text-[10px] !text-accent absolute -top-1 left-6 lg:left-8 bg-surface px-2 -ml-2">THESIS</span>
+          <span class="mono-label !text-[10px] !text-accent absolute -top-4 left-6 lg:left-8 bg-surface px-2 -ml-2">THESIS</span>
           <blockquote>
             <p class="font-display text-2xl lg:text-[1.75rem] font-medium text-ink-strong leading-[1.25] tracking-tight">
               Operators understand workflows the way architects understand

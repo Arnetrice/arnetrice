@@ -1,0 +1,51 @@
+{# WALKTHROUGH REEL
+   Three cinematic placeholders, sized to later hold real screen
+   recordings. Uses WKF channel because most demos are workflow
+   walkthroughs. Sits on surface — the panel placeholders carry
+   their own subtle tint, so a tint band beneath would mute them. #}
+{% from "_macros/section_header.html" import section_header %}
+{% from "_macros/video_panel.html" import video_panel %}
+
+<section class="relative">
+  <div class="mx-auto max-w-[1280px] px-6 lg:px-8 py-28 lg:py-40">
+
+    {{ section_header(
+      number="WKF",
+      label="WALKTHROUGHS",
+      title="Operational demos, in motion.",
+      intro="Short, narrated walkthroughs of each system in use. Placeholders here become real recordings as each surface enters service."
+    ) }}
+
+    <div class="mt-16 lg:mt-20 grid gap-8 lg:gap-10 md:grid-cols-2 lg:grid-cols-3">
+      {{ video_panel(
+        channel="VIS",
+        title="Operations console — workflow lane drill-down",
+        summary="Live SLA timing, intervention surfaces, and what the operator actually sees.",
+        duration="3:24",
+        status="drafting",
+        delay=0
+      ) }}
+      {{ video_panel(
+        channel="WKF",
+        title="Process flow — drift detection and escalation",
+        summary="How drift surfaces upstream of the queue, and where the system routes it.",
+        duration="2:48",
+        status="drafting",
+        delay=80
+      ) }}
+      {{ video_panel(
+        channel="GOV",
+        title="Governance board — change request lifecycle",
+        summary="One change, from pending through role-aware approval to closed audit trail.",
+        duration="4:12",
+        status="queued",
+        delay=160
+      ) }}
+    </div>
+
+    <p class="mt-10 lg:mt-12 mono-label !text-[10px] !text-ink-faint text-center">
+      PREVIEW · PLACEHOLDER PANELS · REPLACE WITH RECORDED WALKTHROUGHS
+    </p>
+
+  </div>
+</section>

@@ -1,0 +1,61 @@
+{# Video panel — 16:9 placeholder sized to later hold a screen recording.
+   Subtle gradient + grid texture matches the hero/portrait backdrop;
+   a centered, restrained play icon makes the affordance clear without
+   shouting. Status + channel + duration sit in the corners. #}
+{% macro video_panel(channel, title, summary, duration, status="drafting", delay=0) %}
+{% set status_label = {
+  "drafting": "DRAFTING",
+  "live":     "LIVE",
+  "queued":   "QUEUED",
+}.get(status, status | upper) %}
+{% set status_dot = {
+  "drafting": "status-dot--info",
+  "live":     "",
+  "queued":   "status-dot--info",
+}[status] %}
+<article class="flex flex-col" data-reveal style="transition-delay: {{ delay }}ms;">
+  <figure
+    class="relative aspect-video bg-surface-elev border border-hairline rounded-lg overflow-hidden group cursor-default"
+    aria-label="Walkthrough placeholder — {{ title }}"
+  >
+    {# Soft gradient + grid texture #}
+    <div aria-hidden="true" class="absolute inset-0 bg-gradient-to-br from-surface-tint via-surface-elev to-surface-elev"></div>
+    <svg aria-hidden="true" class="absolute inset-0 h-full w-full text-hairline opacity-50" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="video-grid-{{ channel|lower }}-{{ delay }}" width="32" height="32" patternUnits="userSpaceOnUse">
+          <path d="M 32 0 L 0 0 0 32" fill="none" stroke="currentColor" stroke-width="1"/>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#video-grid-{{ channel|lower }}-{{ delay }})" />
+    </svg>
+
+    {# Play affordance — centered. Restrained, hairline-bordered. #}
+    <div class="absolute inset-0 flex items-center justify-center">
+      <span class="inline-flex items-center justify-center h-14 w-14 lg:h-16 lg:w-16 rounded-full bg-surface-elev border border-hairline shadow-2 transition-transform duration-300 ease-out group-hover:scale-105">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="text-accent translate-x-[1px]" aria-hidden="true">
+          <path d="M8 5v14l11-7z" />
+        </svg>
+      </span>
+    </div>
+
+    {# Top-left: status. Top-right: channel. Bottom-right: duration. #}
+    <div class="absolute left-3 top-3">
+      <span class="inline-flex items-center gap-2 px-2 py-1 rounded-md bg-surface-elev/90 backdrop-blur-sm border border-hairline">
+        <span class="status-dot {{ status_dot }}" aria-hidden="true"></span>
+        <span class="mono-label !text-[10px]">{{ status_label }}</span>
+      </span>
+    </div>
+    <div class="absolute right-3 top-3">
+      <span class="mono-label !text-[10px] !text-ink-faint bg-surface-elev/90 backdrop-blur-sm border border-hairline px-2 py-1 rounded-md">{{ channel }}</span>
+    </div>
+    <div class="absolute right-3 bottom-3">
+      <span class="mono-label !text-[10px] !text-ink-faint bg-surface-elev/90 backdrop-blur-sm border border-hairline px-2 py-1 rounded-md">{{ duration }}</span>
+    </div>
+  </figure>
+
+  <h3 class="mt-5 font-display text-base lg:text-lg font-semibold text-ink-strong leading-snug">{{ title }}</h3>
+  {% if summary %}
+  <p class="mt-2 text-sm text-ink-muted leading-relaxed">{{ summary }}</p>
+  {% endif %}
+</article>
+{% endmacro %}

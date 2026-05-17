@@ -1,0 +1,92 @@
+{# PROCESS FLOW
+   ERP → Warehouse → Install → Finance dependency chain with one drift
+   indicator. Horizontal on lg+, vertical-stacked on smaller. Uses WKF
+   channel code in place of a section number for the same reason as
+   ops_console_preview.html. #}
+{% from "_macros/section_header.html" import section_header %}
+{% from "_macros/process_node.html" import process_node %}
+
+<section class="relative bg-surface-tint border-y border-hairline">
+  <div class="mx-auto max-w-[1280px] px-6 lg:px-8 py-28 lg:py-40">
+
+    {{ section_header(
+      number="WKF",
+      label="PROCESS FLOW",
+      title="Dependency, drift, escalation.",
+      intro="Operational flow as a chain: each stage depends on the one before, every stage has its own SLA, and drift surfaces where the system can intervene before the queue does."
+    ) }}
+
+    {# THE CHAIN — 4 nodes, 3 connectors. Connectors hide between
+       breakpoints so the layout cleanly switches from row → column. #}
+    <div class="mt-16 lg:mt-20" data-reveal>
+      <div class="grid gap-5 lg:gap-3 lg:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr]">
+
+        {{ process_node(
+          code="P-01",
+          name="ERP",
+          summary="Source of truth for orders, vendors, and inventory commitments.",
+          status="active"
+        ) }}
+
+        {% include "_partials/process_connector.html" %}
+
+        {{ process_node(
+          code="P-02",
+          name="Warehouse",
+          summary="Receipts, picks, and dispatch against ERP commitments.",
+          status="active"
+        ) }}
+
+        {% include "_partials/process_connector.html" %}
+
+        {{ process_node(
+          code="P-03",
+          name="Install",
+          summary="Field execution, exception capture, completion sign-off.",
+          status="drift",
+          drift="2.4h avg SLA slip · Q2"
+        ) }}
+
+        {% include "_partials/process_connector.html" %}
+
+        {{ process_node(
+          code="P-04",
+          name="Finance",
+          summary="Reconciliation, invoicing, and revenue close.",
+          status="pending"
+        ) }}
+
+      </div>
+
+      {# Operational legend — three small callouts under the chain.
+         Mirrors the rhythm of the hero's metric strip. #}
+      <div class="mt-12 lg:mt-16 grid gap-px bg-hairline border border-hairline rounded-xl overflow-hidden md:grid-cols-3">
+        {% set legends = [
+          {
+            "label": "Dependency",
+            "title": "Stages know what they need.",
+            "body":  "Each node declares its upstream contract. Missing inputs surface here, not three queues downstream."
+          },
+          {
+            "label": "Drift detection",
+            "title": "Time as a first-class signal.",
+            "body":  "Stages carry SLA budgets. Drift is measured continuously and routed before it becomes an exception."
+          },
+          {
+            "label": "Escalation",
+            "title": "Intervention has a path.",
+            "body":  "When drift crosses the threshold, the system routes — to a role, not an inbox. Audit travels with it."
+          }
+        ] %}
+        {% for l in legends %}
+          <div class="bg-surface-elev p-6 lg:p-8 flex flex-col">
+            <span class="mono-label !text-[10px]">{{ l.label }}</span>
+            <h3 class="mt-4 font-display text-base lg:text-lg font-semibold text-ink-strong leading-snug">{{ l.title }}</h3>
+            <p class="mt-3 text-sm text-ink-muted leading-relaxed">{{ l.body }}</p>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+  </div>
+</section>

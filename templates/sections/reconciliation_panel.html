@@ -1,0 +1,104 @@
+{# RECONCILIATION PANEL
+   Expected vs Actual ledger with state-coloured variance.
+   Uses VIS channel code (visibility into integrity gaps).
+   Sits on surface to balance the surrounding tint bands. #}
+{% from "_macros/section_header.html" import section_header %}
+{% from "_macros/recon_row.html" import recon_row %}
+
+<section class="relative">
+  <div class="mx-auto max-w-[1280px] px-6 lg:px-8 py-28 lg:py-40">
+
+    {{ section_header(
+      number="VIS",
+      label="RECONCILIATION",
+      title="What should be, what is, where it diverges.",
+      intro="Operational data against operational reality. Reconciliation runs continuously; gaps route to a role, not a queue."
+    ) }}
+
+    <div class="mt-16 lg:mt-20" data-reveal>
+
+      <div class="card overflow-hidden">
+
+        {# Header strip — matches the console preview chrome. #}
+        <div class="flex items-center justify-between gap-4 px-5 py-3 lg:px-7 lg:py-4 border-b border-hairline">
+          <div class="flex items-center gap-3 min-w-0">
+            <span class="status-dot status-dot--info" aria-hidden="true"></span>
+            <span class="mono-label !text-[11px]">RECONCILIATION · INSTALL → FINANCE</span>
+            <span class="mono-id !text-ink-faint hidden md:inline">Q2 BATCH</span>
+          </div>
+          <div class="flex items-center gap-4 shrink-0">
+            <span class="mono-label !text-[10px] !text-ink-faint hidden md:inline">RUN 5M AGO</span>
+            <span class="mono-label !text-[10px] !text-amber">1 GAP</span>
+          </div>
+        </div>
+
+        {# Reconciliation rows. #}
+        <div class="divide-y divide-hairline">
+          {{ recon_row(
+            code="WF-3041",
+            label="Vendor onboarding · NorthRiver Logistics",
+            expected="$24,000",
+            actual="$24,000",
+            variance="$0",
+            variance_pct="0%",
+            state="match"
+          ) }}
+          {{ recon_row(
+            code="WF-3038",
+            label="Install reconciliation · Q2 batch",
+            expected="1,420 u",
+            actual="1,418 u",
+            variance="−2 u",
+            variance_pct="−0.14%",
+            state="variance"
+          ) }}
+          {{ recon_row(
+            code="WF-3019",
+            label="Warehouse exception · damaged receipt",
+            expected="$24,000",
+            actual="$19,800",
+            variance="−$4,200",
+            variance_pct="−17.5%",
+            state="gap"
+          ) }}
+          {{ recon_row(
+            code="WF-2998",
+            label="Quarterly governance audit · sign-off",
+            expected="100%",
+            actual="100%",
+            variance="0",
+            variance_pct="0%",
+            state="match"
+          ) }}
+          {{ recon_row(
+            code="WF-3025",
+            label="Change request · finance routing rules",
+            expected="—",
+            actual="—",
+            variance="—",
+            variance_pct="awaiting",
+            state="pending"
+          ) }}
+        </div>
+
+        {# Footer summary — largest gap surfaces a routing decision. #}
+        <div class="px-5 py-4 lg:px-7 lg:py-5 border-t border-hairline bg-surface-tint/60">
+          <div class="flex flex-wrap items-center justify-between gap-x-6 gap-y-2">
+            <div class="flex items-center gap-3">
+              <span class="status-dot status-dot--warn" aria-hidden="true"></span>
+              <span class="mono-label !text-[10px] !text-amber">LARGEST GAP</span>
+              <span class="mono-id !text-ink-strong">WF-3019 · −$4,200</span>
+            </div>
+            <span class="mono-label !text-[10px] !text-ink-faint">ROUTED TO A. SMITH · ESCALATION-LEVEL-1</span>
+          </div>
+        </div>
+
+      </div>
+
+      <p class="mt-6 mono-label !text-[10px] !text-ink-faint text-center">
+        PREVIEW · PLACEHOLDER LEDGER · REPLACE WITH LIVE RECONCILIATION
+      </p>
+    </div>
+
+  </div>
+</section>

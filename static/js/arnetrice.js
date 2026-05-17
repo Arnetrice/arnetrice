@@ -74,6 +74,33 @@
     evt.target.querySelectorAll("[data-reveal]").forEach((el) => el.classList.add("is-revealed"));
   });
 
+  /* ---------- SLA bars — scaleX from 0 to target % when in viewport ---------- */
+  const slaBars = document.querySelectorAll("[data-sla-bar]");
+  if (slaBars.length && "IntersectionObserver" in window && !reducedMotion) {
+    const so = new IntersectionObserver(
+      (entries, observer) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            const el = entry.target;
+            const target = Math.max(0, Math.min(100, parseFloat(el.dataset.slaFill || "0")));
+            el.style.transition = "transform 900ms cubic-bezier(0.16, 1, 0.3, 1)";
+            requestAnimationFrame(() => {
+              el.style.transform = `scaleX(${target / 100})`;
+            });
+            observer.unobserve(el);
+          }
+        }
+      },
+      { threshold: 0.4 }
+    );
+    slaBars.forEach((el) => so.observe(el));
+  } else {
+    slaBars.forEach((el) => {
+      const target = Math.max(0, Math.min(100, parseFloat(el.dataset.slaFill || "0")));
+      el.style.transform = `scaleX(${target / 100})`;
+    });
+  }
+
   /* ---------- Metric count-ups (when in viewport) ---------- */
   const counters = document.querySelectorAll("[data-count]");
   if (counters.length && "IntersectionObserver" in window && !reducedMotion) {

@@ -1,0 +1,120 @@
+{# OPERATIONS CONSOLE PREVIEW
+   Placeholder for the live operations console. Uses VIS channel code
+   in place of a section number so the existing 01/02/03/04 ordering of
+   home-page sections is preserved.
+
+   Replace placeholder lanes / KPI values with live data once the
+   visibility platform is in service. Structure is hairline-divided
+   panels inside one .card — reads as a real internal tool, not as a
+   chart-heavy SaaS dashboard. #}
+{% from "_macros/section_header.html" import section_header %}
+{% from "_macros/kpi_tile.html" import kpi_tile %}
+{% from "_macros/status_lane.html" import status_lane %}
+
+<section class="relative">
+  <div class="mx-auto max-w-[1280px] px-6 lg:px-8 py-28 lg:py-40">
+
+    {{ section_header(
+      number="VIS",
+      label="OPERATIONS CONSOLE",
+      title="The control surface.",
+      intro="Live workflow state, SLA timing, and intervention surfaces in one panel. This preview will be replaced with real console screenshots as each system enters service."
+    ) }}
+
+    <div class="mt-16 lg:mt-20" data-reveal>
+
+      {# THE CONSOLE — one elevated panel, hairline-divided sub-modules. #}
+      <div class="card overflow-hidden">
+
+        {# Console chrome — restrained header strip. #}
+        <div class="flex items-center justify-between gap-4 px-5 py-3 lg:px-7 lg:py-4 border-b border-hairline">
+          <div class="flex items-center gap-3 min-w-0">
+            <span class="status-dot" aria-hidden="true"></span>
+            <span class="mono-label !text-[11px]">CONSOLE · LIVE</span>
+            <span class="mono-id !text-ink-faint hidden sm:inline truncate">/operations</span>
+          </div>
+          <div class="flex items-center gap-4 shrink-0">
+            <span class="mono-label !text-[10px] !text-ink-faint hidden md:inline">UPDATED 2M AGO</span>
+            <span class="mono-label !text-[10px] !text-signal-ok">SYNCED</span>
+          </div>
+        </div>
+
+        {# KPI ROW — 2 cols on mobile, 4 on tablet+. Hairline-separated. #}
+        <div class="grid gap-px bg-hairline grid-cols-2 md:grid-cols-4">
+          {{ kpi_tile(label="Active workflows",  value="142", trend="+8",   trend_dir="up",   state="ok") }}
+          {{ kpi_tile(label="Approaching SLA",   value="7",   trend="−2",   trend_dir="down", state="warn") }}
+          {{ kpi_tile(label="Pending approvals", value="23",  trend="+5",   trend_dir="up",   state="info") }}
+          {{ kpi_tile(label="Completed today",   value="68",  trend="+12%", trend_dir="up",   state="ok") }}
+        </div>
+
+        {# WORKFLOW LANES — the operational table. #}
+        <div class="border-t border-hairline">
+          <div class="flex items-center justify-between gap-4 px-5 py-3 lg:px-7 lg:py-4 bg-surface-tint/60">
+            <span class="mono-label !text-[11px]">WORKFLOW LANES</span>
+            <span class="mono-label !text-[10px] !text-ink-faint hidden sm:inline">5 OF 142 SHOWN</span>
+          </div>
+
+          <div class="divide-y divide-hairline">
+            {{ status_lane(
+              code="WF-3041",
+              name="Vendor onboarding · NorthRiver Logistics",
+              channel="WKF",
+              state="on_track",
+              sla_label="Stage 3 · review",
+              sla_pct=42,
+              owner="A. SMITH"
+            ) }}
+            {{ status_lane(
+              code="WF-3038",
+              name="Install reconciliation · Q2 batch",
+              channel="VIS",
+              state="approaching",
+              sla_label="SLA · 18h remaining",
+              sla_pct=78,
+              owner="OPS · POD-2"
+            ) }}
+            {{ status_lane(
+              code="WF-3025",
+              name="Change request · finance routing rules",
+              channel="GOV",
+              state="pending",
+              sla_label="Awaiting approver",
+              sla_pct=20,
+              owner="GOV · APPR-LEVEL-2"
+            ) }}
+            {{ status_lane(
+              code="WF-3019",
+              name="Warehouse exception · damaged receipt",
+              channel="WKF",
+              state="blocked",
+              sla_label="Escalation in 2h",
+              sla_pct=92,
+              owner="WHSE · POD-1"
+            ) }}
+            {{ status_lane(
+              code="WF-2998",
+              name="Quarterly governance audit · sign-off",
+              channel="GOV",
+              state="complete",
+              sla_label="Closed",
+              sla_pct=100,
+              owner="A. SMITH"
+            ) }}
+          </div>
+        </div>
+
+        {# Footer strip — light reading meta. #}
+        <div class="flex items-center justify-between gap-4 px-5 py-3 lg:px-7 lg:py-4 border-t border-hairline bg-surface-tint/40">
+          <span class="mono-label !text-[10px] !text-ink-faint">VIEW · LIVE</span>
+          <span class="mono-label !text-[10px] !text-ink-faint hidden sm:inline">5 LANES · 4 CHANNELS · POLLING 60S</span>
+        </div>
+
+      </div>
+
+      <p class="mt-6 mono-label !text-[10px] !text-ink-faint text-center">
+        PREVIEW · PLACEHOLDER DATA · REPLACE WITH LIVE CONSOLE
+      </p>
+    </div>
+
+  </div>
+</section>

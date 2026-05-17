@@ -1,0 +1,91 @@
+{# FOUNDER INTRO
+   Calm human beat between operational sections. Portrait placeholder
+   sits left, narrative + dossier strip sits right (stacks on mobile).
+   Portrait frame is the shared portrait_frame macro — edit that one
+   file to swap in a real headshot across the home + about pages. #}
+{% from "_macros/portrait_frame.html" import portrait_frame %}
+
+<section class="relative bg-surface-tint border-y border-hairline">
+  <div class="mx-auto max-w-[1280px] px-6 lg:px-8 py-28 lg:py-40">
+
+    {# Section header (uses ABT-001 channel-style code, consistent with /about). #}
+    <header class="max-w-3xl">
+      <div class="flex items-center gap-3 mb-6" data-reveal>
+        <span class="status-dot status-dot--info" aria-hidden="true"></span>
+        <span class="mono-label">ABT-001 · FOUNDER</span>
+      </div>
+      <h2 class="font-display text-3xl lg:text-5xl font-semibold tracking-tight text-ink-strong leading-[1.1]" data-reveal style="transition-delay: 80ms;">
+        The operator behind the systems.
+      </h2>
+    </header>
+
+    {# Portrait + dossier — stacks on mobile, splits on lg+. #}
+    <div class="mt-16 lg:mt-20 grid gap-10 lg:gap-16 lg:grid-cols-[minmax(0,320px)_1fr] items-start">
+
+      {# Portrait — shared macro. Swap to a real headshot by editing
+         _macros/portrait_frame.html once. #}
+      <div data-reveal style="transition-delay: 120ms;">
+        {{ portrait_frame(max_width="320px", uid="home-founder") }}
+      </div>
+
+      {# NARRATIVE + DOSSIER #}
+      <div class="space-y-10 lg:space-y-12">
+
+        {# Identity headline + role #}
+        <div data-reveal style="transition-delay: 200ms;">
+          <div class="font-display text-2xl lg:text-3xl font-semibold text-ink-strong leading-tight">
+            Arnetrice Smith
+          </div>
+          <div class="mt-2 mono-label !text-[11px]">OPERATIONS SYSTEMS ARCHITECT · AI-ENABLED BUILDER</div>
+        </div>
+
+        {# Three short paragraphs — operator → systems thinker → builder. #}
+        <div class="max-w-2xl space-y-5 text-base lg:text-lg text-ink leading-relaxed" data-reveal style="transition-delay: 280ms;">
+          <p>
+            Three decades inside operational environments — leading teams,
+            owning processes, watching workflows hold up or break under
+            real load.
+          </p>
+          <p>
+            That perspective shapes everything I build. Operations is an
+            architecture problem long before it's a software problem;
+            the systems on this site reflect that order.
+          </p>
+          <p>
+            I work AI-assisted and human-led — leverage where it earns
+            its keep, judgment on every load-bearing call.
+          </p>
+        </div>
+
+        {# Dossier strip — three operator-coded credentials. Mirrors the
+           hero's metric grid rhythm but at a quieter scale. #}
+        <div class="grid gap-px bg-hairline border border-hairline rounded-xl overflow-hidden md:grid-cols-3" data-reveal style="transition-delay: 360ms;">
+          {% set dossier = [
+            {"label": "Background", "value": "Operational leadership",          "note": "30+ years inside the work"},
+            {"label": "Domain",     "value": "Workflow · Governance · Visibility", "note": "Where systems decide"},
+            {"label": "Method",     "value": "AI-assisted, human-led",          "note": "Leverage with judgment"}
+          ] %}
+          {% for d in dossier %}
+            <div class="bg-surface-elev p-5 lg:p-6 flex flex-col">
+              <span class="mono-label !text-[10px]">{{ d.label }}</span>
+              <div class="mt-3 font-display text-base lg:text-lg font-medium text-ink-strong leading-snug">{{ d.value }}</div>
+              <p class="mt-2 text-xs lg:text-sm text-ink-muted leading-relaxed">{{ d.note }}</p>
+            </div>
+          {% endfor %}
+        </div>
+
+        {# Hand-off to the longer narrative. #}
+        <div data-reveal style="transition-delay: 440ms;">
+          <a href="/about" class="group inline-flex items-center gap-3 hover:gap-4 transition-all">
+            <span class="mono-label group-hover:!text-ink transition-colors">read the full narrative</span>
+            <span class="text-ink-muted group-hover:text-accent transition-colors">→</span>
+            <span class="mono-id text-ink-faint group-hover:text-ink-muted transition-colors">/about</span>
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>

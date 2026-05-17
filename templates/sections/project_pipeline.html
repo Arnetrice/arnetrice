@@ -1,0 +1,125 @@
+{# PROJECT PIPELINE
+   Four-lane lifecycle view for /systems: Discovery → In Build →
+   In Review → Shipped. Each card carries owner + ETA.
+   Sits on tint to anchor it as its own band on /systems. #}
+{% from "_macros/section_header.html" import section_header %}
+{% from "_macros/pipeline_card.html" import pipeline_card %}
+
+<section class="relative">
+  <div class="mx-auto max-w-[1280px] px-6 lg:px-8 py-28 lg:py-40">
+
+    {{ section_header(
+      number="SYS",
+      label="PIPELINE",
+      title="Where each system is in flight.",
+      intro="The lifecycle view — discovery through shipped. SLA timing on each item; nothing sits silently."
+    ) }}
+
+    <div class="mt-16 lg:mt-20" data-reveal>
+
+      {# Four lanes. Stack on mobile, 2x2 on md, 4-up on lg+. #}
+      <div class="grid gap-5 lg:gap-px lg:bg-hairline lg:border lg:border-hairline lg:rounded-xl lg:overflow-hidden md:grid-cols-2 lg:grid-cols-4">
+
+        {# Lane: Discovery #}
+        <div class="bg-surface-elev rounded-xl md:rounded-none border border-hairline md:border-0 p-5 lg:p-6 flex flex-col">
+          <div class="flex items-center justify-between gap-3 pb-4 border-b border-hairline">
+            <div class="flex items-center gap-2">
+              <span class="status-dot status-dot--info" aria-hidden="true"></span>
+              <span class="mono-label !text-[11px]">DISCOVERY</span>
+            </div>
+            <span class="mono-label !text-[10px] !text-ink-faint">2</span>
+          </div>
+          <div class="mt-5 space-y-4 flex-1">
+            {{ pipeline_card(
+              code="SYS-004",
+              title="Vendor reconciliation engine",
+              channel="VIS",
+              owner="A. SMITH",
+              eta="ETA · Q3"
+            ) }}
+            {{ pipeline_card(
+              code="SYS-005",
+              title="Escalation routing fabric",
+              channel="GOV",
+              owner="A. SMITH",
+              eta="ETA · Q4"
+            ) }}
+          </div>
+        </div>
+
+        {# Lane: In Build #}
+        <div class="bg-surface-elev rounded-xl md:rounded-none border border-hairline md:border-0 p-5 lg:p-6 flex flex-col">
+          <div class="flex items-center justify-between gap-3 pb-4 border-b border-hairline">
+            <div class="flex items-center gap-2">
+              <span class="status-dot status-dot--info" aria-hidden="true"></span>
+              <span class="mono-label !text-[11px]">IN BUILD</span>
+            </div>
+            <span class="mono-label !text-[10px] !text-ink-faint">2</span>
+          </div>
+          <div class="mt-5 space-y-4 flex-1">
+            {{ pipeline_card(
+              code="SYS-001",
+              title="Operational Visibility Platform",
+              channel="WKF",
+              owner="A. SMITH",
+              eta="ETA · Q3"
+            ) }}
+            {{ pipeline_card(
+              code="SYS-002",
+              title="Governance Workflow Engine",
+              channel="GOV",
+              owner="A. SMITH",
+              eta="ETA · Q3"
+            ) }}
+          </div>
+        </div>
+
+        {# Lane: In Review #}
+        <div class="bg-surface-elev rounded-xl md:rounded-none border border-hairline md:border-0 p-5 lg:p-6 flex flex-col">
+          <div class="flex items-center justify-between gap-3 pb-4 border-b border-hairline">
+            <div class="flex items-center gap-2">
+              <span class="status-dot status-dot--warn" aria-hidden="true"></span>
+              <span class="mono-label !text-[11px] !text-amber">IN REVIEW</span>
+            </div>
+            <span class="mono-label !text-[10px] !text-ink-faint">1</span>
+          </div>
+          <div class="mt-5 space-y-4 flex-1">
+            {{ pipeline_card(
+              code="SYS-003",
+              title="AI-Assisted Operations Layer",
+              channel="SYS",
+              owner="A. SMITH",
+              eta="REVIEW · ITER 2"
+            ) }}
+          </div>
+        </div>
+
+        {# Lane: Shipped #}
+        <div class="bg-surface-elev rounded-xl md:rounded-none border border-hairline md:border-0 p-5 lg:p-6 flex flex-col">
+          <div class="flex items-center justify-between gap-3 pb-4 border-b border-hairline">
+            <div class="flex items-center gap-2">
+              <span class="status-dot" aria-hidden="true"></span>
+              <span class="mono-label !text-[11px] !text-signal-ok">SHIPPED</span>
+            </div>
+            <span class="mono-label !text-[10px] !text-ink-faint">1</span>
+          </div>
+          <div class="mt-5 space-y-4 flex-1">
+            {{ pipeline_card(
+              code="SYS-000",
+              title="Arnetrice.com V2 — identity platform",
+              channel="SYS",
+              owner="A. SMITH",
+              eta="LIVE · 2026-05"
+            ) }}
+          </div>
+        </div>
+
+      </div>
+
+      <p class="mt-6 mono-label !text-[10px] !text-ink-faint text-center">
+        PREVIEW · PLACEHOLDER PIPELINE · REPLACE WITH LIVE TRACKING
+      </p>
+    </div>
+
+  </div>
+</section>

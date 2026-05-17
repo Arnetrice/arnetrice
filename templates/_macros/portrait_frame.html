@@ -1,0 +1,43 @@
+{# Portrait frame — placeholder sized for a future headshot.
+   Aspect-[4/5], hairline border, soft gradient, grid texture,
+   centered silhouette, mono caption strip. Used by the home
+   founder_intro and the about-page hero so both portraits share
+   one source — swap to a real photo by editing this macro once. #}
+{% macro portrait_frame(max_width="320px", caption="PORTRAIT · PLACEHOLDER", uid="default") %}
+<figure
+  class="relative w-full aspect-[4/5] bg-surface-elev border border-hairline rounded-lg overflow-hidden mx-auto lg:mx-0"
+  style="max-width: {{ max_width }};"
+  aria-label="Portrait placeholder"
+>
+  {# Soft gradient backdrop — matches hero / video panel idiom. #}
+  <div aria-hidden="true" class="absolute inset-0 bg-gradient-to-b from-surface-tint to-surface-elev"></div>
+
+  {# Hairline grid texture. ID is uid-scoped so multiple portraits on
+     the same page don't collide. #}
+  <svg aria-hidden="true" class="absolute inset-0 h-full w-full text-hairline opacity-50" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="portrait-grid-{{ uid }}" width="24" height="24" patternUnits="userSpaceOnUse">
+        <path d="M 24 0 L 0 0 0 24" fill="none" stroke="currentColor" stroke-width="1"/>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#portrait-grid-{{ uid }})" />
+  </svg>
+
+  {# Silhouette — subtle, centered, no facial detail. #}
+  <svg
+    aria-hidden="true"
+    class="absolute inset-0 m-auto h-2/3 w-auto text-ink-faint opacity-30"
+    viewBox="0 0 120 150"
+    fill="currentColor"
+  >
+    <circle cx="60" cy="46" r="22" />
+    <path d="M14 150 C 14 110, 36 88, 60 88 C 84 88, 106 110, 106 150 Z" />
+  </svg>
+
+  {# Caption strip — mono, bottom edge, intentional-placeholder signal. #}
+  <figcaption class="absolute left-3 bottom-3 right-3 flex items-center justify-between gap-3">
+    <span class="mono-label !text-[10px] !text-ink-faint">{{ caption }}</span>
+    <span class="status-dot status-dot--info" aria-hidden="true"></span>
+  </figcaption>
+</figure>
+{% endmacro %}
